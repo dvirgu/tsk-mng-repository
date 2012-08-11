@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://tsk.mng/header/soapHeader" 
+		targetNamespace="http://tsk.mng/header/soapHeader" 
+		xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+		elementFormDefault="qualified">
+	
+	<xs:element name="user_auth" type="user_auth" />
+	
+	<xs:complexType name="user_auth">
+		<xs:sequence>
+			<xs:element name="userName" type="xs:string" />
+			<xs:element name="password" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

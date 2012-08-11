@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://tsk.mng/taskManagement/task_management"
+	targetNamespace="http://tsk.mng/taskManagement/task_management"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:tns="http://tsk.mng/taskManagement/task_management" 
+	xmlns:ns0="http://tsk.mng/user/user_request"
+	xmlns:ns1="http://tsk.mng/task/task_request"
+	xmlns:ns2="http://tsk.mng/response/response">
+	
+	<xs:import schemaLocation="../user/user_request.xsd" namespace="http://tsk.mng/user/user_request" />
+	<xs:import schemaLocation="../task/task_request.xsd" namespace="http://tsk.mng/task/task_request" />
+	<xs:import schemaLocation="../response/response.xsd" namespace="http://tsk.mng/response/response" />
+	
+	
+	<xs:element name="assignTaskToUser_request" type="ns1:task_request"/>
+	<xs:element name="assignTaskToUser_response" type="ns2:response"/>
+	
+	<xs:element name="getUserTasks_request" type="ns1:task_request"/>
+	<xs:element name="getUserTasks_response" type="ns1:task_request"/>
+	
+	<xs:element name="removeTaskFromUser_request" type="ns1:task_request"/>
+	<xs:element name="removeTaskFromUser_response" type="ns2:response"/>
+	
+	<xs:element name="updateTask_request" type="ns1:task_request"/>
+	<xs:element name="updateTask_response" type="ns2:response"/>
+	
+</xs:schema>

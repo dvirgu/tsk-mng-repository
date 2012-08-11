@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://tsk.mng/test/test_request"
+	targetNamespace="http://tsk.mng/task/task_request" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://tsk.mng/task/task_request" 
+	xmlns:ns0="http://tsk.mng/user/user_request">
+
+	<xs:import schemaLocation="../user/user_request.xsd" namespace="http://tsk.mng/user/user_request" />
+		
+	<xs:element name="task_request" type="tns:task_request" />
+
+	<xs:complexType name="task_request">
+		<xs:sequence>
+			<xs:element name="taskId" type="xs:int" />
+			<xs:element name="status" type="tns:TaskStatusType" />
+			<xs:element name="descriptions" type="xs:string" />
+			<xs:element name="deadLine" type="xs:dateTime" />
+			<xs:element name="alert" type="xs:dateTime" />
+			<xs:element name="owner" type="ns0:user_request" />
+			<xs:element name="dependentTasks" type="tns:task_request" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="TaskStatusType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Done" />
+			<xs:enumeration value="InProgress" />
+			<xs:enumeration value="NotStarted" />
+			<xs:enumeration value="Waiting" />
+			<xs:enumeration value="Failed" />
+		</xs:restriction>
+	</xs:simpleType>
+
+</xs:schema>
