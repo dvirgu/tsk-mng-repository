@@ -1,4 +1,4 @@
-package com.anardvir.servlets.filters;
+package org.tsk.mng.webclient.servlets.filters;
 
 import java.io.IOException;
 
@@ -10,8 +10,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
-import com.anardvir.tools.Const;
-import com.anardvir.webservicecontracts.clientwsdl.userelementtype.UserElementType;
+import org.tsk.mng.webclient.tools.Const;
+
 
 /**
  * Servlet Filter implementation class AuthorizationFilter
@@ -41,12 +41,12 @@ public class AuthorizationFilter implements Filter {
 		// TODO Auto-generated method stub
 		// place your code here
 	
-		UserElementType currentUser = (UserElementType) request.getAttribute(Const.CURRENT_USER_ATT);
+//		UserElementType currentUser = (UserElementType) request.getAttribute(Const.CURRENT_USER_ATT);
 		
-		if (currentUser == null) {
+	/*	if (currentUser == null) {
 			request.getServletContext()
 				.getRequestDispatcher(Const.ERROR_LOGIN_PAGE).forward(request, response);
-		}		
+		}		*/
 
 		// pass the request along the filter chain
 		chain.doFilter(request, response);
