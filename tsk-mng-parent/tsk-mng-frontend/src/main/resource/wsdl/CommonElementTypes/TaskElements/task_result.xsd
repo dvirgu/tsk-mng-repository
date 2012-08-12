@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+	xmlns="http://org.tsk.mng/taskManagement/common_elements/task/taskResult"
+	targetNamespace="http://org.tsk.mng/taskManagement/common_elements/task/taskResult"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:ns0="http://org.tsk.mng/taskManagement/common_elements/task/taskFE"
+	xmlns:ns1="http://org.tsk.mng/taskManagement/common_elements/opertaionResultStatus"
+	xmlns:tns="http://org.tsk.mng/taskManagement/common_elements/task/taskResult">
+
+	<xs:import schemaLocation="taskFE.xsd"
+		namespace="http://org.tsk.mng/taskManagement/common_elements/task/taskFE" />
+	<xs:import schemaLocation="../opertaion_result_status.xsd"
+		namespace="http://org.tsk.mng/taskManagement/common_elements/opertaionResultStatus" />
+
+	<xs:element name="taskResult" type="taskResult" />
+
+	<xs:complexType name="taskResult">
+		<xs:sequence>
+			<xs:element name="taskReturnValues" type="ns0:taskFE"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="resultStatus" type="ns1:OperationResultStatus" />
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

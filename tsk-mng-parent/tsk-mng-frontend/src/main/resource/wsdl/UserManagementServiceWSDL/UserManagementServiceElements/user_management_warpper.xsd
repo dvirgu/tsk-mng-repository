@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://org.tsk.mng/taskManagement/user_management_wrapper"
+	targetNamespace="http://org.tsk.mng/taskManagement/user_management_wrapper"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://org.tsk.mng/taskManagement/user_management_wrapper"
+	xmlns:ns0="http://org.tsk.mng/taskManagement/common_elements/user/userFE"
+	xmlns:ns1="http://org.tsk.mng/taskManagement/common_elements/task/taskFE"
+	xmlns:ns2="http://org.tsk.mng/taskManagement/common_elements/user/userResult"
+	xmlns:ns3="http://org.tsk.mng/taskManagement/common_elements/task/taskResult">
+
+	<xs:import schemaLocation="../../CommonElementTypes/UserElements/userFE.xsd"
+		namespace="http://org.tsk.mng/taskManagement/common_elements/user/userFE" />
+
+	<xs:import schemaLocation="../../CommonElementTypes/TaskElements/taskFE.xsd"
+		namespace="http://org.tsk.mng/taskManagement/common_elements/task/taskFE" />
+
+	<xs:import schemaLocation="../../CommonElementTypes/UserElements/user_result.xsd"
+		namespace="http://org.tsk.mng/taskManagement/common_elements/user/userResult" />
+
+	<xs:import schemaLocation="../../CommonElementTypes/TaskElements/task_result.xsd"
+		namespace="http://org.tsk.mng/taskManagement/common_elements/task/taskResult" />
+
+		
+	<!-- addSuperiorToUserOperationElements -->
+	
+	<xs:element name="addSuperiorToUserOperationElementRequest" type="tns:addSuperiorToUserTypeRequest" />
+	<xs:element name="addSuperiorToUserOperationElementResponse" type="ns2:userResult" />
+	
+	<xs:element name="addSuperiorToUserTypeRequest" type="addSuperiorToUserTypeRequest" />
+	
+	<xs:complexType name="addSuperiorToUserTypeRequest">
+		<xs:sequence>
+			<xs:element name="task" type="ns1:taskFE"/>
+			<xs:element name="user" type="ns0:userFE"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	
+	<!-- createUserOperationElements -->
+	
+	<xs:element name="createUserOperationElementRequest" type="tns:createUserTypeRequest" />
+	<xs:element name="createUserOperationElementResponse" type="ns2:userResult" />
+	
+	<xs:element name="createUserTypeRequest" type="createUserTypeRequest" />
+	
+	<xs:complexType name="createUserTypeRequest">
+		<xs:sequence>
+			<xs:element name="user" type="ns0:userFE"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	<!-- deleteUserOperationElements -->
+	
+	<xs:element name="deleteUserOperationElementRequest" type="tns:deleteUserTypeRequest" />
+	<xs:element name="deleteUserOperationElementResponse" type="ns2:userResult" />
+	
+	<xs:element name="deleteUserTypeRequest" type="deleteUserTypeRequest" />
+	
+	<xs:complexType name="deleteUserTypeRequest">
+		<xs:sequence>
+			<xs:element name="user" type="ns0:userFE"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	<!-- updateUserOperationElements -->
+	
+	<xs:element name="readUserOperationElementRequest" type="tns:readUserTypeRequest" />
+	<xs:element name="readUserOperationElementResponse" type="ns2:userResult" />
+	
+	<xs:element name="readUserTypeRequest" type="readUserTypeRequest" />
+	
+	<xs:complexType name="readUserTypeRequest">
+		<xs:sequence>
+			<xs:element name="user" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	<!-- updateUserOperationElements -->
+	
+	<xs:element name="updateUserOperationElementRequest" type="tns:updateUserTypeRequest" />
+	<xs:element name="updateUserOperationElementResponse" type="ns2:userResult" />
+	
+	<xs:element name="updateUserTypeRequest" type="updateUserTypeRequest" />
+	
+	<xs:complexType name="updateUserTypeRequest">
+		<xs:sequence>
+			<xs:element name="user" type="ns0:userFE"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+</xs:schema>
