@@ -9,7 +9,7 @@
 </head>
 <body>
 	<jsp:useBean id="user" scope="session"
-		class="com.anardvir.webservicecontracts.clientwsdl.userelementtype.UserElementType" />
+		class="org.tsk.mng.taskmanagement.header.soapheader.UserAuthInfo"/>
 	<jsp:getProperty property="email" name="user" />
 	: The Result is :
 	<jsp:getProperty property="userName" name="user" />

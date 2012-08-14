@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-	xmlns:tns="http://org.tsk.mng/taskManagement/UserManagementService/"
+	xmlns:tns="http://mng.tsk.org/taskManagement/UserManagementService/"
 	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-	name="UserManagementService" targetNamespace="http://org.tsk.mng/taskManagement/UserManagementService/"
-	xmlns:ns0="http://org.tsk.mng/taskManagement/header/soapHeader"
-	xmlns:ns1="http://org.tsk.mng/taskManagement/user_management_wrapper">
+	name="UserManagementService" targetNamespace="http://mng.tsk.org/taskManagement/UserManagementService/"
+	xmlns:ns0="http://mng.tsk.org/taskManagement/header/soapHeader"
+	xmlns:ns1="http://mng.tsk.org/taskManagement/UserManagementWrapper">
 
 	<!-- Types -->
 	<wsdl:types>
 		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-			targetNamespace="http://org.tsk.mng/taskManagement/UserManagementService/">
+			targetNamespace="http://mng.tsk.org/taskManagement/UserManagementService/">
 
-			<xsd:import namespace="http://org.tsk.mng/taskManagement/header/soapHeader"
+			<xsd:import namespace="http://mng.tsk.org/taskManagement/header/soapHeader"
 				schemaLocation="../CommonElementTypes/SoapHeaderElements/soap_header.xsd" />
 
 			<xsd:import
-				namespace="http://org.tsk.mng/taskManagement/user_management_wrapper"
+				namespace="http://mng.tsk.org/taskManagement/UserManagementWrapper"
 				schemaLocation="UserManagementServiceElements/user_management_warpper.xsd" />
 
 		</xsd:schema>

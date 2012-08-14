@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns="http://org.tsk.mng/taskManagement/common_elements/user/userFE"
-	targetNamespace="http://org.tsk.mng/taskManagement/common_elements/user/userFE" 
+<xs:schema xmlns="http://mng.tsk.org/taskManagement/common_elements/user/userFE"
+	targetNamespace="http://mng.tsk.org/taskManagement/common_elements/user/userFE" 
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:ns0="http://org.tsk.mng/taskManagement/common_elements/task/taskFE"
-	xmlns:tns="http://org.tsk.mng/taskManagement/common_elements/user/userFE">
+	xmlns:ns0="http://mng.tsk.org/taskManagement/common_elements/task/taskFE"
+	xmlns:tns="http://mng.tsk.org/taskManagement/common_elements/user/userFE">
 
-	<xs:import schemaLocation="../TaskElements/taskFE.xsd" namespace="http://org.tsk.mng/taskManagement/common_elements/task/taskFE" />
+	<xs:import schemaLocation="../TaskElements/taskFE.xsd" namespace="http://mng.tsk.org/taskManagement/common_elements/task/taskFE" />
 	<xs:element name="userFE" type="userFE" />
 
 	<xs:complexType name="userFE">

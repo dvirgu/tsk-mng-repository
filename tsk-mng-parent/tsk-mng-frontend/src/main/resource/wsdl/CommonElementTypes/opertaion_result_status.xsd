@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns="http://org.tsk.mng/taskManagement/common_elements/opertaionResultStatus"
-	targetNamespace="http://org.tsk.mng/taskManagement/common_elements/opertaionResultStatus" 
+<xs:schema xmlns="http://mng.tsk.org/taskManagement/common_elements/opertaionResultStatus"
+	targetNamespace="http://mng.tsk.org/taskManagement/common_elements/opertaionResultStatus" 
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:tns="http://org.tsk.mng/taskManagement/common_elements/opertaionResultStatus">
+	xmlns:tns="http://mng.tsk.org/taskManagement/common_elements/opertaionResultStatus">
 
 	<xs:simpleType name="OperationResultStatus">
 		<xs:restriction base="xs:string">

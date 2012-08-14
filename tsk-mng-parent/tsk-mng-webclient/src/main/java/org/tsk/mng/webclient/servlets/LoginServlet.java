@@ -9,13 +9,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult;
+import org.tsk.mng.taskmanagement.header.soapheader.UserAuthInfo;
+import org.tsk.mng.taskmanagement.taskmanagementservice.TaskManagementService;
+import org.tsk.mng.taskmanagement.taskmanagementservice.TaskManagementServicePortType;
+import org.tsk.mng.taskmanagement.usermanagementservice.UserManagementService;
+import org.tsk.mng.taskmanagement.usermanagementservice.UserManagementServicePortType;
+import org.tsk.mng.taskmanagement.usermanagementwrapper.ReadUserTypeRequest;
 import org.tsk.mng.webclient.tools.Const;
-
-
 
 /**
  * Servlet implementation class MainServlet
- *
+ * 
  * @author Dvir
  * 
  */
@@ -23,12 +28,12 @@ import org.tsk.mng.webclient.tools.Const;
 public class LoginServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private Logger logger = Logger.getLogger(LoginServlet.class.getName());
 
-//	private static ClientService ss;	TODO
-//	private static ClientPort port;		TODO
-	
+	private static UserManagementServicePortType userService; // TODO should be on servletContext ?
+//	private static TaskManagementServicePortType taskService;
+
 	static {
 		initClientWebService();
 	}
@@ -43,51 +48,59 @@ public class LoginServlet extends HttpServlet {
 
 	private static void initClientWebService() {
 
-//		ss = new ClientService(ClientService.WSDL_LOCATION, ClientService.SERVICE); FIXME
-//		port = ss.getClientPort();	FIXME
+		userService = new UserManagementService(
+				UserManagementService.WSDL_LOCATION,
+				UserManagementService.SERVICE).getUserManagementServicePort();
+
+		taskService = new TaskManagementService(
+				TaskManagementService.WSDL_LOCATION,
+				TaskManagementService.SERVICE).getTaskManagementServicePort();
 
 	}
-
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doProcess(request,response);
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		doProcess(request, response);
 	}
-
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doProcess(request,response);
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		doProcess(request, response);
 	}
 
-	private void doProcess(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
+	private void doProcess(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 
 		request.getSession().removeAttribute(Const.CURRENT_USER_ATT);
-		String redirectPageUri = Const.ERROR_LOGIN_PAGE; //Error Page. 
+		String redirectPageUri = Const.ERROR_LOGIN_PAGE; // Error Page.
 
 		String reqUserName = request.getParameter("userName");
 		String reqPass = request.getParameter("password");
 
-		//create new user from the web service object factory
-		/*ObjectFactory objectFactory = new ObjectFactory();
-		UserElementType user = objectFactory.createUserElementType();
-		user.setUserName(reqUserName);
-		user.setPassword(reqPass);*/	//FIXME
+		// create new authentication request
+		UserAuthInfo authUserInfo = new UserAuthInfo();
+		authUserInfo.setUserName(reqUserName);
+		authUserInfo.setPassword(reqPass);
 		
-	//	user = port.login(user); // getting user from WebService API FIXME
-		
-		/*if (user != null) {
-			//set the user
-			request.getSession().setAttribute(Const.CURRENT_USER_ATT, user); 
-			redirectPageUri = Const.SUCCESS_LOGIN_PAGE;
-		}  FIXME*/
+		//the user to request
+		ReadUserTypeRequest userReq = new ReadUserTypeRequest();
+		userReq.setUser(reqUserName);
+
+		// getting user from WebService API
+		 UserResult user = userService.readUserOperation(authUserInfo,userReq);
+
+		 if (user != null) { //set the user
+		 request.getSession().setAttribute(Const.CURRENT_USER_ATT, authUserInfo);
+		 redirectPageUri = Const.SUCCESS_LOGIN_PAGE; }
+		 
 
 		response.sendRedirect(redirectPageUri);
 	}

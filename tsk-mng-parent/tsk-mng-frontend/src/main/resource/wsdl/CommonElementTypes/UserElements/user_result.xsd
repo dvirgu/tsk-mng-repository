@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema
-	xmlns="http://org.tsk.mng/taskManagement/common_elements/user/userResult"
-	targetNamespace="http://org.tsk.mng/taskManagement/common_elements/user/userResult"
+	xmlns="http://mng.tsk.org/taskManagement/common_elements/user/userResult"
+	targetNamespace="http://mng.tsk.org/taskManagement/common_elements/user/userResult"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:ns0="http://org.tsk.mng/taskManagement/common_elements/user/userFE"
-	xmlns:ns1="http://org.tsk.mng/taskManagement/common_elements/opertaionResultStatus"
-	xmlns:tns="http://org.tsk.mng/taskManagement/common_elements/user/userResult">
+	xmlns:ns0="http://mng.tsk.org/taskManagement/common_elements/user/userFE"
+	xmlns:ns1="http://mng.tsk.org/taskManagement/common_elements/opertaionResultStatus"
+	xmlns:tns="http://mng.tsk.org/taskManagement/common_elements/user/userResult">
 
 	<xs:import schemaLocation="userFE.xsd"
-		namespace="http://org.tsk.mng/taskManagement/common_elements/user/userFE" />
+		namespace="http://mng.tsk.org/taskManagement/common_elements/user/userFE" />
 	<xs:import schemaLocation="../opertaion_result_status.xsd"
-		namespace="http://org.tsk.mng/taskManagement/common_elements/opertaionResultStatus"/>
+		namespace="http://mng.tsk.org/taskManagement/common_elements/opertaionResultStatus"/>
 
 	<xs:element name="userResult" type="userResult" />
 

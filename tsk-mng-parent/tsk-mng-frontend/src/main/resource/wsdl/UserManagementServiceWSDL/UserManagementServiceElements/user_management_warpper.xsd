@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns="http://org.tsk.mng/taskManagement/user_management_wrapper"
-	targetNamespace="http://org.tsk.mng/taskManagement/user_management_wrapper"
+<xs:schema xmlns="http://mng.tsk.org/taskManagement/UserManagementWrapper"
+	targetNamespace="http://mng.tsk.org/taskManagement/UserManagementWrapper"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:tns="http://org.tsk.mng/taskManagement/user_management_wrapper"
-	xmlns:ns0="http://org.tsk.mng/taskManagement/common_elements/user/userFE"
-	xmlns:ns1="http://org.tsk.mng/taskManagement/common_elements/task/taskFE"
-	xmlns:ns2="http://org.tsk.mng/taskManagement/common_elements/user/userResult"
-	xmlns:ns3="http://org.tsk.mng/taskManagement/common_elements/task/taskResult">
+	xmlns:tns="http://mng.tsk.org/taskManagement/UserManagementWrapper"
+	xmlns:ns0="http://mng.tsk.org/taskManagement/common_elements/user/userFE"
+	xmlns:ns1="http://mng.tsk.org/taskManagement/common_elements/task/taskFE"
+	xmlns:ns2="http://mng.tsk.org/taskManagement/common_elements/user/userResult"
+	xmlns:ns3="http://mng.tsk.org/taskManagement/common_elements/task/taskResult">
 
 	<xs:import schemaLocation="../../CommonElementTypes/UserElements/userFE.xsd"
-		namespace="http://org.tsk.mng/taskManagement/common_elements/user/userFE" />
+		namespace="http://mng.tsk.org/taskManagement/common_elements/user/userFE" />
 
 	<xs:import schemaLocation="../../CommonElementTypes/TaskElements/taskFE.xsd"
-		namespace="http://org.tsk.mng/taskManagement/common_elements/task/taskFE" />
+		namespace="http://mng.tsk.org/taskManagement/common_elements/task/taskFE" />
 
 	<xs:import schemaLocation="../../CommonElementTypes/UserElements/user_result.xsd"
-		namespace="http://org.tsk.mng/taskManagement/common_elements/user/userResult" />
+		namespace="http://mng.tsk.org/taskManagement/common_elements/user/userResult" />
 
 	<xs:import schemaLocation="../../CommonElementTypes/TaskElements/task_result.xsd"
-		namespace="http://org.tsk.mng/taskManagement/common_elements/task/taskResult" />
+		namespace="http://mng.tsk.org/taskManagement/common_elements/task/taskResult" />
 
 		
 	<!-- addSuperiorToUserOperationElements -->
