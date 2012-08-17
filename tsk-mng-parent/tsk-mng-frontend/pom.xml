@@ -29,6 +29,49 @@
 			<version>6.0</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>3.0.5.RELEASE</version>
+			</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>3.0.5.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>3.0.5.RELEASE</version>
+			</dependency>
+
+		
+		<!-- Apache CXF dependencies -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxws</artifactId>
+			<version>2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http</artifactId>
+			<version>2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>javax.ws.rs-api</artifactId>
+			<version>2.0-m06</version>
+		</dependency>
+        <dependency>
+		    <groupId>org.codehaus.jettison</groupId>
+		    <artifactId>jettison</artifactId>
+		    <version>1.1</version>
+		</dependency>
+		<!--dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-bundle-jaxrs</artifactId>
+			<version>${cxf.version}</version>
+		</dependency-->
 	</dependencies>
 
 
@@ -54,13 +97,14 @@
 						<phase>generate-sources</phase>
 						<configuration>
 							<sourceRoot>${basedir}/src/main/java</sourceRoot>
+							<!-- sourceRoot>${project.build.directory}/generated/cxf</sourceRoot -->
 							<wsdlOptions>
 								<wsdlOption>
-									<wsdl>src/main/resource/wsdl/TaskManagementServiceWSDL/TaskManagementService.wsdl</wsdl>
+									<wsdl>${basedir}/src/main/webapp/WEB-INF/wsdl/TaskManagementServiceWSDL/TaskManagementService.wsdl</wsdl>
 									<wsdlLocation>http://localhost:8080/TaskManagementService/services/TaskManagementService?wsdl</wsdlLocation>
-									<extraargs>
+									<!-- extraargs>
 										<extraarg>-impl</extraarg>
-									</extraargs>
+									</extraargs-->
 								</wsdlOption>
 							</wsdlOptions>
 						</configuration>
@@ -73,13 +117,14 @@
 						<phase>generate-sources</phase>
 						<configuration>
 							<sourceRoot>${basedir}/src/main/java</sourceRoot>
+							<!-- sourceRoot>${project.build.directory}/generated/cxf</sourceRoot -->
 							<wsdlOptions>
 								<wsdlOption>
-									<wsdl>src/main/resource/wsdl/UserManagementServiceWSDL/UserManagementService.wsdl</wsdl>
+									<wsdl>${basedir}/src/main/webapp/WEB-INF/wsdl/UserManagementServiceWSDL/UserManagementService.wsdl</wsdl>
 									<wsdlLocation>http://localhost:8080/TaskManagementService/services/UserManagementService?wsdl</wsdlLocation>
-									<extraargs>
+									<!-- extraargs>
 										<extraarg>-impl</extraarg>
-									</extraargs>
+									</extraargs-->
 								</wsdlOption>
 							</wsdlOptions>
 						</configuration>

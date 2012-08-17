@@ -1,13 +1,14 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
-
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
+<body>
+	<h2>Task Management System - Authentication System</h2>
+<script type="text/javascript" src="ajaxCode.js"></script>
+	
+	<form method="post" action="Login">
+		Username: <input type="text" name="userName"/>
+		Pass: <input type="password" name="password"/>
+		<Input type="submit" value="Send"/>
+		<!-- input type="button" value="Send" name="sendButton" onclick="callServer()"-->
+	</form>
+	
+</body>
 </html>

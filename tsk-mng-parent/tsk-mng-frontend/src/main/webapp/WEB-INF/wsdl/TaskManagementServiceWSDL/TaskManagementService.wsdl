@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://mng.tsk.org/taskManagement/TaskManagementService/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	name="TaskManagementService" targetNamespace="http://mng.tsk.org/taskManagement/TaskManagementService/"
+	xmlns:ns0="http://mng.tsk.org/taskManagement/header/soapHeader"
+	xmlns:ns1="http://mng.tsk.org/taskManagement/task_management_wrapper">
+
+
+	<wsdl:types>
+		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			targetNamespace="http://mng.tsk.org/taskManagement/TaskManagementService/">
+
+			<xsd:import namespace="http://mng.tsk.org/taskManagement/header/soapHeader"
+				schemaLocation="../CommonElementTypes/SoapHeaderElements/soap_header.xsd" />
+
+			<xsd:import
+				namespace="http://mng.tsk.org/taskManagement/task_management_wrapper"
+				schemaLocation="TaskManagementServiceElements/task_management_warpper.xsd" />
+
+		</xsd:schema>
+	</wsdl:types>
+
+	<!-- Messages -->
+
+	<!-- assignUserToTask Message -->
+	<wsdl:message name="assignUserToTaskRequestMessage">
+		<wsdl:part name="soapHeader" element="ns0:userAuthInfo" />
+		<wsdl:part name="assignUserToTaskRequest"
+			element="ns1:assignUserToTaskOperationElementRequest" />
+	</wsdl:message>
+
+	<wsdl:message name="assignUserToTaskResponseMessage">
+		<wsdl:part name="assignUserToTaskResponse"
+			element="ns1:assignUserToTaskOperationElementResponse" />
+	</wsdl:message>
+
+	<!-- getUerTasks Message -->
+
+	<wsdl:message name="getUserTasksRequestMessage">
+		<wsdl:part name="soapHeader" element="ns0:userAuthInfo" />
+		<wsdl:part name="getUserTasksRequest" element="ns1:getUserTasksOperationElementRequest" />
+	</wsdl:message>
+
+	<wsdl:message name="getUserTasksResponseMessage">
+		<wsdl:part name="getUserTasksResponse" element="ns1:getUserTasksOperationElementResponse" />
+	</wsdl:message>
+
+	<!-- removeTaskFromUser Message -->
+	<wsdl:message name="removeTaskFromUserRequestMessage">
+		<wsdl:part name="soapHeader" element="ns0:userAuthInfo" />
+		<wsdl:part name="removeTaskFromUserRequest"
+			element="ns1:removeTaskFromUserOperationElementRequest" />
+	</wsdl:message>
+
+	<wsdl:message name="removeTaskFromUserResponseMessage">
+		<wsdl:part name="removeTaskFromUserResponse"
+			element="ns1:removeTaskFromUserOperationElementResponse" />
+	</wsdl:message>
+
+	<!-- updateTask Message -->
+	<wsdl:message name="updateTaskRequestMessage">
+		<wsdl:part name="soapHeader" element="ns0:userAuthInfo" />
+		<wsdl:part name="updateTaskRequest" element="ns1:updateTaskOperationElemetRequest" />
+	</wsdl:message>
+	<wsdl:message name="updateTaskResponseMessage">
+		<wsdl:part name="updateTaskResponse" element="ns1:updateTaskOperationElemetResponse" />
+	</wsdl:message>
+
+	<!-- updateTask Message -->
+	<wsdl:message name="addDependencyRequestMessage">
+		<wsdl:part name="soapHeader" element="ns0:userAuthInfo" />
+		<wsdl:part name="addDependencyRequest" element="ns1:addDependencyOperationElemetRequest" />
+	</wsdl:message>
+	<wsdl:message name="addDependencyResponseMessage">
+		<wsdl:part name="addDependencyResponse" element="ns1:addDependencyOperationElemetResponse" />
+	</wsdl:message>
+
+	<!-- Port type - inside it define all the operations with their inputs and 
+		outputs -->
+
+	<wsdl:portType name="TaskManagementServicePortType">
+
+		<wsdl:operation name="assignUserToTaskOperation">
+			<wsdl:input name="input1" message="tns:assignUserToTaskRequestMessage" />
+			<wsdl:output name="output1" message="tns:assignUserToTaskResponseMessage" />
+		</wsdl:operation>
+
+		<wsdl:operation name="getUserTasksOperation">
+			<wsdl:input name="input2" message="tns:getUserTasksRequestMessage" />
+			<wsdl:output name="output2" message="tns:getUserTasksResponseMessage" />
+		</wsdl:operation>
+
+		<wsdl:operation name="removeTaskFromUserOperation">
+			<wsdl:input name="input3" message="tns:removeTaskFromUserRequestMessage" />
+			<wsdl:output name="output3" message="tns:removeTaskFromUserResponseMessage" />
+		</wsdl:operation>
+
+		<wsdl:operation name="updateTaskOperation">
+			<wsdl:input name="input4" message="tns:updateTaskRequestMessage" />
+			<wsdl:output name="output4" message="tns:updateTaskResponseMessage" />
+		</wsdl:operation>
+
+		<wsdl:operation name="addDependencyOperation">
+			<wsdl:input name="input5" message="tns:addDependencyRequestMessage" />
+			<wsdl:output name="output5" message="tns:addDependencyResponseMessage" />
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="TaskManagementServiceBinding" type="tns:TaskManagementServicePortType">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+
+		<wsdl:operation name="assignUserToTaskOperation">
+			<soap:operation soapAction="assignUserToTaskOperation" />
+			<wsdl:input name="input1">
+				<soap:header use="literal" part="soapHeader"
+					message="tns:assignUserToTaskRequestMessage" />
+				<soap:body use="literal" parts="assignUserToTaskRequest" />
+			</wsdl:input>
+			<wsdl:output name="output1">
+				<soap:body use="literal" parts="assignUserToTaskResponse" />
+			</wsdl:output>
+		</wsdl:operation>
+
+		<wsdl:operation name="getUserTasksOperation">
+			<soap:operation soapAction="updateTaskOperation" />
+			<wsdl:input name="input2">
+				<soap:header use="literal" part="soapHeader"
+					message="tns:getUserTasksRequestMessage" />
+				<soap:body use="literal" parts="getUserTasksRequest" />
+			</wsdl:input>
+			<wsdl:output name="output2">
+				<soap:body use="literal" parts="getUserTasksResponse" />
+			</wsdl:output>
+		</wsdl:operation>
+
+		<wsdl:operation name="removeTaskFromUserOperation">
+			<soap:operation soapAction="removeTaskFromUserOperation" />
+			<wsdl:input name="input3">
+				<soap:header use="literal" part="soapHeader"
+					message="tns:removeTaskFromUserRequestMessage" />
+				<soap:body use="literal" parts="removeTaskFromUserRequest" />
+			</wsdl:input>
+			<wsdl:output name="output3">
+				<soap:body use="literal" parts="removeTaskFromUserResponse" />
+			</wsdl:output>
+		</wsdl:operation>
+
+		<wsdl:operation name="updateTaskOperation">
+			<soap:operation soapAction="updateTaskOperation" />
+			<wsdl:input name="input4">
+				<soap:header use="literal" part="soapHeader"
+					message="tns:updateTaskRequestMessage" />
+				<soap:body use="literal" parts="updateTaskRequest" />
+			</wsdl:input>
+			<wsdl:output name="output4">
+				<soap:body use="literal" parts="updateTaskResponse" />
+			</wsdl:output>
+		</wsdl:operation>
+
+		<wsdl:operation name="addDependencyOperation">
+			<soap:operation soapAction="addDependencyOperation" />
+			<wsdl:input name="input5">
+				<soap:header use="literal" part="soapHeader"
+					message="tns:addDependencyRequestMessage" />
+				<soap:body use="literal" parts="addDependencyRequest" />
+			</wsdl:input>
+			<wsdl:output name="output5">
+				<soap:body use="literal" parts="addDependencyResponse" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	
+	<wsdl:service name="TaskManagementService">
+		<wsdl:port binding="tns:TaskManagementServiceBinding" name="TaskManagementServicePort">
+			<soap:address
+				location="http://localhost:8080/TaskManagementService/services/TaskManagementService" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

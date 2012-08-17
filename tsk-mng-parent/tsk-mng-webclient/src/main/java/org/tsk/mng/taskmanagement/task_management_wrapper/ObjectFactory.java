@@ -66,11 +66,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link RemoveTaskFromUserElementRequest }
+     * Create an instance of {@link UpdateTaskElemetRequest }
      * 
      */
-    public RemoveTaskFromUserElementRequest createRemoveTaskFromUserElementRequest() {
-        return new RemoveTaskFromUserElementRequest();
+    public UpdateTaskElemetRequest createUpdateTaskElemetRequest() {
+        return new UpdateTaskElemetRequest();
     }
 
     /**
@@ -82,11 +82,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link UpdateTaskElemetRequest }
+     * Create an instance of {@link RemoveTaskFromUserElementRequest }
      * 
      */
-    public UpdateTaskElemetRequest createUpdateTaskElemetRequest() {
-        return new UpdateTaskElemetRequest();
+    public RemoveTaskFromUserElementRequest createRemoveTaskFromUserElementRequest() {
+        return new RemoveTaskFromUserElementRequest();
     }
 
     /**

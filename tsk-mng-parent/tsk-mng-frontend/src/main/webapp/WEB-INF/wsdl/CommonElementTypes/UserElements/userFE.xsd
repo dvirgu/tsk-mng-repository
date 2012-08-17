@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://mng.tsk.org/taskManagement/common_elements/user/userFE"
+	targetNamespace="http://mng.tsk.org/taskManagement/common_elements/user/userFE" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:ns0="http://mng.tsk.org/taskManagement/common_elements/task/taskFE"
+	xmlns:tns="http://mng.tsk.org/taskManagement/common_elements/user/userFE">
+
+	<xs:import schemaLocation="../TaskElements/taskFE.xsd" namespace="http://mng.tsk.org/taskManagement/common_elements/task/taskFE" />
+	<xs:element name="userFE" type="userFE" />
+
+	<xs:complexType name="userFE">
+		<xs:sequence>
+			<xs:element name="mail" type="xs:string" />
+			<xs:element name="firstName" type="xs:string" />
+			<xs:element name="lastName" type="xs:string" />
+			<xs:element name="nickName" type="xs:string" />
+			<xs:element name="tasks" type="ns0:taskFE" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="superiors" type="userFE" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="workers" type="userFE" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="password" type="xs:string" />
+			<xs:element name="permission" type="tns:PermissionType" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="PermissionType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Admin" />
+			<xs:enumeration value="User" />
+		</xs:restriction>
+	</xs:simpleType>
+
+</xs:schema>

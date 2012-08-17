@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="UserManagementService" targetNamespace="http://mng.tsk.org/taskManagement/UserManagementService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://mng.tsk.org/taskManagement/UserManagementService/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns0="http://mng.tsk.org/taskManagement/header/soapHeader" xmlns:ns1="http://mng.tsk.org/taskManagement/UserManagementWrapper">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://mng.tsk.org/taskManagement/UserManagementService/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+			<xsd:import namespace="http://mng.tsk.org/taskManagement/header/soapHeader" schemaLocation="../CommonElementTypes/SoapHeaderElements/soap_header.xsd"/>
+
+			<xsd:import namespace="http://mng.tsk.org/taskManagement/UserManagementWrapper" schemaLocation="UserManagementServiceElements/user_management_warpper.xsd"/>
+
+		</xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="readUserRequestMessage">
+    <wsdl:part name="soapHeader" element="ns0:userAuthInfo">
+    </wsdl:part>
+    <wsdl:part name="readUserRequest" element="ns1:readUserOperationElementRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateUserRequestMessage">
+    <wsdl:part name="soapHeader" element="ns0:userAuthInfo">
+    </wsdl:part>
+    <wsdl:part name="updateUserRequest" element="ns1:updateUserOperationElementRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteUserRequestMessage">
+    <wsdl:part name="soapHeader" element="ns0:userAuthInfo">
+    </wsdl:part>
+    <wsdl:part name="deleteUserRequest" element="ns1:deleteUserOperationElementRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addSuperiorToUserResponseMessage">
+    <wsdl:part name="addSuperiorToUserResponse" element="ns1:addSuperiorToUserOperationElementResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createUserResponseMessage">
+    <wsdl:part name="createUserResponse" element="ns1:createUserOperationElementResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createUserRequestMessage">
+    <wsdl:part name="soapHeader" element="ns0:userAuthInfo">
+    </wsdl:part>
+    <wsdl:part name="createUserRequest" element="ns1:createUserOperationElementRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteUserResponseMessage">
+    <wsdl:part name="deleteUserResponse" element="ns1:deleteUserOperationElementResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addSuperiorToUserRequestMessage">
+    <wsdl:part name="soapHeader" element="ns0:userAuthInfo">
+    </wsdl:part>
+    <wsdl:part name="addSuperiorToUserRequest" element="ns1:addSuperiorToUserOperationElementRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateUserResponseMessage">
+    <wsdl:part name="updateUserResponse" element="ns1:updateUserOperationElementResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="readUserResponseMessage">
+    <wsdl:part name="readUserResponse" element="ns1:readUserOperationElementResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="UserManagementServicePortType">
+    <wsdl:operation name="addSuperiorToUserOperation">
+      <wsdl:input name="input1" message="tns:addSuperiorToUserRequestMessage">
+    </wsdl:input>
+      <wsdl:output name="output1" message="tns:addSuperiorToUserResponseMessage">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createUserOperation">
+      <wsdl:input name="input2" message="tns:createUserRequestMessage">
+    </wsdl:input>
+      <wsdl:output name="output2" message="tns:createUserResponseMessage">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteUserOperation">
+      <wsdl:input name="input3" message="tns:deleteUserRequestMessage">
+    </wsdl:input>
+      <wsdl:output name="output3" message="tns:deleteUserResponseMessage">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readUserOperation">
+      <wsdl:input name="input4" message="tns:readUserRequestMessage">
+    </wsdl:input>
+      <wsdl:output name="output4" message="tns:readUserResponseMessage">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateUserOperation">
+      <wsdl:input name="input5" message="tns:updateUserRequestMessage">
+    </wsdl:input>
+      <wsdl:output name="output5" message="tns:updateUserResponseMessage">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="UserManagementServiceBinding" type="tns:UserManagementServicePortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="addSuperiorToUserOperation">
+      <soap:operation soapAction="addSuperiorToUserOperation"/>
+      <wsdl:input name="input1">
+        <soap:header message="tns:addSuperiorToUserRequestMessage" part="soapHeader" use="literal">
+        </soap:header>
+        <soap:body parts="addSuperiorToUserRequest" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="output1">
+        <soap:body parts="addSuperiorToUserResponse" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createUserOperation">
+      <soap:operation soapAction="createUserOperation"/>
+      <wsdl:input name="input2">
+        <soap:header message="tns:createUserRequestMessage" part="soapHeader" use="literal">
+        </soap:header>
+        <soap:body parts="createUserRequest" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="output2">
+        <soap:body parts="createUserResponse" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteUserOperation">
+      <soap:operation soapAction="deleteUserOperation"/>
+      <wsdl:input name="input3">
+        <soap:header message="tns:deleteUserRequestMessage" part="soapHeader" use="literal">
+        </soap:header>
+        <soap:body parts="deleteUserRequest" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="output3">
+        <soap:body parts="deleteUserResponse" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readUserOperation">
+      <soap:operation soapAction="readUserOperation"/>
+      <wsdl:input name="input4">
+        <soap:header message="tns:readUserRequestMessage" part="soapHeader" use="literal">
+        </soap:header>
+        <soap:body parts="readUserRequest" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="output4">
+        <soap:body parts="readUserResponse" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateUserOperation">
+      <soap:operation soapAction="updateUserOperation"/>
+      <wsdl:input name="input5">
+        <soap:header message="tns:updateUserRequestMessage" part="soapHeader" use="literal">
+        </soap:header>
+        <soap:body parts="updateUserRequest" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="output5">
+        <soap:body parts="updateUserResponse" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UserManagementService">
+    <wsdl:port name="UserManagementServicePort" binding="tns:UserManagementServiceBinding">
+      <soap:address location="http://localhost:8080/tsk-mng-frontend/services/UserManagementServicePort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

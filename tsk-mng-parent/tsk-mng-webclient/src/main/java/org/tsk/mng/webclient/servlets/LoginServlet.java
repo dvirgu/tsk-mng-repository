@@ -9,14 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.tsk.mng.webclient.tools.Const;
 import org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult;
 import org.tsk.mng.taskmanagement.header.soapheader.UserAuthInfo;
-import org.tsk.mng.taskmanagement.taskmanagementservice.TaskManagementService;
-import org.tsk.mng.taskmanagement.taskmanagementservice.TaskManagementServicePortType;
 import org.tsk.mng.taskmanagement.usermanagementservice.UserManagementService;
 import org.tsk.mng.taskmanagement.usermanagementservice.UserManagementServicePortType;
 import org.tsk.mng.taskmanagement.usermanagementwrapper.ReadUserTypeRequest;
-import org.tsk.mng.webclient.tools.Const;
+
 
 /**
  * Servlet implementation class MainServlet
@@ -51,11 +50,6 @@ public class LoginServlet extends HttpServlet {
 		userService = new UserManagementService(
 				UserManagementService.WSDL_LOCATION,
 				UserManagementService.SERVICE).getUserManagementServicePort();
-
-		taskService = new TaskManagementService(
-				TaskManagementService.WSDL_LOCATION,
-				TaskManagementService.SERVICE).getTaskManagementServicePort();
-
 	}
 
 	/**
