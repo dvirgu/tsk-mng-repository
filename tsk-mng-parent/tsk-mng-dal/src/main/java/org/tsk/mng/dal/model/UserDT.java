@@ -43,11 +43,11 @@ public class UserDT {
 	@Column(name="PERMISSION_STATUS")
 	@Enumerated(EnumType.ORDINAL)
 	private PermissionType permission;
-	
+	/*
 	@OneToOne
 	@Column(name="SUPERIOR")
-	private List<UserDT> superior;
-	
+	private UserDT superior;
+	*/
 	@OneToMany
 	@JoinTable(name="USER_TASKS", joinColumns=@JoinColumn(name="USER_MAIL") ,inverseJoinColumns=@JoinColumn(name="TASK_ID"))
 	private List<TaskDT> tasks;
@@ -82,18 +82,21 @@ public class UserDT {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
 	public PermissionType getPermission() {
 		return permission;
 	}
 	public void setPermission(PermissionType permission) {
 		this.permission = permission;
 	}
-	public List<UserDT> getSuperiors() {
+	/*
+	public UserDT getSuperior() {
 		return superior;
 	}
-	public void setSuperiors(List<UserDT> superior) {
+	public void setSuperior(UserDT superior) {
 		this.superior = superior;
 	}
+	*/
 	public List<TaskDT> getTasks() {
 		return tasks;
 	}

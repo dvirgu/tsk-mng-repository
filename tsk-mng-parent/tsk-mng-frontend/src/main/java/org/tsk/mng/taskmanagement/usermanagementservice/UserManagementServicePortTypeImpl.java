@@ -172,8 +172,9 @@ public class UserManagementServicePortTypeImpl implements
 					// userToTrans.setNickName(user.getNickName());
 					// userToTrans.setPassword(user.getPassword());
 					// userToTrans.setPermission(user.getPermission());
-				} catch (NullPointerException npe) {
 					_return.getUserReturnValues().add(userToTrans);
+				} catch (NullPointerException npe) {
+					
 				}
 			}
 

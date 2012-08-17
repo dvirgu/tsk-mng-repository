@@ -15,12 +15,12 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 	private UserDao userDao;
 	
 	
-	public UserDao getUserDaoObj() {
+	public UserDao getUserDao() {
 		return userDao;
 	}
 
-	public void setUserDaoObj(UserDao userDaoObj) {
-		this.userDao = userDaoObj;
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
 	}
 	
 	

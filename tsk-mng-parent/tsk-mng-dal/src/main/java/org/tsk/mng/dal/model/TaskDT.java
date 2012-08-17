@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -40,7 +41,7 @@ public class TaskDT {
 	@Column(name="DEADLINE")
 	private Date deadline;
 	
-	@Column(name="OWNER")
+	@OneToOne
 	private UserDT owner;
 	
 	@Column(name="STATUS")
@@ -76,6 +77,7 @@ public class TaskDT {
 	public void setDeadline(Date deadline) {
 		this.deadline = deadline;
 	}
+	
 	public UserDT getOwner() {
 		return owner;
 	}
