@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -11,12 +13,17 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.tsk.mng.backend.enums.PermissionType;
 
 @Entity
 @Table(name = "USER_DETAILS")
 public class UserDT {
 
+	public enum PermissionType {
+
+		Admin,
+		User
+	}
+	
 	@Id
 	@Column(name="MAIL")
 	private String mail;
@@ -34,6 +41,7 @@ public class UserDT {
 	private String password;
 	
 	@Column(name="PERMISSION_STATUS")
+	@Enumerated(EnumType.ORDINAL)
 	private PermissionType permission;
 	
 	@OneToOne

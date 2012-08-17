@@ -5,20 +5,28 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import org.tsk.mng.backend.enums.TaskStatusType;
-import org.tsk.mng.backend.model.TaskBE;
-import org.tsk.mng.backend.model.UserBE;
 
 @Entity
 @Table(name = "TASK_DETAILS")
 public class TaskDT {
 
+	public enum TaskStatusType {
+
+		Done,
+		InProgress,
+		NotStarted,
+		Waiting,
+		Failed
+	}
+	
 	@Id
 	@Column(name="ID")
 	private int taskId;
@@ -33,14 +41,15 @@ public class TaskDT {
 	private Date deadline;
 	
 	@Column(name="OWNER")
-	private UserBE owner;
+	private UserDT owner;
 	
 	@Column(name="STATUS")
+	@Enumerated(EnumType.ORDINAL)
 	private TaskStatusType status;
 	
 	@ManyToMany
 	@JoinTable(name="DEPENDENT_TASKS", joinColumns=@JoinColumn(name="TASK_ID"), inverseJoinColumns=@JoinColumn(name="DEPENDENT_TASK_ID"))
-	private List<TaskBE> dependentTasks;
+	private List<TaskDT> dependentTasks;
 	
 	
 	public int getTaskId() {
@@ -67,10 +76,10 @@ public class TaskDT {
 	public void setDeadline(Date deadline) {
 		this.deadline = deadline;
 	}
-	public UserBE getOwner() {
+	public UserDT getOwner() {
 		return owner;
 	}
-	public void setOwner(UserBE owner) {
+	public void setOwner(UserDT owner) {
 		this.owner = owner;
 	}
 	public TaskStatusType getStatus() {
@@ -79,10 +88,10 @@ public class TaskDT {
 	public void setStatus(TaskStatusType status) {
 		this.status = status;
 	}
-	public List<TaskBE> getDependentTasks() {
+	public List<TaskDT> getDependentTasks() {
 		return dependentTasks;
 	}
-	public void setDependentTasks(List<TaskBE> dependentTasks) {
+	public void setDependentTasks(List<TaskDT> dependentTasks) {
 		this.dependentTasks = dependentTasks;
 	}
 	
