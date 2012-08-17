@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="spring/spring.properties" />
+	</bean>
+
+	<bean id="hibernateDaoImpl" class="org.anara.www.dao.HibernateDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="${hibernate.config}" />
+        <property name="packagesToScan" value="org.anara.www.model" />
+	</bean>
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${app.jdbc.driverClassName}" />
+		<property name="url" value="${app.jdbc.url}" />
+		<property name="username" value="${app.jdbc.username}" />
+		<property name="password" value="${app.jdbc.password}" />
+		<property name="initialSize" value="5" />
+		<property name="maxActive" value="10" />
+	</bean>
+
+	<!-- End hibernate -->
+</beans>

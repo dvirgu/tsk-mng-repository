@@ -2,6 +2,7 @@ package org.tsk.mng.backend.infa;
 
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.tsk.mng.backend.config.Consts;
 
 
 
@@ -21,7 +22,7 @@ public class SpringInitializer {
 			else{
 				String springLoaderFileNameFixed = springLoaderFileName;
 				if((springLoaderFileNameFixed == null) || (springLoaderFileNameFixed.length() == 0)){
-					springLoaderFileNameFixed = "spring/spring.xml";
+					springLoaderFileNameFixed = Consts.SPRING_FOLDER_PATH +  "/" + "spring/spring.xml";
 				}
 				String springLoaderPathFile = springLoaderFileNameFixed;
 				beanFactory = new FileSystemXmlApplicationContext(springLoaderPathFile);
