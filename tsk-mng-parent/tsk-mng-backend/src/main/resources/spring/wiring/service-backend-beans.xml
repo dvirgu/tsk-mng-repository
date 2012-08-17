@@ -1,0 +1,102 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="triangle" class="org.anara.www.classes.Triangle"> <!-- Parameter init example -->
+		<property name="type" value="Parameter" />
+		<property name="height" value="20" />
+	</bean>
+
+	<bean id="ctorTriangle" class="org.anara.www.classes.Triangle">	<!-- Ctor init example -->
+		<constructor-arg type="java.lang.String" value="Ctor" />
+		<constructor-arg type="int" value="20" />
+	</bean>
+
+	<bean id="triangleWithPoints" class="org.anara.www.classes.Triangle"> <!-- Object ref example -->
+		<property name="pointA" ref="pointA" />
+		<property name="pointB" ref="pointB" />
+		<property name="pointC">
+			<bean class="org.anara.www.classes.Point"> <!-- inner class example -->
+				<property name="x" value="-20" />
+				<property name="y" value="0" />
+			</bean>
+		</property>
+	</bean>
+
+	<alias name="triangleWithPoints" alias="triangle-alias" />	<!-- Alias example -->
+
+	<bean id="triangleWithPointList" class="org.anara.www.classes.Triangle"> <!-- Collection init example -->
+		<property name="pointList">
+			<list>
+				<ref bean="pointA" />
+				<ref bean="pointB" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="triangleWithParent" class="org.anara.www.classes.Triangle"
+		parent="parent-triangle"> <!-- Parent and abstract example -->
+		<property name="pointList">
+			<list merge="true">
+				<ref bean="pointE" />
+			</list>
+		</property>
+		<property name="height" value="20" />
+	</bean>
+
+	<bean id="parent-triangle" class="org.anara.www.classes.Triangle"
+		abstract="true"> <!-- It is not have to be abstract to be parent ,but if it is abstract then 
+			the bean will not be created -->
+		<property name="pointList">
+			<list>
+				<ref bean="pointA" />
+				<ref bean="pointB" />
+			</list>
+		</property>
+		<property name="type" value="Abstract" />
+	</bean>
+
+
+	<bean id="scopeSquare1" class="org.anara.www.classes.Square"> <!-- ApplicationContextAware and BeanNameAware example -->
+		<property name="pointD" ref="pointD" />
+		<property name="pointE" ref="pointE" />
+	</bean>
+
+	<bean id="scopeSquare2" class="org.anara.www.classes.Square"> <!-- ApplicationContextAware and BeanNameAware example -->
+		<property name="pointD" ref="pointD" />
+		<property name="pointE" ref="pointE" />
+	</bean>
+
+	<bean id="invokeSquareMethod" class="org.anara.www.classes.Square"
+		init-method="myInit" destroy-method="cleanUp">
+		<property name="pointD" ref="pointD" />
+		<property name="pointE" ref="pointE" />
+	</bean>
+	
+	<bean id="hibernateCircle" class="org.anara.www.model.Circle"> <!-- Spring Hibernate example -->
+		
+		<property name="name" value="My Circle"></property>
+	</bean>
+
+
+	<bean id="pointA" class="org.anara.www.classes.Point">
+		<property name="x" value="0" />
+		<property name="y" value="0" />
+	</bean>
+
+	<bean id="pointB" class="org.anara.www.classes.Point">
+		<property name="x" value="20" />
+		<property name="y" value="0" />
+	</bean>
+
+	<bean id="pointD" class="org.anara.www.classes.Point" scope="prototype"> <!-- Scope prototype example -->
+		<property name="x" value="-20" />
+		<property name="y" value="0" />
+	</bean>
+
+	<bean id="pointE" class="org.anara.www.classes.Point">
+		<property name="x" value="20" />
+		<property name="y" value="0" />
+	</bean>
+
+</beans>
