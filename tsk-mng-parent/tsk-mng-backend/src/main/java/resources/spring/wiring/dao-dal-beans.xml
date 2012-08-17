@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<bean id="userDaoBean" class="org.tsk.mng.dal.dao.impl.UserDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory" />
+	<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 
 </beans>
