@@ -16,11 +16,9 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 
 import org.tsk.mng.backend.config.Consts;
 import org.tsk.mng.backend.infa.SpringInitializer;
-import org.tsk.mng.backend.model.UserBE;
 import org.tsk.mng.backend.result.UserResultBE;
 import org.tsk.mng.backend.service.UserManagementBEService;
-import org.tsk.mng.taskmanagement.common_elements.opertaionresultstatus.OperationResultStatus;
-import org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE;
+import org.tsk.mng.frontend.Utils.TransfromUtilBase;
 import org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult;
 
 /**
@@ -153,33 +151,14 @@ public class UserManagementServicePortTypeImpl implements
 
 		try {
 
-			UserManagementBEService service = SpringInitializer
-					.getBeanFactory().getBean(Consts.USER_MANAGEMENT_BEAN,
-							UserManagementBEService.class);
+			UserManagementBEService service = SpringInitializer.getBeanFactory().getBean(Consts.USER_MANAGEMENT_BEAN,UserManagementBEService.class);
 			
-			UserResultBE userResult = service
-					.readUser(soapHeader.getUserName()); // TODO what about
-															// password?
-
-			org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult _return = new UserResult();
-			UserFE userToTrans = new UserFE();
+			UserResultBE userResultBe = service.readUser(soapHeader.getUserName()); // TODO what about password?
 			
-			for (UserBE user : userResult.getUsers()) {
-				try {
-					userToTrans.setFirstName(user.getFirstName());
-					userToTrans.setLastName(user.getLastName());
-					userToTrans.setMail(user.getMail());
-					// userToTrans.setNickName(user.getNickName());
-					// userToTrans.setPassword(user.getPassword());
-					// userToTrans.setPermission(user.getPermission());
-				} catch (NullPointerException npe) {
-					_return.getUserReturnValues().add(userToTrans);
-				}
-			}
+			UserResult retValue = TransfromUtilBase.userResultBeToUserResult(userResultBe);
 
-			_return.setResultStatus(OperationResultStatus.SUCCSESSFUL);
+			return retValue;
 
-			return _return;
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			throw new RuntimeException(ex);
