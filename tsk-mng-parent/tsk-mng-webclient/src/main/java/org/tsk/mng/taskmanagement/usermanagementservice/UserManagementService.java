@@ -33,7 +33,7 @@ public class UserManagementService extends Service {
         URL url = null;
         try {
         	url = new URL("http://localhost:8080/tsk-mng-frontend-0.0.1-REVISION/services/UserManagementServicePort?wsdl");
-//            url = new URL("http://localhost:8080/TaskManagementService/services/UserManagementService?wsdl");
+//TODO            url = new URL("http://localhost:8080/TaskManagementService/services/UserManagementService?wsdl");
         } catch (MalformedURLException e) {
             System.err.println("Can not initialize the default wsdl from http://localhost:8080/TaskManagementService/services/UserManagementService?wsdl");
             // e.printStackTrace();

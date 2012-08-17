@@ -15,6 +15,7 @@
 
 	<import resource="wiring/service-backend-beans.xml"/>
 	<import resource="wiring/dao-hibernate-beans.xml"/>
+	<import resource="wiring/dao-dal-beans.xml"/>
 
 
 </beans>

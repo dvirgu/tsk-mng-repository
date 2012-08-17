@@ -49,7 +49,7 @@ public class BaseDaoImpl<DataType, PKType extends Serializable> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public DataType get(PKType pk) {
+	public DataType getByPK(PKType pk) {
 		Session session = sessionFactory.openSession();
 		DataType dt = (DataType) session.get(getPersistentClass(), pk);
 		session.close();

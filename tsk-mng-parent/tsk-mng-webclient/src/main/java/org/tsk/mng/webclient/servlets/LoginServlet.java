@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.tsk.mng.webclient.tools.Const;
+import org.tsk.mng.taskmanagement.common_elements.opertaionresultstatus.OperationResultStatus;
 import org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult;
 import org.tsk.mng.taskmanagement.header.soapheader.UserAuthInfo;
 import org.tsk.mng.taskmanagement.usermanagementservice.UserManagementService;
@@ -91,8 +92,8 @@ public class LoginServlet extends HttpServlet {
 		// getting user from WebService API
 		 UserResult user = userService.readUserOperation(authUserInfo,userReq);
 
-		 if (user != null) { //set the user
-		 request.getSession().setAttribute(Const.CURRENT_USER_ATT, authUserInfo);
+		 if (user.getResultStatus() == OperationResultStatus.SUCCSESSFUL) { //set the user
+			 request.getSession().setAttribute(Const.CURRENT_USER_ATT, authUserInfo);
 		 redirectPageUri = Const.SUCCESS_LOGIN_PAGE; }
 		 
 
