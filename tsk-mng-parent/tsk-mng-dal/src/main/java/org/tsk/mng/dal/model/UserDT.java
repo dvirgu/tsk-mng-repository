@@ -43,11 +43,12 @@ public class UserDT {
 	@Column(name="PERMISSION_STATUS")
 	@Enumerated(EnumType.ORDINAL)
 	private PermissionType permission;
-	/*
+	
+	
+	//@Column(name="SUPERIOR")
 	@OneToOne
-	@Column(name="SUPERIOR")
 	private UserDT superior;
-	*/
+	
 	@OneToMany
 	@JoinTable(name="USER_TASKS", joinColumns=@JoinColumn(name="USER_MAIL") ,inverseJoinColumns=@JoinColumn(name="TASK_ID"))
 	private List<TaskDT> tasks;
@@ -89,14 +90,14 @@ public class UserDT {
 	public void setPermission(PermissionType permission) {
 		this.permission = permission;
 	}
-	/*
+	
 	public UserDT getSuperior() {
 		return superior;
 	}
 	public void setSuperior(UserDT superior) {
 		this.superior = superior;
 	}
-	*/
+	
 	public List<TaskDT> getTasks() {
 		return tasks;
 	}
