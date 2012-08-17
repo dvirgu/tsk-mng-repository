@@ -38,6 +38,8 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 		userDataType.setMail("dvirgu@gmail.com");
 		userDataType.setLastName("Bamm");
 		
+		userDao.save(userDataType);
+		
 		return new UserResultBE();
 		
 		
