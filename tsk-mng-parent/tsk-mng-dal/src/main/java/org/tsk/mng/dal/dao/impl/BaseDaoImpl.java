@@ -5,17 +5,25 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.orm.hibernate3.HibernateTemplate;
 
 public class BaseDaoImpl<DataType, PKType extends Serializable> {
 
-	private SessionFactory sessionFactory;
+	//private SessionFactory sessionFactory;
+	private HibernateTemplate hibernateTemplate;
+	
 	final private Class<DataType> persistentClass;
 	private Session session;
 
 	public SessionFactory getSessionFactory() {
-		return sessionFactory;
+		//return sessionFactory;
+		return hibernateTemplate.getSessionFactory();
 	}
 
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.hibernateTemplate = new HibernateTemplate(sessionFactory);
+	}
+	
 	@SuppressWarnings("unchecked")
 	public BaseDaoImpl() {
 		this.persistentClass = (Class<DataType>) ((java.lang.reflect.ParameterizedType) getClass()
@@ -25,54 +33,52 @@ public class BaseDaoImpl<DataType, PKType extends Serializable> {
 	public Class<DataType> getPersistentClass() {
 		return persistentClass;
 	}
-
-    public void setSession(Session session) {
-        this.session = session;
-    }
  
     protected Session getSession() {
         if (session == null)
             throw new IllegalStateException("Session has not been set on DAO before usage");
-        return session;
+        return hibernateTemplate.getSessionFactory().getCurrentSession();
     }
 
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
-
 	public void save(DataType dt) {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		session.save(dt);
-		session.getTransaction().commit();
-		session.close();
+//		Session session = getSession();
+//		session.beginTransaction();
+//		session.save(dt);
+//		session.getTransaction().commit();
+//		session.close();
+		hibernateTemplate.saveOrUpdate(dt);
 	}
 
-	@SuppressWarnings("unchecked")
 	public DataType getByPK(PKType pk) {
-		Session session = sessionFactory.openSession();
-		DataType dt = (DataType) session.get(getPersistentClass(), pk);
-		session.close();
+//		Session session = getSession();
+//		DataType dt = (DataType) session.get(getPersistentClass(), pk);
+//		session.close();
+		DataType dt = hibernateTemplate.get(getPersistentClass(), pk);
 		return dt;
 	}
 
 	public void update(DataType dt) {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		session.update(dt);
-		session.getTransaction().commit();
-		session.close();
+//		Session session = getSession();
+//		session.beginTransaction();
+//		session.update(dt);
+//		session.getTransaction().commit();
+//		session.close();
+		hibernateTemplate.saveOrUpdate(dt);
 	}
 
 	public void delete(DataType dt) {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		session.delete(dt);
-		session.getTransaction().commit();
-		session.close();
+//		Session session = getSession();
+//		session.beginTransaction();
+//		session.delete(dt);
+//		session.getTransaction().commit();
+//		session.close();
+		hibernateTemplate.delete(dt);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<DataType> getList(){
-		return null;
+		List<DataType> retList =(List<DataType>)hibernateTemplate.find("from " + getPersistentClass().getName()); 
+
+		return retList;
 	}
 }

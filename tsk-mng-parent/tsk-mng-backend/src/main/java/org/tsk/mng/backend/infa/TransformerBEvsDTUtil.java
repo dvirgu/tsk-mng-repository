@@ -3,6 +3,7 @@ package org.tsk.mng.backend.infa;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.dozer.Mapper;
 import org.tsk.mng.backend.model.TaskBE;
 import org.tsk.mng.backend.model.UserBE;
 import org.tsk.mng.dal.model.TaskDT;
@@ -25,7 +26,7 @@ import org.tsk.mng.dal.model.UserDT.PermissionType;
  */
 public class TransformerBEvsDTUtil {
 
-
+	private static Mapper mapper;
 
 	public static TaskBE convertTaskDTtoBE(TaskDT taskDTtoConvert) {
 		
@@ -60,6 +61,13 @@ public class TransformerBEvsDTUtil {
 		return null;
 
 
+	}
+	
+	public static UserDT dozerConvertUserBEtoDT(UserBE userBE){
+		mapper = SpringInitializer.getBeanFactory().getBean("mapper", Mapper.class);
+		UserDT userDT = mapper.map(userBE, UserDT.class);
+		
+		return userDT;
 	}
 
 	private static List<TaskDT> convertTaskListBEtoDT(List<TaskBE> tasks) {
@@ -116,7 +124,9 @@ public class TransformerBEvsDTUtil {
 	private static UserDT convertSuperiorBEtoDT(List<UserBE> superiors) {
 		
 		if (superiors != null) {
-			return convertUserBEtoDT(superiors.get(0));
+			for(UserBE userBE : superiors){
+				return convertUserBEtoDT(userBE);
+			}
 		}
 
 		return null;

@@ -107,7 +107,7 @@ public class TransformerFEvsBEUtil {
 			UserBE userBeToRet = new UserBE();
 			userBeToRet.setFirstName(userFEtoConvert.getFirstName());
 			userBeToRet.setLastName(userFEtoConvert.getLastName());
-			userBeToRet.setMail(userBeToRet.getMail());
+			userBeToRet.setMail(userFEtoConvert.getMail());
 			userBeToRet.setNickName(userFEtoConvert.getNickName());
 			userBeToRet.setPassword(userFEtoConvert.getPassword());
 			userBeToRet.setPermission(convertPermissionFEtoBE(userFEtoConvert.getPermission()));

@@ -5,9 +5,22 @@ import org.tsk.mng.backend.model.UserBE;
 import org.tsk.mng.backend.result.TaskResultBE;
 import org.tsk.mng.backend.result.UserResultBE;
 import org.tsk.mng.backend.service.TaskMangementBEService;
+import org.tsk.mng.dal.dao.interfaces.TaskDao;
 
 public class TaskManagementBEServiceImpl implements TaskMangementBEService {
 
+	TaskDao taskDao;
+	
+	
+	public TaskDao getTaskDao() {
+		return taskDao;
+	}
+
+	public void setTaskDao(TaskDao taskDao) {
+		this.taskDao = taskDao;
+	}
+
+	
 	public UserResultBE assignUserToTask(UserBE user, TaskBE task) {
 		// TODO Auto-generated method stub
 		return null;

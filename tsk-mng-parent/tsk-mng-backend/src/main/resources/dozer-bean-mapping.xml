@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://dozer.sourceforge.net http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping>
+		<class-a>org.tsk.mng.backend.model.UserBE</class-a>
+		<class-b>org.tsk.mng.dal.model.UserDT</class-b>
+		<field>
+			<a>mail</a>
+			<b>mail</b>
+		</field>
+		<field>
+			<a>firstName</a>
+			<b>firstName</b>
+		</field>
+		<field>
+			<a>lastName</a>
+			<b>lastName</b>
+		</field>
+		<field>
+			<a>nickName</a>
+			<b>nickName</b>
+		</field>
+		<field>
+			<a>password</a>
+			<b>password</b>
+		</field>
+		<field>
+			<a>permission</a>
+			<b>permission</b>
+		</field>
+		<!-- TODO: mapping superiors in BE to single superior in DT
+		<field>
+			<a></a>
+			<b></b>
+		</field>
+		 -->
+		 <!-- TODO: need to map the TaskBE to TaskDT first -->
+		<field>
+			<a>tasks</a>
+			<b>tasks</b>
+			<b-hint>org.tsk.mng.dal.model.TaskDT</b-hint>
+		</field>
+		 
+	</mapping>
+
+	<mapping wildcard="true">
+		<class-a>org.tsk.mng.backend.model.TaskBE</class-a>
+		<class-b>org.tsk.mng.dal.model.TaskDT</class-b>
+		
+		<field>
+			<a>descriptions</a>
+			<b>descriptions</b>
+		</field>
+		<field>
+			<a>taskId</a>
+			<b>taskId</b>
+		</field>
+		<field>
+			<a>alert</a>
+			<b>alert</b>
+		</field>
+		<field>
+			<a>deadline</a>
+			<b>deadline</b>
+		</field>
+		<field>
+			<a>owner</a>
+			<b>owner</b>
+		</field>
+		<field>
+			<a>status</a>
+			<b>status</b>
+		</field>
+		<field>
+			<a>dependentTasks</a>
+			<b>dependentTasks</b>
+		</field>
+	</mapping>
+	
+	
+
+</mappings>

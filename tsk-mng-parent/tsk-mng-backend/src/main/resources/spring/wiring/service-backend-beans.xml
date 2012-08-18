@@ -2,9 +2,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="userManagementBean" class="org.tsk.mng.backend.Impl.UserManagementBEServiceImpl">
+	<bean id="UserManagementBEService" class="org.tsk.mng.backend.Impl.UserManagementBEServiceImpl">
 		<property name="userDao" ref="userDaoBean" />
 	</bean>
 
+	<bean id="TaskManagementBEService" class="org.tsk.mng.backend.Impl.TaskManagementBEServiceImpl">
+		<property name="taskDao" ref="taskDaoBean" />
+	</bean>
 
 </beans>

@@ -12,4 +12,6 @@ public final class Consts {
 	 */
 	public static final String USER_MANAGEMENT_BEAN = "userManagementBean";
 	
+	public static final String MAPPER_BEAN = "mapper";
+	
 }
