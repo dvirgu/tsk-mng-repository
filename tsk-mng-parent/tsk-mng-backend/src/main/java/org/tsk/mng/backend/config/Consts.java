@@ -5,7 +5,7 @@ public final class Consts {
 	/**
 	 * 
 	 */
-	public final static String SPRING_FOLDER_PATH = "src/main/resources";
+	public final static String SPRING_FOLDER_PATH = "";
 	
 	/**
 	 * 
