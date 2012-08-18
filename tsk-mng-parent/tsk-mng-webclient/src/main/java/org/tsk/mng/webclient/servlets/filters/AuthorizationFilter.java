@@ -10,13 +10,14 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
-import org.tsk.mng.webclient.tools.Const;
+import org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE;
+import org.tsk.mng.webclient.tools.Consts;
 
 
 /**
  * Servlet Filter implementation class AuthorizationFilter
  */
-@WebFilter(description = "cheking authorization for each request", urlPatterns = { "/Login*" })
+@WebFilter(description = "cheking authorization for each request", urlPatterns = { "/" })
 public class AuthorizationFilter implements Filter {
 
     /**
@@ -38,15 +39,14 @@ public class AuthorizationFilter implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		// place your code here
 	
-//		UserElementType currentUser = (UserElementType) request.getAttribute(Const.CURRENT_USER_ATT);
+		UserFE currentUser = (UserFE) request.getAttribute(Consts.CURRENT_USER_ATT);
 		
-	/*	if (currentUser == null) {
+		if (currentUser == null) {
+			
 			request.getServletContext()
-				.getRequestDispatcher(Const.ERROR_LOGIN_PAGE).forward(request, response);
-		}		*/
+				.getRequestDispatcher("index.jsp").forward(request, response);//TODO const it
+		}		
 
 		// pass the request along the filter chain
 		chain.doFilter(request, response);

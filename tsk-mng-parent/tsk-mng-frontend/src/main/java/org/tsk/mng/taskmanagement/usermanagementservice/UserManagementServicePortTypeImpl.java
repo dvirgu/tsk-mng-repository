@@ -14,7 +14,6 @@ import javax.jws.soap.SOAPBinding;
 import javax.jws.soap.SOAPBinding.ParameterStyle;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
-import org.tsk.mng.backend.config.Consts;
 import org.tsk.mng.backend.infa.SpringInitializer;
 import org.tsk.mng.backend.result.UserResultBE;
 import org.tsk.mng.backend.service.UserManagementBEService;
@@ -82,11 +81,13 @@ public class UserManagementServicePortTypeImpl implements
 			
 			UserFE userFE = createUserRequest.getUser();
 			
-			service.createUser(TransformerFEvsBEUtil.convertUserFEtoBE(userFE));
-			
-			org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult _return = null;
+			UserResultBE result = service.createUser(TransformerFEvsBEUtil.convertUserFEtoBE(userFE));
+
+			UserResult _return = TransformerFEvsBEUtil.convertUserResultBEtoUserResult(result);
 			
 			return _return;
+			
+			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			throw new RuntimeException(ex);

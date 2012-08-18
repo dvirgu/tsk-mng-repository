@@ -38,7 +38,7 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 		
 		userDao.save(userDTtoCreate);
 		
-		return new UserResultBE();
+		return new UserResultBE(); // TODO change this line
 		
 		
 	}

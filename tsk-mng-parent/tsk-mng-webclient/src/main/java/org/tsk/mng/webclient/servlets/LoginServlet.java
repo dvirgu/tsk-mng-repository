@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.tsk.mng.webclient.tools.Const;
+import org.tsk.mng.webclient.tools.Consts;
 import org.tsk.mng.taskmanagement.common_elements.opertaionresultstatus.OperationResultStatus;
 import org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult;
 import org.tsk.mng.taskmanagement.header.soapheader.UserAuthInfo;
@@ -25,18 +25,12 @@ import org.tsk.mng.taskmanagement.usermanagementwrapper.ReadUserTypeRequest;
  * 
  */
 @WebServlet("/Login")
-public class LoginServlet extends HttpServlet {
+public class LoginServlet extends ClientServletBase {
 
 	private static final long serialVersionUID = 1L;
 
 	private Logger logger = Logger.getLogger(LoginServlet.class.getName());
 
-	private static UserManagementServicePortType userService; // TODO should be on servletContext ?
-//	private static TaskManagementServicePortType taskService;
-
-	static {
-		initClientWebService();
-	}
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -46,12 +40,6 @@ public class LoginServlet extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
-	private static void initClientWebService() {
-
-		userService = new UserManagementService(
-				UserManagementService.WSDL_LOCATION,
-				UserManagementService.SERVICE).getUserManagementServicePort();
-	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -74,8 +62,7 @@ public class LoginServlet extends HttpServlet {
 	private void doProcess(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		request.getSession().removeAttribute(Const.CURRENT_USER_ATT);
-		String redirectPageUri = Const.ERROR_LOGIN_PAGE; // Error Page.
+		String redirectPageUri = Consts.ERROR_LOGIN_PAGE; // Error Page.
 
 		String reqUserName = request.getParameter("userName");
 		String reqPass = request.getParameter("password");
@@ -84,18 +71,19 @@ public class LoginServlet extends HttpServlet {
 		UserAuthInfo authUserInfo = new UserAuthInfo();
 		authUserInfo.setUserName(reqUserName);
 		authUserInfo.setPassword(reqPass);
-		
+
 		//the user to request
 		ReadUserTypeRequest userReq = new ReadUserTypeRequest();
 		userReq.setUser(reqUserName);
 
 		// getting user from WebService API
-		 UserResult user = userService.readUserOperation(authUserInfo,userReq);
+		UserManagementServicePortType userService = getUserManagementServicePort();
+		UserResult user = userService.readUserOperation(authUserInfo,userReq);
 
-		 if (user.getResultStatus() == OperationResultStatus.SUCCSESSFUL) { //set the user
-			 request.getSession().setAttribute(Const.CURRENT_USER_ATT, authUserInfo);
-		 redirectPageUri = Const.SUCCESS_LOGIN_PAGE; }
-		 
+		if (user.getResultStatus() == OperationResultStatus.SUCCSESSFUL) { //set the user
+			request.getSession().setAttribute(Consts.CURRENT_USER_ATT, user.getUserReturnValues().get(0)); //FIXME change it getIndex
+			redirectPageUri = Consts.SUCCESS_LOGIN_PAGE; }
+
 
 		response.sendRedirect(redirectPageUri);
 	}

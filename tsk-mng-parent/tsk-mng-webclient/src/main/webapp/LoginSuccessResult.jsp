@@ -9,9 +9,10 @@
 </head>
 <body>
 	<jsp:useBean id="user" scope="session"
-		class="org.tsk.mng.taskmanagement.header.soapheader.UserAuthInfo"/>
-	<jsp:getProperty property="email" name="user" />
+		class="org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE"/>
+	<jsp:getProperty property="mail" name="user" />
 	: The Result is :
-	<jsp:getProperty property="userName" name="user" />
+	<jsp:getProperty property="firstName" name="user" />
+	<jsp:getProperty property="lastName" name="user" />
 </body>
 </html>
