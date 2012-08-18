@@ -34,7 +34,7 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 
 	public UserResultBE createUser(UserBE user) {
 		
-		UserDT userDTtoCreate = TransformerBEvsDTUtil.convertUserBEtoDT(user);
+		UserDT userDTtoCreate = TransformerBEvsDTUtil.dozerConvertUserBEtoDT(user);
 		
 		userDao.save(userDTtoCreate);
 		

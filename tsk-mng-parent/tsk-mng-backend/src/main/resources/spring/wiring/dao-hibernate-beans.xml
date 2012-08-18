@@ -21,6 +21,10 @@
 		<property name="initialSize" value="5" />
 		<property name="maxActive" value="10" />
 	</bean>
+	
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 
 	<!-- End hibernate -->
 </beans>

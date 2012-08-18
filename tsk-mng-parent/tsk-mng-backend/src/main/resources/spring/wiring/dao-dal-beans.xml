@@ -6,4 +6,8 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
+	<bean id="taskDaoBean" class="org.tsk.mng.dal.dao.impl.TaskDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
 </beans>
