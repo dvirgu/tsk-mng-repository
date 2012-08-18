@@ -18,7 +18,8 @@ import org.tsk.mng.backend.config.Consts;
 import org.tsk.mng.backend.infa.SpringInitializer;
 import org.tsk.mng.backend.result.UserResultBE;
 import org.tsk.mng.backend.service.UserManagementBEService;
-import org.tsk.mng.frontend.Utils.TransfromerFEvsBEUtil;
+import org.tsk.mng.frontend.Utils.TransformerFEvsBEUtil;
+import org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE;
 import org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult;
 
 /**
@@ -76,7 +77,15 @@ public class UserManagementServicePortTypeImpl implements
 		System.out.println(soapHeader);
 		System.out.println(createUserRequest);
 		try {
+			
+			UserManagementBEService service = getUserService();
+			
+			UserFE userFE = createUserRequest.getUser();
+			
+			service.createUser(TransformerFEvsBEUtil.convertUserFEtoBE(userFE));
+			
 			org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult _return = null;
+			
 			return _return;
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -151,18 +160,22 @@ public class UserManagementServicePortTypeImpl implements
 
 		try {
 
-			UserManagementBEService service = SpringInitializer.getBeanFactory().getBean(Consts.USER_MANAGEMENT_BEAN,UserManagementBEService.class);
+			UserManagementBEService service = getUserService();
 			
 			UserResultBE userResultBe = service.readUser(soapHeader.getUserName()); // TODO what about password?
 			
-			UserResult retValue = TransfromerFEvsBEUtil.convertUserResultBEtoUserResult(userResultBe);
-
+			UserResult retValue = TransformerFEvsBEUtil.convertUserResultBEtoUserResult(userResultBe);
+			
 			return retValue;
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			throw new RuntimeException(ex);
 		}
+	}
+	
+	private UserManagementBEService getUserService() {
+		return SpringInitializer.getBean(UserManagementBEService.class);
 	}
 
 }

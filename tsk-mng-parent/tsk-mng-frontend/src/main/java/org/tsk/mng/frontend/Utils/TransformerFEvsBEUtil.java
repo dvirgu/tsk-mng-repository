@@ -27,7 +27,7 @@ import org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult;
  * @author Dvir
  *
  */
-public class TransfromerFEvsBEUtil {
+public class TransformerFEvsBEUtil {
 
 	public static UserResult convertUserResultBEtoUserResult(UserResultBE userResultBe) {
 
@@ -35,7 +35,7 @@ public class TransfromerFEvsBEUtil {
 		OperationResultStatus status;
 
 		try {
-			List<UserFE> newUsers = convertUserBEListToUserFEList(userResultBe.getUsers());
+			List<UserFE> newUsers = convertUserListBEtoFE(userResultBe.getUsers());
 			userToRet.getUserReturnValues().addAll(newUsers);
 			status = OperationResultStatus.SUCCSESSFUL;
 
@@ -49,11 +49,10 @@ public class TransfromerFEvsBEUtil {
 
 	}
 
-	
 	public static TaskBE convertTaskFEtoBE(TaskFE taskToConvert) {
 		return null;
 	}
-	
+
 	public static TaskFE convertTaskBEtoFE(TaskBE taskToConvert) {
 
 		if (taskToConvert != null) {
@@ -62,11 +61,11 @@ public class TransfromerFEvsBEUtil {
 			taskToRet.setAlert(dateToXMLDate(taskToConvert.getAlert()));
 			taskToRet.setDeadLine(dateToXMLDate(taskToConvert.getDeadline()));
 			taskToRet.setDescriptions(taskToConvert.getDescriptions());
-			taskToRet.setOwner(convertUserBEtoUserFE(taskToConvert.getOwner()));
+			taskToRet.setOwner(convertUserBEtoFE(taskToConvert.getOwner()));
 			taskToRet.setStatus(convertStatusBEtoStatusFE(taskToConvert.getStatus()));
 			taskToRet.setTaskId(taskToConvert.getTaskId());
 
-			List<TaskFE> newDependencyList = convertTaskBEListToTaskFEList(taskToConvert.getDependentTasks());
+			List<TaskFE> newDependencyList = convertTaskListBEtoFE(taskToConvert.getDependentTasks());
 			taskToRet.getDependentTasks().addAll(newDependencyList);
 
 			return taskToRet;
@@ -74,7 +73,7 @@ public class TransfromerFEvsBEUtil {
 		return null;
 	}
 
-	private static UserFE convertUserBEtoUserFE(UserBE userBEToConvert) {
+	public static UserFE convertUserBEtoFE(UserBE userBEToConvert) {
 
 		if (userBEToConvert != null) {
 			UserFE userToRet = new UserFE();
@@ -87,13 +86,13 @@ public class TransfromerFEvsBEUtil {
 			userToRet.setPermission(convertPermission(userBEToConvert
 					.getPermission()));
 
-			List<UserFE> newSuperiors = convertUserBEListToUserFEList(userBEToConvert.getSuperiors());
+			List<UserFE> newSuperiors = convertUserListBEtoFE(userBEToConvert.getSuperiors());
 			userToRet.getSuperiors().addAll(newSuperiors);
 
-			List<UserFE> newWorkers = convertUserBEListToUserFEList(userBEToConvert.getWorkers());
+			List<UserFE> newWorkers = convertUserListBEtoFE(userBEToConvert.getWorkers());
 			userToRet.getWorkers().addAll(newWorkers);
 
-			List<TaskFE> newTasks = convertTaskBEListToTaskFEList(userBEToConvert.getTasks());
+			List<TaskFE> newTasks = convertTaskListBEtoFE(userBEToConvert.getTasks());
 			userToRet.getTasks().addAll(newTasks);
 
 			return userToRet;
@@ -102,6 +101,27 @@ public class TransfromerFEvsBEUtil {
 		return null;
 	}
 
+	public static UserBE convertUserFEtoBE(UserFE userFEtoConvert) {
+
+		if (userFEtoConvert != null) {
+			UserBE userBeToRet = new UserBE();
+			userBeToRet.setFirstName(userFEtoConvert.getFirstName());
+			userBeToRet.setLastName(userFEtoConvert.getLastName());
+			userBeToRet.setMail(userBeToRet.getMail());
+			userBeToRet.setNickName(userFEtoConvert.getNickName());
+			userBeToRet.setPassword(userFEtoConvert.getPassword());
+			userBeToRet.setPermission(convertPermissionFEtoBE(userFEtoConvert.getPermission()));
+			userBeToRet.setSuperiors(convertUserListFEtoBE(userFEtoConvert.getSuperiors()));
+			userBeToRet.setTasks(convertTaskListFEtoBE(userFEtoConvert.getTasks()));
+			userBeToRet.setWorkers(convertUserListFEtoBE(userFEtoConvert.getWorkers()));
+			
+			return userBeToRet;
+		}
+		
+		return null;
+
+	}
+	
 	/**
 	 * convert from BE enum type to FE enum type. In case of input error will
 	 * return USER permission.
@@ -123,22 +143,20 @@ public class TransfromerFEvsBEUtil {
 		}
 	}
 
-	private static List<UserFE> convertUserBEListToUserFEList(
+	private static List<UserFE> convertUserListBEtoFE(
 			List<UserBE> listToConvert) {
 
 		if (listToConvert != null) { 
 			List<UserFE> listToRet = new ArrayList<UserFE>();
 
 			for (UserBE userBe : listToConvert) {
-				listToRet.add(convertUserBEtoUserFE(userBe));
+				listToRet.add(convertUserBEtoFE(userBe));
 			}
 
 			return listToRet;
 		}
 		return null;
 	}
-
-
 
 	private static TaskStatusType convertStatusBEtoStatusFE(
 			org.tsk.mng.backend.enums.TaskStatusType statusToConvert) {
@@ -177,7 +195,7 @@ public class TransfromerFEvsBEUtil {
 		} return null;
 	}
 
-	private static List<TaskFE> convertTaskBEListToTaskFEList(
+	private static List<TaskFE> convertTaskListBEtoFE(
 			List<TaskBE> taskListToConvert) {
 
 		if (taskListToConvert != null) {
@@ -192,6 +210,52 @@ public class TransfromerFEvsBEUtil {
 		}
 
 		return null;
+	}
+
+	private static List<TaskBE> convertTaskListFEtoBE(List<TaskFE> tasksToConvert) {
+		
+		if (tasksToConvert != null) {
+			
+			List<TaskBE> listToRet = new ArrayList<TaskBE>();
+			
+			for (TaskFE taskFE : tasksToConvert) {
+				listToRet.add(convertTaskFEtoBE(taskFE));
+			}
+			
+			return listToRet;
+		}
+		
+		return null;
+	}
+
+	private static List<UserBE> convertUserListFEtoBE(List<UserFE> superiorsToConvert) {
+		
+		if (superiorsToConvert != null) {
+			List<UserBE> listToRet = new ArrayList<UserBE>();
+			
+			for (UserFE userFE : superiorsToConvert) {
+				listToRet.add(convertUserFEtoBE(userFE));
+			}
+			
+			return listToRet;
+		}
+		
+		return null;
+		
+	}
+
+	private static org.tsk.mng.backend.enums.PermissionType convertPermissionFEtoBE(
+			PermissionType permission) {
+
+		switch (permission) {
+		case ADMIN :
+			return org.tsk.mng.backend.enums.PermissionType.Admin;
+		case USER :
+			return org.tsk.mng.backend.enums.PermissionType.User;
+		default :
+			return null;
+		}
+
 	}
 
 }
