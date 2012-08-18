@@ -36,4 +36,17 @@ public class SpringInitializer {
 		
 		return beanFactory; // FIXME case of npe
 	}
+	
+	/**
+	 * Generic method that gets the class of wanted bean and returns the instance of that bean 
+	 * @author anara  
+	 * @param beanClass - class type of the wanted bean
+	 * @return instance of the wanted bean
+	 */
+	public static <T> T getBean(Class<T> beanClass){
+			
+		T bean = getBeanFactory().getBean(beanClass.getSimpleName(), beanClass);
+		
+		return bean;
+	}
 }
