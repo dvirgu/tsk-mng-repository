@@ -18,7 +18,7 @@ import org.tsk.mng.backend.config.Consts;
 import org.tsk.mng.backend.infa.SpringInitializer;
 import org.tsk.mng.backend.result.UserResultBE;
 import org.tsk.mng.backend.service.UserManagementBEService;
-import org.tsk.mng.frontend.Utils.TransfromUtilBase;
+import org.tsk.mng.frontend.Utils.TransfromerFEvsBEUtil;
 import org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult;
 
 /**
@@ -155,7 +155,7 @@ public class UserManagementServicePortTypeImpl implements
 			
 			UserResultBE userResultBe = service.readUser(soapHeader.getUserName()); // TODO what about password?
 			
-			UserResult retValue = TransfromUtilBase.userResultBeToUserResult(userResultBe);
+			UserResult retValue = TransfromerFEvsBEUtil.convertUserResultBEtoUserResult(userResultBe);
 
 			return retValue;
 

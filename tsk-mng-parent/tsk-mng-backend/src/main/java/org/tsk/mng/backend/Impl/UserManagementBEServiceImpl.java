@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.tsk.mng.backend.enums.OperationStatusType;
+import org.tsk.mng.backend.infa.TransformerBEvsDTUtil;
 import org.tsk.mng.backend.model.UserBE;
 import org.tsk.mng.backend.result.UserResultBE;
 import org.tsk.mng.backend.service.UserManagementBEService;
@@ -33,12 +34,9 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 
 	public UserResultBE createUser(UserBE user) {
 		
-		UserDT userDataType = new UserDT();
-		userDataType.setFirstName("Sahi");
-		userDataType.setMail("dvirgu@gmail.com");
-		userDataType.setLastName("Bamm");
+		UserDT userDTToCreate = TransformerBEvsDTUtil.convertUserBEtoDT(user);
 		
-		userDao.save(userDataType);
+		userDao.save(userDTToCreate);
 		
 		return new UserResultBE();
 		
@@ -51,8 +49,6 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 	}
 
 	public UserResultBE readUser(String mail) {
-		
-		createUser(new UserBE());
 		
 		UserDT user = userDao.getByPK(mail);
 

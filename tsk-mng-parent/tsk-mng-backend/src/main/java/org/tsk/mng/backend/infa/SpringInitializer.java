@@ -24,16 +24,16 @@ public class SpringInitializer {
 				String springLoaderFileNameFixed = springLoaderFileName;
 				if((springLoaderFileNameFixed == null) || (springLoaderFileNameFixed.length() == 0)){
 					springLoaderFileNameFixed = Consts.SPRING_FOLDER_PATH +  "/" + "spring/spring.xml";
-					//springLoaderFileNameFixed =  "../spring/spring.xml";
+					//springLoaderFileNameFixed =  "../spring/spring.xml"; FIXME
 				}
 				String springLoaderPathFile = springLoaderFileNameFixed;
 				beanFactory = new ClassPathXmlApplicationContext(springLoaderPathFile);
-				//beanFactory = new FileSystemXmlApplicationContext(springLoaderPathFile);
+				//beanFactory = new FileSystemXmlApplicationContext(springLoaderPathFile); FIXME
 			}
 		} catch (Exception e) {
 			System.out.println("Error getting beanFactory. Message: " + e.getMessage());
 		}
 		
-		return beanFactory;
+		return beanFactory; // FIXME case of npe
 	}
 }
