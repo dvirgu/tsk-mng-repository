@@ -1,15 +1,14 @@
 package org.tsk.mng.webclient.servlets;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.omg.PortableInterceptor.SUCCESSFUL;
 import org.tsk.mng.taskmanagement.common_elements.opertaionresultstatus.OperationResultStatus;
-import org.tsk.mng.taskmanagement.common_elements.user.userfe.PermissionType;
 import org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE;
 import org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult;
 import org.tsk.mng.taskmanagement.usermanagementservice.UserManagementServicePortType;
@@ -19,8 +18,8 @@ import org.tsk.mng.webclient.tools.Consts;
 /**
  * Servlet implementation class SignUpServlet
  */
-@WebServlet(description = "Create a new user in the system", urlPatterns = { "/SignUp" })
-public class SignUpServlet extends ClientServletBase {
+@WebServlet(description = "Create a new user in the system", urlPatterns = {Consts.SIGNUP_SERVLET_URL})
+public class SignUpServlet extends ServletBase {
 
 
 	private static final long serialVersionUID = 1L;
@@ -59,44 +58,38 @@ public class SignUpServlet extends ClientServletBase {
 	private void doProcess(HttpServletRequest request,HttpServletResponse response) {
 
 		try {
-			CreateUserTypeRequest newUserReq = new CreateUserTypeRequest();
-			UserFE newUser = createUserFE(request);
-			newUserReq.setUser(newUser);
-
 			UserManagementServicePortType userService = getUserManagementServicePort();
+			CreateUserTypeRequest newUserReq = createCreateUserTypeRequest(request);
 			UserResult result = userService.createUserOperation(null, newUserReq);// soapHear parameter should be null cause is new user, authenticate isn't relevant here.
+
+			
+			if (result.getUserReturnValues().size() > 1) {
+				throw new RuntimeException("more than one user doesn't supported yet");//TODO support more than one user in sign
+			}
+			
+			String pageDispatch = Consts.ERROR_LOGIN_PAGE;;
 			
 			if (result.getResultStatus() == OperationResultStatus.SUCCSESSFUL) {
-				request.getSession().setAttribute(Consts.CURRENT_USER_ATT, result.getUserReturnValues().get(0));//FIXME change get(0)
-				response.sendRedirect(Consts.SUCCESS_LOGIN_PAGE);
-			} //TODO status failed
+				UserFE userSignupResult = result.getUserReturnValues().get(0);//should be one user if result is successful
+				if (userSignupResult != null) {
+					request.getSession().setAttribute(Consts.CURRENT_USER_ATT, userSignupResult);
+					pageDispatch = Consts.WELCOME_PAGE;
+				}
+			}
+			
+			getServletContext().getRequestDispatcher(pageDispatch).forward(request, response);
 			
 		} catch (ServletException e) {
 			e.printStackTrace();
 			//TODO logger
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO logger
 			e.printStackTrace();
 		}
-
 	}
+	
 
-	private UserFE createUserFE(HttpServletRequest request) {
 
-		if (request != null) {
-			UserFE newUser = new UserFE();
-			newUser.setMail(request.getParameter(Consts.MAIL_PARAM));
-			newUser.setLastName(request.getParameter(Consts.LAST_NAME_PARAM));
-			newUser.setFirstName(request.getParameter(Consts.FIRST_NAME_PARAM));
-			newUser.setNickName(request.getParameter(Consts.NICK_NAME_PARAM));
-			newUser.setPassword(request.getParameter(Consts.PASSWORD_PARAM));
-			newUser.setPermission(PermissionType.valueOf(request.getParameter(Consts.PERMISSION_PARAM).toUpperCase()));
-
-			return newUser;
-		}
-
-		throw new NullPointerException("HttpServletRequest is null");
-	}
 
 
 }

@@ -9,6 +9,7 @@
 
 <h1>SignUp - User</h1>
 <body>
+
 <p>Please fill all fields :</p>
 <form method="post" action="SignUp">
 Email : <input type="text"/ name="mail"><br><br>

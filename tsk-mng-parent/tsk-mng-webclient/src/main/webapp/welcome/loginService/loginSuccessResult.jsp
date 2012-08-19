@@ -8,11 +8,11 @@
 <title>Login Page - TaskManagementSystem</title>
 </head>
 <body>
-	<jsp:useBean id="user" scope="session"
+	<jsp:useBean id="currentUserAttribute" scope="session"
 		class="org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE"/>
-	<jsp:getProperty property="mail" name="user" />
+	<jsp:getProperty property="mail" name="currentUserAttribute" />
 	: The Result is :
-	<jsp:getProperty property="firstName" name="user" />
-	<jsp:getProperty property="lastName" name="user" />
+	<jsp:getProperty property="firstName" name="currentUserAttribute" />
+	<jsp:getProperty property="lastName" name="currentUserAttribute" />
 </body>
 </html>

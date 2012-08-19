@@ -1,11 +1,34 @@
 package org.tsk.mng.webclient.tools;
 
 public class Consts {
-
 	
-	public static final String CURRENT_USER_ATT ="user";
-	public static final String SUCCESS_LOGIN_PAGE ="LoginSuccessResult.jsp";
-	public static final String ERROR_LOGIN_PAGE = "LoginFailResult.jsp";
+	/**
+	 * Current Session Attributes
+	 */
+	public static final String CURRENT_USER_ATT ="currentUserAttribute";
+	
+	/**
+	 * Pages Attributes
+	 */
+	public static final String WELCOME_PAGES = "/welcome";
+	public static final String SIGNUP_PAGE = WELCOME_PAGES + "/signup.jsp";
+	public static final String WELCOME_PAGE = WELCOME_PAGES + "/welcomePage.jsp";
+	
+	public static final String LOGIN_SERVICE_PAGES = WELCOME_PAGES + "/loginService";
+	public static final String LOGIN_PAGE = LOGIN_SERVICE_PAGES + "/login.jsp";
+	public static final String SUCCESS_LOGIN_PAGE = LOGIN_SERVICE_PAGES + "/loginSuccessResult.jsp";
+	public static final String ERROR_LOGIN_PAGE = LOGIN_SERVICE_PAGES + "/loginFailResult.jsp";
+	
+	/**
+	 * Servlet URL 
+	 */
+	public static final String SERVLET_ROUTER = "/MainServlet";
+	public static final String SIGNUP_SERVLET_URL = WELCOME_PAGES + "/SignUp";
+	public static final String LOGIN_SERVLET_URL = WELCOME_PAGES + "/Login";
+	
+	/**
+	 * Services Attributes
+	 */
 	public static final String USER_SERVICE_PORT_ATT = "UserManagementService";
 
 	

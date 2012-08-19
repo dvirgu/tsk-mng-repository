@@ -17,15 +17,15 @@ import org.tsk.mng.webclient.tools.Consts;
 /**
  * Servlet Filter implementation class AuthorizationFilter
  */
-@WebFilter(description = "cheking authorization for each request", urlPatterns = { "/" })
-public class AuthorizationFilter implements Filter {
+@WebFilter(description = "cheking wheter the user is login", urlPatterns = { "/welcome/loginService/*" })//"/" + Consts.LOGIN_SERVICE_PAGES + "/*" })
+public class LoginFilter implements Filter {
 
-    /**
-     * Default constructor. 
-     */
-    public AuthorizationFilter() {
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * Default constructor. 
+	 */
+	public LoginFilter() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Filter#destroy()
@@ -39,15 +39,16 @@ public class AuthorizationFilter implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-	
-		UserFE currentUser = (UserFE) request.getAttribute(Consts.CURRENT_USER_ATT);
-		
-		if (currentUser == null) {
-			
-			request.getServletContext()
-				.getRequestDispatcher("index.jsp").forward(request, response);//TODO const it
-		}		
 
+/*		UserFE currentUser = (UserFE) request.getAttribute(Consts.CURRENT_USER_ATT);
+
+		if (currentUser != null) {//it does login
+			String pageToDispatch = "/" + Consts.SUCCESS_LOGIN_PAGE;//TODO welcome page
+			
+		}TODO to delete*/ 
+		
+		request.getServletContext().getRequestDispatcher(Consts.SERVLET_ROUTER).forward(request, response);
+		
 		// pass the request along the filter chain
 		chain.doFilter(request, response);
 	}

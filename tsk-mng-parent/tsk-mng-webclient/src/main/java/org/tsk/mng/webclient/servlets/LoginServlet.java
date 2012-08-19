@@ -13,7 +13,6 @@ import org.tsk.mng.webclient.tools.Consts;
 import org.tsk.mng.taskmanagement.common_elements.opertaionresultstatus.OperationResultStatus;
 import org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult;
 import org.tsk.mng.taskmanagement.header.soapheader.UserAuthInfo;
-import org.tsk.mng.taskmanagement.usermanagementservice.UserManagementService;
 import org.tsk.mng.taskmanagement.usermanagementservice.UserManagementServicePortType;
 import org.tsk.mng.taskmanagement.usermanagementwrapper.ReadUserTypeRequest;
 
@@ -24,8 +23,8 @@ import org.tsk.mng.taskmanagement.usermanagementwrapper.ReadUserTypeRequest;
  * @author Dvir
  * 
  */
-@WebServlet("/Login")
-public class LoginServlet extends ClientServletBase {
+@WebServlet(Consts.LOGIN_SERVLET_URL)
+public class LoginServlet extends ServletBase {
 
 	private static final long serialVersionUID = 1L;
 
@@ -62,7 +61,9 @@ public class LoginServlet extends ClientServletBase {
 	private void doProcess(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		String redirectPageUri = Consts.ERROR_LOGIN_PAGE; // Error Page.
+		//TODO change the logic of the this method
+		
+		String dispachPageUri = Consts.ERROR_LOGIN_PAGE; // Error Page.
 
 		String reqUserName = request.getParameter("userName");
 		String reqPass = request.getParameter("password");
@@ -82,9 +83,9 @@ public class LoginServlet extends ClientServletBase {
 
 		if (user.getResultStatus() == OperationResultStatus.SUCCSESSFUL) { //set the user
 			request.getSession().setAttribute(Consts.CURRENT_USER_ATT, user.getUserReturnValues().get(0)); //FIXME change it getIndex
-			redirectPageUri = Consts.SUCCESS_LOGIN_PAGE; }
+			dispachPageUri = Consts.WELCOME_PAGE; }
 
 
-		response.sendRedirect(redirectPageUri);
+		getServletContext().getRequestDispatcher(dispachPageUri).forward(request, response);
 	}
 }
