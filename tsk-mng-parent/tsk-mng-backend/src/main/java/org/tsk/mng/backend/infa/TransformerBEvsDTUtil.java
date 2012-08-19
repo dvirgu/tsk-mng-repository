@@ -19,11 +19,12 @@ import org.tsk.mng.dal.model.UserDT.PermissionType;
  * From DataTypes object to ObjectBE,
  * From ObjectBe to ObjectFe
  * 
- * 
+ * @deprecated - please use {@link TransformerUtil} instead - 19/8/2012  22:40 - Dvir  
  * @since August 17 ,2012
  * @author Dvirgu
  *
  */
+@Deprecated //TODO should be remove
 public class TransformerBEvsDTUtil {
 
 	private static Mapper mapper;

@@ -9,6 +9,7 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import org.tsk.mng.backend.infa.TransformerUtil;
 import org.tsk.mng.backend.model.TaskBE;
 import org.tsk.mng.backend.model.UserBE;
 import org.tsk.mng.backend.result.UserResultBE;
@@ -25,8 +26,10 @@ import org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult;
  * 
  * @since 18/8/2012 
  * @author Dvir
- *
+ * @deprecated - please user {@link TransformerUtil}
+ *TODO remove it
  */
+@Deprecated
 public class TransformerFEvsBEUtil {
 
 	public static UserResult convertUserResultBEtoUserResult(UserResultBE userResultBe) {

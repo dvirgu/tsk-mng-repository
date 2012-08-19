@@ -9,6 +9,9 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 
 public class BaseDaoImpl<DataType, PKType extends Serializable> {
 
+	
+	//TODO clear all unnecessary comments - Dvir To Anar
+	
 	//private SessionFactory sessionFactory;
 	private HibernateTemplate hibernateTemplate;
 	
@@ -27,7 +30,7 @@ public class BaseDaoImpl<DataType, PKType extends Serializable> {
 	@SuppressWarnings("unchecked")
 	public BaseDaoImpl() {
 		this.persistentClass = (Class<DataType>) ((java.lang.reflect.ParameterizedType) getClass()
-				.getGenericSuperclass()).getActualTypeArguments()[0];
+				.getGenericSuperclass()).getActualTypeArguments()[0];//TODO Dvir ask Anar - Should it used index 0 ?
 	}
 
 	public Class<DataType> getPersistentClass() {

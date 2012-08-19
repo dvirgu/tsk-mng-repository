@@ -80,10 +80,9 @@ public class UserManagementServicePortTypeImpl implements
 		System.out.println(createUserRequest);
 		try {
 			
-			UserManagementBEService service = getUserService();
+			UserManagementBEService service = getUserService();//getting UserService
 			
 			UserFE userFE = createUserRequest.getUser();
-			
 			UserResultBE result = service.createUser(TransformerFEvsBEUtil.convertUserFEtoBE(userFE));
 
 			UserResult _return = TransformerFEvsBEUtil.convertUserResultBEtoUserResult(result);
