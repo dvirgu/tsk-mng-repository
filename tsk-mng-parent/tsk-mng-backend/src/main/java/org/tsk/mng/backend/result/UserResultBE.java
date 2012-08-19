@@ -23,6 +23,9 @@ public class UserResultBE {
 	public void setUsers(List<UserBE> users) {
 		this.users = users;
 	}
+	public boolean addUser(UserBE userToAdd) {
+		return users.add(userToAdd);
+	}
 	
 	
 }

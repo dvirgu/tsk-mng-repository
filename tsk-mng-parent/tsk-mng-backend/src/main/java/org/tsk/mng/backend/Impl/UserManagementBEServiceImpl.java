@@ -14,8 +14,8 @@ import org.tsk.mng.dal.model.UserDT;
 public class UserManagementBEServiceImpl implements UserManagementBEService {
 
 	private UserDao userDao;
-	
-	
+
+
 	public UserDao getUserDao() {
 		return userDao;
 	}
@@ -23,8 +23,8 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
-	
-	
+
+
 	/* ServiceImpl Methods */
 
 	public UserResultBE addSuperiorToUser(UserBE superior, UserBE worker) {
@@ -33,14 +33,20 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 	}
 
 	public UserResultBE createUser(UserBE user) {
-		
-		UserDT userDTtoCreate = TransformerBEvsDTUtil.dozerConvertUserBEtoDT(user);
-		
-		userDao.save(userDTtoCreate);
-		
-		return new UserResultBE(); // TODO change this line
-		
-		
+		UserResultBE result = null;
+
+		try {
+			result = new UserResultBE();
+			UserDT userDTtoCreate = TransformerBEvsDTUtil.dozerConvertUserBEtoDT(user);
+			userDao.save(userDTtoCreate);
+			result.addUser(user);
+			result.setStatus(OperationStatusType.Success);
+		} catch (Exception e) { 
+			e.printStackTrace(); //TODO logger
+		}
+
+		return result;
+
 	}
 
 	public UserResultBE deleteUser(UserBE user) {
@@ -49,24 +55,24 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 	}
 
 	public UserResultBE readUser(String mail) {
-		
+
 		UserDT user = userDao.getByPK(mail);
 
 		UserResultBE returnResult = new UserResultBE();
-		
+
 		returnResult.setStatus(OperationStatusType.Success);
 		List<UserBE> users = new ArrayList<UserBE>();
 		UserBE userBE = new UserBE();
 		userBE.setFirstName(user.getFirstName());
 		userBE.setLastName(user.getLastName());
 		userBE.setMail(user.getMail());
-//		userBE.setNickName(user.getNickName());
-//		userBE.setPassword(user.getPassword());
-//		userBE.setPermission(user.getPermission());
+		//		userBE.setNickName(user.getNickName());
+		//		userBE.setPassword(user.getPassword());
+		//		userBE.setPermission(user.getPermission());
 		users.add(userBE);
-		
+
 		returnResult.setUsers(users);
-		
+
 		return returnResult;
 	}
 
@@ -75,6 +81,6 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 		return null;
 	}
 
-	
+
 
 }

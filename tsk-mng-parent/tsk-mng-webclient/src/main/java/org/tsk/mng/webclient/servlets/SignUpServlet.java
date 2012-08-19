@@ -69,7 +69,7 @@ public class SignUpServlet extends ClientServletBase {
 			if (result.getResultStatus() == OperationResultStatus.SUCCSESSFUL) {
 				request.getSession().setAttribute(Consts.CURRENT_USER_ATT, result.getUserReturnValues().get(0));//FIXME change get(0)
 				response.sendRedirect(Consts.SUCCESS_LOGIN_PAGE);
-			}
+			} //TODO status failed
 			
 		} catch (ServletException e) {
 			e.printStackTrace();

@@ -5,6 +5,8 @@
 
 package org.tsk.mng.taskmanagement.usermanagementservice;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -15,6 +17,7 @@ import javax.jws.soap.SOAPBinding.ParameterStyle;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
 import org.tsk.mng.backend.infa.SpringInitializer;
+import org.tsk.mng.backend.model.UserBE;
 import org.tsk.mng.backend.result.UserResultBE;
 import org.tsk.mng.backend.service.UserManagementBEService;
 import org.tsk.mng.frontend.Utils.TransformerFEvsBEUtil;
