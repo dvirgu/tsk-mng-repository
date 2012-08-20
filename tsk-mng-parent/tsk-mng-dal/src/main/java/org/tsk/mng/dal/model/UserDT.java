@@ -20,8 +20,8 @@ public class UserDT {
 
 	public enum PermissionType {
 
-		Admin,
-		User
+		ADMIN,
+		USER
 	}
 	
 	@Id
