@@ -137,10 +137,10 @@ public class TransformerBEvsDTUtil {
 
 		switch (permission) {
 		
-		case ADMIN:
-			return PermissionType.ADMIN;
-		case USER :
-			return PermissionType.USER;
+		case Admin:
+			return PermissionType.Admin;
+		case User :
+			return PermissionType.User;
 		default:
 			return null;
 		}

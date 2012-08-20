@@ -134,9 +134,9 @@ public class TransformerFEvsBEUtil {
 			org.tsk.mng.backend.enums.PermissionType permissionTypeToConvert) {
 
 		switch (permissionTypeToConvert) {
-		case ADMIN:
+		case Admin:
 			return PermissionType.ADMIN;
-		case USER:
+		case User:
 			return PermissionType.USER;
 		default:
 			return PermissionType.USER;
@@ -249,9 +249,9 @@ public class TransformerFEvsBEUtil {
 
 		switch (permission) {
 		case ADMIN :
-			return org.tsk.mng.backend.enums.PermissionType.ADMIN;
+			return org.tsk.mng.backend.enums.PermissionType.Admin;
 		case USER :
-			return org.tsk.mng.backend.enums.PermissionType.USER;
+			return org.tsk.mng.backend.enums.PermissionType.User;
 		default :
 			return null;
 		}

@@ -6,9 +6,6 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
-        <dependent-module archiveName="tsk-mng-backend-0.0.1-REVISION.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/tsk-mng-backend/tsk-mng-backend">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="tsk-mng-dal-0.0.1-REVISION.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/tsk-mng-dal/tsk-mng-dal">
             <dependency-type>uses</dependency-type>
         </dependent-module>

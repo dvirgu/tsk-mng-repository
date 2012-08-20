@@ -3,6 +3,9 @@
     <wb-module deploy-name="tsk-mng-backend">
         <wb-resource deploy-path="/" source-path="/src/main/resources" tag="defaultRootSource"/>
         <wb-resource deploy-path="/" source-path="/src/main/java"/>
+        <dependent-module archiveName="tsk-mng-dal-0.0.1-REVISION.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/tsk-mng-dal/tsk-mng-dal">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="java-output-path" value="/tsk-mng-backend/target/classes"/>
     </wb-module>
 </project-modules>
