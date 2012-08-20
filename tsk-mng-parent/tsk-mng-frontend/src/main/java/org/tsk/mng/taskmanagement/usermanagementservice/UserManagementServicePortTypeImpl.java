@@ -5,6 +5,8 @@
 
 package org.tsk.mng.taskmanagement.usermanagementservice;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -14,8 +16,8 @@ import javax.jws.soap.SOAPBinding;
 import javax.jws.soap.SOAPBinding.ParameterStyle;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
-import org.tsk.mng.backend.config.Consts;
 import org.tsk.mng.backend.infa.SpringInitializer;
+import org.tsk.mng.backend.model.UserBE;
 import org.tsk.mng.backend.result.UserResultBE;
 import org.tsk.mng.backend.service.UserManagementBEService;
 import org.tsk.mng.frontend.Utils.TransformerFEvsBEUtil;
@@ -78,15 +80,16 @@ public class UserManagementServicePortTypeImpl implements
 		System.out.println(createUserRequest);
 		try {
 			
-			UserManagementBEService service = getUserService();
+			UserManagementBEService service = getUserService();//getting UserService
 			
 			UserFE userFE = createUserRequest.getUser();
-			
-			service.createUser(TransformerFEvsBEUtil.convertUserFEtoBE(userFE));
-			
-			org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult _return = null;
+			UserResultBE result = service.createUser(TransformerFEvsBEUtil.convertUserFEtoBE(userFE));
+
+			UserResult _return = TransformerFEvsBEUtil.convertUserResultBEtoUserResult(result);
 			
 			return _return;
+			
+			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			throw new RuntimeException(ex);

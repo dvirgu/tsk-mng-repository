@@ -9,6 +9,7 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import org.tsk.mng.backend.infa.TransformerUtil;
 import org.tsk.mng.backend.model.TaskBE;
 import org.tsk.mng.backend.model.UserBE;
 import org.tsk.mng.backend.result.UserResultBE;
@@ -25,26 +26,32 @@ import org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult;
  * 
  * @since 18/8/2012 
  * @author Dvir
- *
+ * @deprecated - please user {@link TransformerUtil}
+ *TODO remove it
  */
+@Deprecated
 public class TransformerFEvsBEUtil {
 
 	public static UserResult convertUserResultBEtoUserResult(UserResultBE userResultBe) {
 
-		UserResult userToRet = new UserResult();
-		OperationResultStatus status;
+		UserResult userToRet = null;
 
-		try {
-			List<UserFE> newUsers = convertUserListBEtoFE(userResultBe.getUsers());
-			userToRet.getUserReturnValues().addAll(newUsers);
-			status = OperationResultStatus.SUCCSESSFUL;
+		if (userResultBe != null ){
 
-		} catch (Exception e) {
-			e.printStackTrace(); //TODO logger
-			status = OperationResultStatus.FAILURE;
+			userToRet = new UserResult();
+			OperationResultStatus status;
+
+			try {
+				List<UserFE> newUsers = convertUserListBEtoFE(userResultBe.getUsers());
+				userToRet.getUserReturnValues().addAll(newUsers);
+				status = OperationResultStatus.SUCCSESSFUL;
+
+			} catch (Exception e) {
+				e.printStackTrace(); //TODO logger
+				status = OperationResultStatus.FAILURE;
+			}
+			userToRet.setResultStatus(status);
 		}
-
-		userToRet.setResultStatus(status);
 		return userToRet;
 
 	}
@@ -114,14 +121,14 @@ public class TransformerFEvsBEUtil {
 			userBeToRet.setSuperiors(convertUserListFEtoBE(userFEtoConvert.getSuperiors()));
 			userBeToRet.setTasks(convertTaskListFEtoBE(userFEtoConvert.getTasks()));
 			userBeToRet.setWorkers(convertUserListFEtoBE(userFEtoConvert.getWorkers()));
-			
+
 			return userBeToRet;
 		}
-		
+
 		return null;
 
 	}
-	
+
 	/**
 	 * convert from BE enum type to FE enum type. In case of input error will
 	 * return USER permission.
@@ -213,35 +220,35 @@ public class TransformerFEvsBEUtil {
 	}
 
 	private static List<TaskBE> convertTaskListFEtoBE(List<TaskFE> tasksToConvert) {
-		
+
 		if (tasksToConvert != null) {
-			
+
 			List<TaskBE> listToRet = new ArrayList<TaskBE>();
-			
+
 			for (TaskFE taskFE : tasksToConvert) {
 				listToRet.add(convertTaskFEtoBE(taskFE));
 			}
-			
+
 			return listToRet;
 		}
-		
+
 		return null;
 	}
 
 	private static List<UserBE> convertUserListFEtoBE(List<UserFE> superiorsToConvert) {
-		
+
 		if (superiorsToConvert != null) {
 			List<UserBE> listToRet = new ArrayList<UserBE>();
-			
+
 			for (UserFE userFE : superiorsToConvert) {
 				listToRet.add(convertUserFEtoBE(userFE));
 			}
-			
+
 			return listToRet;
 		}
-		
+
 		return null;
-		
+
 	}
 
 	private static org.tsk.mng.backend.enums.PermissionType convertPermissionFEtoBE(

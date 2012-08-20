@@ -10,21 +10,22 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
-import org.tsk.mng.webclient.tools.Const;
+import org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE;
+import org.tsk.mng.webclient.tools.Consts;
 
 
 /**
  * Servlet Filter implementation class AuthorizationFilter
  */
-@WebFilter(description = "cheking authorization for each request", urlPatterns = { "/Login*" })
-public class AuthorizationFilter implements Filter {
+@WebFilter(description = "cheking wheter the user is login", urlPatterns = { "/welcome/loginService/*" })//"/" + Consts.LOGIN_SERVICE_PAGES + "/*" })
+public class LoginFilter implements Filter {
 
-    /**
-     * Default constructor. 
-     */
-    public AuthorizationFilter() {
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * Default constructor. 
+	 */
+	public LoginFilter() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Filter#destroy()
@@ -38,16 +39,16 @@ public class AuthorizationFilter implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		// place your code here
-	
-//		UserElementType currentUser = (UserElementType) request.getAttribute(Const.CURRENT_USER_ATT);
-		
-	/*	if (currentUser == null) {
-			request.getServletContext()
-				.getRequestDispatcher(Const.ERROR_LOGIN_PAGE).forward(request, response);
-		}		*/
 
+/*		UserFE currentUser = (UserFE) request.getAttribute(Consts.CURRENT_USER_ATT);
+
+		if (currentUser != null) {//it does login
+			String pageToDispatch = "/" + Consts.SUCCESS_LOGIN_PAGE;//TODO welcome page
+			
+		}TODO to delete*/ 
+		
+		request.getServletContext().getRequestDispatcher(Consts.SERVLET_ROUTER).forward(request, response);
+		
 		// pass the request along the filter chain
 		chain.doFilter(request, response);
 	}
