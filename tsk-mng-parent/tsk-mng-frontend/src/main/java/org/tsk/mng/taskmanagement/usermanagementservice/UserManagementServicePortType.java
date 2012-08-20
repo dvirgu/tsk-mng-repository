@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlSeeAlso;
  */
  
 @WebService(targetNamespace = "http://mng.tsk.org/taskManagement/UserManagementService/", name = "UserManagementServicePortType")
-@XmlSeeAlso({org.tsk.mng.taskmanagement.common_elements.task.taskresult.ObjectFactory.class,org.tsk.mng.taskmanagement.common_elements.task.taskfe.ObjectFactory.class,org.tsk.mng.taskmanagement.common_elements.user.userresult.ObjectFactory.class,org.tsk.mng.taskmanagement.usermanagementwrapper.ObjectFactory.class,org.tsk.mng.taskmanagement.common_elements.opertaionresultstatus.ObjectFactory.class,org.tsk.mng.taskmanagement.header.soapheader.ObjectFactory.class,org.tsk.mng.taskmanagement.common_elements.user.userfe.ObjectFactory.class})
+@XmlSeeAlso({org.tsk.mng.taskmanagement.common_elements.task.taskfe.ObjectFactory.class,org.tsk.mng.taskmanagement.common_elements.task.taskresult.ObjectFactory.class,org.tsk.mng.taskmanagement.common_elements.user.userresult.ObjectFactory.class,org.tsk.mng.taskmanagement.usermanagementwrapper.ObjectFactory.class,org.tsk.mng.taskmanagement.common_elements.opertaionresultstatus.ObjectFactory.class,org.tsk.mng.taskmanagement.header.soapheader.ObjectFactory.class,org.tsk.mng.taskmanagement.common_elements.user.userfe.ObjectFactory.class})
 @SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.BARE)
 public interface UserManagementServicePortType {
 

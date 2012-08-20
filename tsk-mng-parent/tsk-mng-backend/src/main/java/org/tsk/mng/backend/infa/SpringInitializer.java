@@ -18,7 +18,7 @@ public class SpringInitializer {
 	public static AbstractApplicationContext getBeanFactory(String springLoaderFileName){
 		try{
 			if(beanFactory != null){
-				Object beanFactoryLivelihoodTester = beanFactory.getBean("beanFactoryLivelihoodTester"); //TODO remove this line (dvir to anar)
+				Object beanFactoryLivelihoodTester = beanFactory.getBean("beanFactoryLivelihoodTester"); 
 			}
 			else{
 				String springLoaderFileNameFixed = springLoaderFileName;
