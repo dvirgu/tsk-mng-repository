@@ -1,14 +1,18 @@
 package org.tsk.mng.dal.model;
 
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -45,14 +49,24 @@ public class UserDT {
 	private PermissionType permission;
 	
 	
-	//@Column(name="SUPERIOR")
-	@OneToOne
+	@ManyToOne(cascade={CascadeType.ALL} ,fetch=FetchType.EAGER)
+	@JoinColumn(name="SUPERIOR_ID")
 	private UserDT superior;
 	
-	@OneToMany
-	@JoinTable(name="USER_TASKS", joinColumns=@JoinColumn(name="USER_MAIL") ,inverseJoinColumns=@JoinColumn(name="TASK_ID"))
+	@OneToMany(mappedBy="superior" ,fetch=FetchType.EAGER)
+	private List<UserDT> workers;
+	
+	@OneToMany(mappedBy="owner" ,fetch=FetchType.EAGER)
 	private List<TaskDT> tasks;
 	
+	
+	
+	public List<UserDT> getWorkers() {
+		return workers;
+	}
+	public void setWorkers(List<UserDT> workers) {
+		this.workers = workers;
+	}
 	public String getMail() {
 		return mail;
 	}

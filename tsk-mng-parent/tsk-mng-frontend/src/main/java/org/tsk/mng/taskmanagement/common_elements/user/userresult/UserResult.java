@@ -95,4 +95,16 @@ public class UserResult {
         this.resultStatus = value;
     }
 
+    /**
+     * Sets the value of the userReturnValues property.
+     * 
+     * @param userReturnValues
+     *     allowed object is
+     *     {@link UserFE }
+     *     
+     */
+    public void setUserReturnValues(List<UserFE> userReturnValues) {
+        this.userReturnValues = userReturnValues;
+    }
+
 }

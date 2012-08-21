@@ -95,4 +95,16 @@ public class TaskResult {
         this.resultStatus = value;
     }
 
+    /**
+     * Sets the value of the taskReturnValues property.
+     * 
+     * @param taskReturnValues
+     *     allowed object is
+     *     {@link TaskFE }
+     *     
+     */
+    public void setTaskReturnValues(List<TaskFE> taskReturnValues) {
+        this.taskReturnValues = taskReturnValues;
+    }
+
 }
