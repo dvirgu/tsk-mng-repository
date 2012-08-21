@@ -229,4 +229,16 @@ public class TaskFE {
         return this.dependentTasks;
     }
 
+    /**
+     * Sets the value of the dependentTasks property.
+     * 
+     * @param dependentTasks
+     *     allowed object is
+     *     {@link TaskFE }
+     *     
+     */
+    public void setDependentTasks(List<TaskFE> dependentTasks) {
+        this.dependentTasks = dependentTasks;
+    }
+
 }

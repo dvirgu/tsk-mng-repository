@@ -67,7 +67,7 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 
 			if (!isUserExistInTheSystem(userDT)) { 
 				userDao.save(userDT); //TODO should check whether the user is created successfully
-				result = new UserResultBE(OperationStatusType.Success, "User : " + user + " has created in DB", user);
+				result = new UserResultBE(OperationStatusType.SUCCSESSFUL, "User : " + user + " has created in DB", user);
 			} else {
 				result = new UserResultBE("The username " + user.getMail() + " is already existing in the system");
 			}
@@ -121,7 +121,7 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 			UserDT user = userDao.getByPK(mail);
 			if (user != null) {//the user exists
 				UserBE userToRet = TransformerUtil.dozerConvert(user, UserBE.class);
-				result =  new UserResultBE(OperationStatusType.Success, "The user " + mail + " has found", userToRet);
+				result =  new UserResultBE(OperationStatusType.SUCCSESSFUL, "The user " + mail + " has found", userToRet);
 			} else {
 				result = new UserResultBE("The User doesn't exist");
 			}

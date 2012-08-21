@@ -3,14 +3,17 @@ package org.tsk.mng.dal.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -41,18 +44,29 @@ public class TaskDT {
 	@Column(name="DEADLINE")
 	private Date deadline;
 	
-	@OneToOne
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="OWNER_MAIL")
 	private UserDT owner;
 	
 	@Column(name="STATUS")
 	@Enumerated(EnumType.ORDINAL)
 	private TaskStatusType status;
 	
-	@ManyToMany
+	@ManyToMany(cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
 	@JoinTable(name="DEPENDENT_TASKS", joinColumns=@JoinColumn(name="TASK_ID"), inverseJoinColumns=@JoinColumn(name="DEPENDENT_TASK_ID"))
 	private List<TaskDT> dependentTasks;
 	
+	@ManyToMany(mappedBy="dependentTasks" ,fetch=FetchType.EAGER)
+	private List<TaskDT> dependOnMyTasks;
 	
+	
+	
+	public List<TaskDT> getDependOnMyTasks() {
+		return dependOnMyTasks;
+	}
+	public void setDependOnMyTasks(List<TaskDT> dependOnMyTasks) {
+		this.dependOnMyTasks = dependOnMyTasks;
+	}
 	public int getTaskId() {
 		return taskId;
 	}

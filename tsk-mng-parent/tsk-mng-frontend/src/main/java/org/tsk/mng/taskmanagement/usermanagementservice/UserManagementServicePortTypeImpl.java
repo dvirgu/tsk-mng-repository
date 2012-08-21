@@ -17,6 +17,7 @@ import javax.jws.soap.SOAPBinding.ParameterStyle;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
 import org.tsk.mng.backend.infa.SpringInitializer;
+import org.tsk.mng.backend.infa.TransformerUtil;
 import org.tsk.mng.backend.model.UserBE;
 import org.tsk.mng.backend.result.UserResultBE;
 import org.tsk.mng.backend.service.UserManagementBEService;
@@ -83,9 +84,9 @@ public class UserManagementServicePortTypeImpl implements
 			UserManagementBEService service = getUserService();//getting UserService
 			
 			UserFE userFE = createUserRequest.getUser();
-			UserResultBE result = service.createUser(TransformerFEvsBEUtil.convertUserFEtoBE(userFE));
+			UserResultBE result = service.createUser(TransformerUtil.dozerConvert(userFE, UserBE.class));
 
-			UserResult _return = TransformerFEvsBEUtil.convertUserResultBEtoUserResult(result);
+			UserResult _return = TransformerUtil.dozerConvert(result, UserResult.class);
 			
 			return _return;
 			
@@ -167,7 +168,7 @@ public class UserManagementServicePortTypeImpl implements
 			
 			UserResultBE userResultBe = service.readUser(soapHeader.getUserName()); // TODO what about password?
 			
-			UserResult retValue = TransformerFEvsBEUtil.convertUserResultBEtoUserResult(userResultBe);
+			UserResult retValue = TransformerUtil.dozerConvert(userResultBe, UserResult.class);
 			
 			return retValue;
 

@@ -27,7 +27,7 @@ public class UserResultBE {
 	 */
 	public UserResultBE(String description) {
 		setDescription(description);
-		setStatus(OperationStatusType.Failure);
+		setStatus(OperationStatusType.FAILURE);
 	}
 
 	public OperationStatusType getStatus() {

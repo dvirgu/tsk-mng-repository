@@ -298,4 +298,40 @@ public class UserFE {
         this.permission = value;
     }
 
+    /**
+     * Sets the value of the tasks property.
+     * 
+     * @param tasks
+     *     allowed object is
+     *     {@link TaskFE }
+     *     
+     */
+    public void setTasks(List<TaskFE> tasks) {
+        this.tasks = tasks;
+    }
+
+    /**
+     * Sets the value of the superiors property.
+     * 
+     * @param superiors
+     *     allowed object is
+     *     {@link UserFE }
+     *     
+     */
+    public void setSuperiors(List<UserFE> superiors) {
+        this.superiors = superiors;
+    }
+
+    /**
+     * Sets the value of the workers property.
+     * 
+     * @param workers
+     *     allowed object is
+     *     {@link UserFE }
+     *     
+     */
+    public void setWorkers(List<UserFE> workers) {
+        this.workers = workers;
+    }
+
 }
