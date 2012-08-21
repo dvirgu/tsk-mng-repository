@@ -2,7 +2,6 @@ package org.tsk.mng.backend.infa;
 
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.tsk.mng.backend.config.Consts;
 
 

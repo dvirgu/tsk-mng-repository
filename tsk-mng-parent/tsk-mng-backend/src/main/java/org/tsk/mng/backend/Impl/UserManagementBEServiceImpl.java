@@ -2,6 +2,7 @@ package org.tsk.mng.backend.Impl;
 
 
 import org.tsk.mng.backend.enums.OperationStatusType;
+import org.tsk.mng.backend.exceptions.BEResultException;
 import org.tsk.mng.backend.infa.TransformerUtil;
 import org.tsk.mng.backend.model.UserBE;
 import org.tsk.mng.backend.result.UserResultBE;
@@ -52,11 +53,13 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 	 * This method provides create user service.
 	 * The service checks whether the requested user doesn't exist in the system.
 	 * 
-	 * In case the user is existing the result be Failure with appropriate notice description
+	 * In case the user is existing appropriate @link BEResultException exception throws
 	 * 
 	 * @param user
+	 * @return UserBE
 	 * @author Dvir
 	 * 
+	 * @exception BEResultException
 	 */
 	public UserResultBE createUser(UserBE user) {
 		UserResultBE result = null;
@@ -67,9 +70,9 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 
 			if (!isUserExistInTheSystem(userDT)) { 
 				userDao.save(userDT); //TODO should check whether the user is created successfully
-				result = new UserResultBE(OperationStatusType.Success, "User : " + user + " has created in DB", user);
+				result = new UserResultBE(OperationStatusType.SUCCSESSFUL, "User : " + user + " has created in DB", user);
 			} else {
-				result = new UserResultBE("The username " + user.getMail() + " is already existing in the system");
+				throw new BEResultException("The username " + user.getMail() + " is already existing in the system");
 			}
 
 		} catch (Exception e) { 
@@ -121,7 +124,7 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 			UserDT user = userDao.getByPK(mail);
 			if (user != null) {//the user exists
 				UserBE userToRet = TransformerUtil.dozerConvert(user, UserBE.class);
-				result =  new UserResultBE(OperationStatusType.Success, "The user " + mail + " has found", userToRet);
+				result =  new UserResultBE(OperationStatusType.SUCCSESSFUL, "The user " + mail + " has found", userToRet);
 			} else {
 				result = new UserResultBE("The User doesn't exist");
 			}
