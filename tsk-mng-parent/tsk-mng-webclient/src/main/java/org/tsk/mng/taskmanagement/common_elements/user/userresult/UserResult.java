@@ -5,9 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-import org.tsk.mng.taskmanagement.common_elements.opertaionresultstatus.OperationResultStatus;
+import org.tsk.mng.taskmanagement.common_elements.resultbase.ResultBase;
 import org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE;
 
 
@@ -19,12 +18,11 @@ import org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE;
  * <pre>
  * &lt;complexType name="userResult">
  *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *     &lt;extension base="{http://mng.tsk.org/taskManagement/common_elements/resultBase}resultBase">
  *       &lt;sequence>
  *         &lt;element name="userReturnValues" type="{http://mng.tsk.org/taskManagement/common_elements/user/userFE}userFE" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="resultStatus" type="{http://mng.tsk.org/taskManagement/common_elements/opertaionResultStatus}OperationResultStatus"/>
  *       &lt;/sequence>
- *     &lt;/restriction>
+ *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
@@ -33,14 +31,13 @@ import org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "userResult", propOrder = {
-    "userReturnValues",
-    "resultStatus"
+    "userReturnValues"
 })
-public class UserResult {
+public class UserResult
+    extends ResultBase
+{
 
     protected List<UserFE> userReturnValues;
-    @XmlElement(required = true)
-    protected OperationResultStatus resultStatus;
 
     /**
      * Gets the value of the userReturnValues property.
@@ -72,27 +69,15 @@ public class UserResult {
     }
 
     /**
-     * Gets the value of the resultStatus property.
+     * Sets the value of the userReturnValues property.
      * 
-     * @return
-     *     possible object is
-     *     {@link OperationResultStatus }
-     *     
-     */
-    public OperationResultStatus getResultStatus() {
-        return resultStatus;
-    }
-
-    /**
-     * Sets the value of the resultStatus property.
-     * 
-     * @param value
+     * @param userReturnValues
      *     allowed object is
-     *     {@link OperationResultStatus }
+     *     {@link UserFE }
      *     
      */
-    public void setResultStatus(OperationResultStatus value) {
-        this.resultStatus = value;
+    public void setUserReturnValues(List<UserFE> userReturnValues) {
+        this.userReturnValues = userReturnValues;
     }
 
 }

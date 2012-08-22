@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;simpleType name="OperationResultStatus">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *     &lt;enumeration value="Succsessful"/>
+ *     &lt;enumeration value="Success"/>
  *     &lt;enumeration value="Failure"/>
  *   &lt;/restriction>
  * &lt;/simpleType>
@@ -25,8 +25,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum OperationResultStatus {
 
-    @XmlEnumValue("Succsessful")
-    SUCCSESSFUL("Succsessful"),
+    @XmlEnumValue("Success")
+    SUCCESS("Success"),
     @XmlEnumValue("Failure")
     FAILURE("Failure");
     private final String value;

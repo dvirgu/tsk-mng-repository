@@ -31,9 +31,9 @@ public class ObjectFactory {
     private final static QName _UpdateTaskOperationElemetRequest_QNAME = new QName("http://mng.tsk.org/taskManagement/task_management_wrapper", "updateTaskOperationElemetRequest");
     private final static QName _AddDependencyOperationElemetRequest_QNAME = new QName("http://mng.tsk.org/taskManagement/task_management_wrapper", "addDependencyOperationElemetRequest");
     private final static QName _AddDependencyElemetRequest_QNAME = new QName("http://mng.tsk.org/taskManagement/task_management_wrapper", "addDependencyElemetRequest");
+    private final static QName _GetUserTasksTypeRequest_QNAME = new QName("http://mng.tsk.org/taskManagement/task_management_wrapper", "getUserTasksTypeRequest");
     private final static QName _UpdateTaskElemetRequest_QNAME = new QName("http://mng.tsk.org/taskManagement/task_management_wrapper", "updateTaskElemetRequest");
     private final static QName _GetUserTasksOperationElementResponse_QNAME = new QName("http://mng.tsk.org/taskManagement/task_management_wrapper", "getUserTasksOperationElementResponse");
-    private final static QName _GetUserTasksTypeRequest_QNAME = new QName("http://mng.tsk.org/taskManagement/task_management_wrapper", "getUserTasksTypeRequest");
     private final static QName _UpdateTaskOperationElemetResponse_QNAME = new QName("http://mng.tsk.org/taskManagement/task_management_wrapper", "updateTaskOperationElemetResponse");
     private final static QName _RemoveTaskFromUserElementRequest_QNAME = new QName("http://mng.tsk.org/taskManagement/task_management_wrapper", "removeTaskFromUserElementRequest");
     private final static QName _RemoveTaskFromUserOperationElementRequest_QNAME = new QName("http://mng.tsk.org/taskManagement/task_management_wrapper", "removeTaskFromUserOperationElementRequest");
@@ -50,11 +50,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link UpdateTaskElemetRequest }
+     * 
+     */
+    public UpdateTaskElemetRequest createUpdateTaskElemetRequest() {
+        return new UpdateTaskElemetRequest();
+    }
+
+    /**
      * Create an instance of {@link GetUserTasksTypeRequest }
      * 
      */
     public GetUserTasksTypeRequest createGetUserTasksTypeRequest() {
         return new GetUserTasksTypeRequest();
+    }
+
+    /**
+     * Create an instance of {@link RemoveTaskFromUserElementRequest }
+     * 
+     */
+    public RemoveTaskFromUserElementRequest createRemoveTaskFromUserElementRequest() {
+        return new RemoveTaskFromUserElementRequest();
     }
 
     /**
@@ -66,27 +82,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link UpdateTaskElemetRequest }
-     * 
-     */
-    public UpdateTaskElemetRequest createUpdateTaskElemetRequest() {
-        return new UpdateTaskElemetRequest();
-    }
-
-    /**
      * Create an instance of {@link AddDependencyElemetRequest }
      * 
      */
     public AddDependencyElemetRequest createAddDependencyElemetRequest() {
         return new AddDependencyElemetRequest();
-    }
-
-    /**
-     * Create an instance of {@link RemoveTaskFromUserElementRequest }
-     * 
-     */
-    public RemoveTaskFromUserElementRequest createRemoveTaskFromUserElementRequest() {
-        return new RemoveTaskFromUserElementRequest();
     }
 
     /**
@@ -135,6 +135,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetUserTasksTypeRequest }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://mng.tsk.org/taskManagement/task_management_wrapper", name = "getUserTasksTypeRequest")
+    public JAXBElement<GetUserTasksTypeRequest> createGetUserTasksTypeRequest(GetUserTasksTypeRequest value) {
+        return new JAXBElement<GetUserTasksTypeRequest>(_GetUserTasksTypeRequest_QNAME, GetUserTasksTypeRequest.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link UpdateTaskElemetRequest }{@code >}}
      * 
      */
@@ -150,15 +159,6 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://mng.tsk.org/taskManagement/task_management_wrapper", name = "getUserTasksOperationElementResponse")
     public JAXBElement<TaskResult> createGetUserTasksOperationElementResponse(TaskResult value) {
         return new JAXBElement<TaskResult>(_GetUserTasksOperationElementResponse_QNAME, TaskResult.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetUserTasksTypeRequest }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://mng.tsk.org/taskManagement/task_management_wrapper", name = "getUserTasksTypeRequest")
-    public JAXBElement<GetUserTasksTypeRequest> createGetUserTasksTypeRequest(GetUserTasksTypeRequest value) {
-        return new JAXBElement<GetUserTasksTypeRequest>(_GetUserTasksTypeRequest_QNAME, GetUserTasksTypeRequest.class, null, value);
     }
 
     /**

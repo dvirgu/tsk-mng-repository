@@ -4,22 +4,25 @@
 	targetNamespace="http://mng.tsk.org/taskManagement/common_elements/task/taskResult"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:ns0="http://mng.tsk.org/taskManagement/common_elements/task/taskFE"
-	xmlns:ns1="http://mng.tsk.org/taskManagement/common_elements/opertaionResultStatus"
+	xmlns:ns1="http://mng.tsk.org/taskManagement/common_elements/resultBase"
 	xmlns:tns="http://mng.tsk.org/taskManagement/common_elements/task/taskResult">
 
 	<xs:import schemaLocation="taskFE.xsd"
 		namespace="http://mng.tsk.org/taskManagement/common_elements/task/taskFE" />
-	<xs:import schemaLocation="../opertaion_result_status.xsd"
-		namespace="http://mng.tsk.org/taskManagement/common_elements/opertaionResultStatus" />
+	<xs:import schemaLocation="../result_base.xsd"
+		namespace="http://mng.tsk.org/taskManagement/common_elements/resultBase" />
 
 	<xs:element name="taskResult" type="taskResult" />
 
 	<xs:complexType name="taskResult">
-		<xs:sequence>
-			<xs:element name="taskReturnValues" type="ns0:taskFE"
-				minOccurs="0" maxOccurs="unbounded" />
-			<xs:element name="resultStatus" type="ns1:OperationResultStatus" />
-		</xs:sequence>
+		<xs:complexContent>
+			<xs:extension base="ns1:resultBase">
+				<xs:sequence>
+					<xs:element name="taskReturnValues" type="ns0:taskFE"
+						minOccurs="0" maxOccurs="unbounded" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
 	</xs:complexType>
 
 </xs:schema>

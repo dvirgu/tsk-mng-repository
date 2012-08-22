@@ -1,7 +1,5 @@
 package org.tsk.mng.backend.infa;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import org.dozer.Mapper;
 import org.tsk.mng.backend.config.Consts;
@@ -25,17 +23,4 @@ public class TransformerUtil {
 		return toObj;
 	}
 	
-	public static <T, K> List<T> dozerListConvert(List<K> fromListToConvert, Class<T> toObjClass){
-		List<T> convertedList = null;
-		
-		if(fromListToConvert != null){
-			convertedList = new ArrayList<T>();
-			for(K objToConvert : fromListToConvert){
-				T toObj = dozerConvert(objToConvert, toObjClass);
-				convertedList.add(toObj);
-			}
-		}
-		
-		return convertedList;
-	}
 }

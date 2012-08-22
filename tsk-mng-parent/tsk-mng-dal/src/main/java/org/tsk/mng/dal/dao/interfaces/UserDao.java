@@ -19,5 +19,13 @@ public interface UserDao {
 	 * @return
 	 */
 	UserDT getByPK(String mail);
+	
 
+	/**
+	 * 
+	 * 
+	 * @param userToSave
+	 * @return
+	 */
+	boolean saveAndVerifyUser(UserDT userToSave);
 }

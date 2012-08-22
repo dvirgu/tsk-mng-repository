@@ -11,6 +11,7 @@ public class BaseDaoImpl<DataType, PKType extends Serializable> {
 
 	
 	//TODO clear all unnecessary comments - Dvir To Anar
+	//TODO should add throwing of exceptions 
 	
 	//private SessionFactory sessionFactory;
 	private HibernateTemplate hibernateTemplate;

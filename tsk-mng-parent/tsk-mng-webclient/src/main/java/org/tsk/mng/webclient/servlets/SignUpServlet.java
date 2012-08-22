@@ -69,7 +69,7 @@ public class SignUpServlet extends ServletBase {
 			
 			String pageDispatch = Consts.ERROR_LOGIN_PAGE;;
 			
-			if (result.getResultStatus() == OperationResultStatus.SUCCSESSFUL) {
+			if (result.getResultStatus() == OperationResultStatus.SUCCESS) {
 				UserFE userSignupResult = result.getUserReturnValues().get(0);//should be one user if result is successful
 				if (userSignupResult != null) {
 					request.getSession().setAttribute(Consts.CURRENT_USER_ATT, userSignupResult);

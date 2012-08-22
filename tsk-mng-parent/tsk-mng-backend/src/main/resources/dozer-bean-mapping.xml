@@ -150,7 +150,7 @@
 		</field>
 	</mapping>
 	
-	<mapping>
+	<!-- mapping>
 		<class-a>org.tsk.mng.backend.result.UserResultBE</class-a>
 		<class-b>org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult</class-b>
 		<field>
@@ -162,9 +162,9 @@
 			<b>userReturnValues</b>
 			<b-hint>org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE</b-hint>
 		</field>
-	</mapping>
+	</mapping-->
 	
-	<mapping>
+	<!--mapping>
 		<class-a>org.tsk.mng.backend.result.TaskResultBE</class-a>
 		<class-b>org.tsk.mng.taskmanagement.common_elements.task.taskresult.TaskResult</class-b>
 		<field>
@@ -176,7 +176,7 @@
 			<b>taskReturnValues</b>
 			<b-hint>org.tsk.mng.taskmanagement.common_elements.task.taskfe.TaskFE</b-hint>
 		</field>
-	</mapping>
+	</mapping-->
 
 
 </mappings>

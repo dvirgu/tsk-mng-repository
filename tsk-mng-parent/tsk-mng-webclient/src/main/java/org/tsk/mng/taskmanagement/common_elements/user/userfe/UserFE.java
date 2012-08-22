@@ -25,7 +25,7 @@ import org.tsk.mng.taskmanagement.common_elements.task.taskfe.TaskFE;
  *         &lt;element name="lastName" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="nickName" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="tasks" type="{http://mng.tsk.org/taskManagement/common_elements/task/taskFE}taskFE" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="superiors" type="{http://mng.tsk.org/taskManagement/common_elements/user/userFE}userFE" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="superiors" type="{http://mng.tsk.org/taskManagement/common_elements/user/userFE}userFE"/>
  *         &lt;element name="workers" type="{http://mng.tsk.org/taskManagement/common_elements/user/userFE}userFE" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="permission" type="{http://mng.tsk.org/taskManagement/common_elements/user/userFE}PermissionType"/>
@@ -60,7 +60,8 @@ public class UserFE {
     @XmlElement(required = true)
     protected String nickName;
     protected List<TaskFE> tasks;
-    protected List<UserFE> superiors;
+    @XmlElement(required = true)
+    protected UserFE superiors;
     protected List<UserFE> workers;
     @XmlElement(required = true)
     protected String password;
@@ -195,30 +196,25 @@ public class UserFE {
     /**
      * Gets the value of the superiors property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the superiors property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getSuperiors().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link UserFE }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link UserFE }
+     *     
      */
-    public List<UserFE> getSuperiors() {
-        if (superiors == null) {
-            superiors = new ArrayList<UserFE>();
-        }
-        return this.superiors;
+    public UserFE getSuperiors() {
+        return superiors;
+    }
+
+    /**
+     * Sets the value of the superiors property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link UserFE }
+     *     
+     */
+    public void setSuperiors(UserFE value) {
+        this.superiors = value;
     }
 
     /**
@@ -296,6 +292,30 @@ public class UserFE {
      */
     public void setPermission(PermissionType value) {
         this.permission = value;
+    }
+
+    /**
+     * Sets the value of the tasks property.
+     * 
+     * @param tasks
+     *     allowed object is
+     *     {@link TaskFE }
+     *     
+     */
+    public void setTasks(List<TaskFE> tasks) {
+        this.tasks = tasks;
+    }
+
+    /**
+     * Sets the value of the workers property.
+     * 
+     * @param workers
+     *     allowed object is
+     *     {@link UserFE }
+     *     
+     */
+    public void setWorkers(List<UserFE> workers) {
+        this.workers = workers;
     }
 
 }

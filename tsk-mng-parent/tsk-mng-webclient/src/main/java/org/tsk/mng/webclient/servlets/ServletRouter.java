@@ -14,7 +14,7 @@ import org.tsk.mng.webclient.tools.Consts;
  * Servlet implementation class MainServlet
  */
 @WebServlet(description = "Router of requests", urlPatterns = { Consts.SERVLET_ROUTER })
-public class ServletRouter extends HttpServlet {
+public class ServletRouter extends ServletBase {
 	private static final long serialVersionUID = 1L;
 
 	/**

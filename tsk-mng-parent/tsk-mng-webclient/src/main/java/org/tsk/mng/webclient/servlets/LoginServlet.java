@@ -81,7 +81,7 @@ public class LoginServlet extends ServletBase {
 		UserManagementServicePortType userService = getUserManagementServicePort();
 		UserResult user = userService.readUserOperation(authUserInfo,userReq);
 
-		if (user.getResultStatus() == OperationResultStatus.SUCCSESSFUL) { //set the user
+		if (user.getResultStatus() == OperationResultStatus.SUCCESS) { //set the user
 			request.getSession().setAttribute(Consts.CURRENT_USER_ATT, user.getUserReturnValues().get(0)); //FIXME change it getIndex
 			dispachPageUri = Consts.WELCOME_PAGE; }
 

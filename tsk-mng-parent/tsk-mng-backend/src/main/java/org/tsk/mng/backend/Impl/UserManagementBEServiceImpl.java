@@ -1,11 +1,9 @@
 package org.tsk.mng.backend.Impl;
 
 
-import org.tsk.mng.backend.enums.OperationStatusType;
-import org.tsk.mng.backend.exceptions.BEResultException;
+import org.tsk.mng.backend.exceptions.ResultBeException;
 import org.tsk.mng.backend.infa.TransformerUtil;
 import org.tsk.mng.backend.model.UserBE;
-import org.tsk.mng.backend.result.UserResultBE;
 import org.tsk.mng.backend.service.UserManagementBEService;
 import org.tsk.mng.dal.dao.interfaces.UserDao;
 import org.tsk.mng.dal.model.UserDT;
@@ -44,7 +42,7 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 
 	/* ServiceImpl Methods */
 
-	public UserResultBE addSuperiorToUser(UserBE superior, UserBE worker) {
+	public UserBE addSuperiorToUser(UserBE superior, UserBE worker) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -59,29 +57,28 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 	 * @return UserBE
 	 * @author Dvir
 	 * 
-	 * @exception BEResultException
+	 * @exception ResultBeException
 	 */
-	public UserResultBE createUser(UserBE user) {
-		UserResultBE result = null;
+	public UserBE createUser(UserBE user) throws ResultBeException {
 
 		try {
 			//create UserDT
 			UserDT userDT = TransformerUtil.dozerConvert(user, UserDT.class);
-
-			if (!isUserExistInTheSystem(userDT)) { 
-				userDao.save(userDT); //TODO should check whether the user is created successfully
-				result = new UserResultBE(OperationStatusType.SUCCSESSFUL, "User : " + user + " has created in DB", user);
-			} else {
-				throw new BEResultException("The username " + user.getMail() + " is already existing in the system");
+			
+			if (isUserExistInTheSystem(userDT)) {
+				throw new ResultBeException("User already exist in the system");
 			}
+			
+			if (!userDao.saveAndVerifyUser(userDT)) {
+				throw new ResultBeException("error occur while creating user");
+			}
+			
+			return user;
 
 		} catch (Exception e) { 
-			e.printStackTrace(); //TODO logger
-			result = new UserResultBE("Exception occur : " + e.getMessage());
+			//TODO logger
+			 throw new ResultBeException("Exception occur : " + e.getMessage(),e);
 		}
-
-		return result;
-
 	}
 
 	/**
@@ -104,40 +101,38 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 		throw new NullPointerException("userDT is null");
 	}
 
-	public UserResultBE deleteUser(UserBE user) {
+	public UserBE deleteUser(UserBE user) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
+
+
 	/**
 	 * This method provide getUser service.
-	 * TODO add more descriptions
+	 * in case of error in data fetching
+	 * throw exception with appropriate message/description
 	 * 
-	 * @return return UserResultBE
-	 * @param mail - the ID of the user
+	 * @return UserBE
+	 * @param mail - the ID/PK of the user
+	 * @throws ResultBeException 
 	 */
-	public UserResultBE readUser(String mail) {
-		UserResultBE result = null;
-		
+	public UserBE readUser(String mail) throws ResultBeException {
+
 		try {
-			UserDT user = userDao.getByPK(mail);
-			if (user != null) {//the user exists
-				UserBE userToRet = TransformerUtil.dozerConvert(user, UserBE.class);
-				result =  new UserResultBE(OperationStatusType.SUCCSESSFUL, "The user " + mail + " has found", userToRet);
-			} else {
-				result = new UserResultBE("The User doesn't exist");
+			UserDT userDT = userDao.getByPK(mail);
+			if (userDT != null) {//the user exists
+				return TransformerUtil.dozerConvert(userDT, UserBE.class);
 			}
+			// user doesn't exist
+			throw new ResultBeException("The User doesn't exist");
+			
 		}catch (Exception e) {
 			//TODO logger
-			result = new UserResultBE("Exception occur : " + e.getMessage());
+			throw new ResultBeException("Exception occur : " + e.getMessage(),e);
 		}
-		
-		return result;
-
 	}
 
-	public UserResultBE updateUser(UserBE user) {
+	public UserBE updateUser(UserBE user) {
 		// TODO Auto-generated method stub
 		return null;
 	}

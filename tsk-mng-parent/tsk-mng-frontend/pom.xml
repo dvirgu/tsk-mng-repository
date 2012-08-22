@@ -94,7 +94,7 @@
 
 	<profiles>
 		<profile>
-			<id>generet-services</id>
+			<id>generate-services</id>
 			<build>
 				<plugins>
 					<plugin>
@@ -109,8 +109,8 @@
 									<sourceRoot>${basedir}/src/main/java</sourceRoot>
 									<wsdlOptions>
 										<wsdlOption>
-											<wsdl>${basedir}/src/main/webapp/WEB-INF/wsdl/TaskManagementServiceWSDL/TaskManagementService.wsdl</wsdl>
-											<wsdlLocation>http://localhost:8080/TaskManagementService/services/TaskManagementService?wsdl</wsdlLocation>
+											<wsdl>${basedir}/src/main/resource/wsdl/TaskManagementServiceWSDL/TaskManagementService.wsdl</wsdl>
+											<wsdlLocation>http://localhost:8080/tsk-mng-frontend-0.0.1-REVISION/services/TaskManagementServicePort?wsdl</wsdlLocation>
 											<extraargs>
 												<extraarg>-xjc-Xcollection-setter-injector</extraarg>
 											</extraargs>
@@ -128,8 +128,8 @@
 									<sourceRoot>${basedir}/src/main/java</sourceRoot>
 									<wsdlOptions>
 										<wsdlOption>
-											<wsdl>${basedir}/src/main/webapp/WEB-INF/wsdl/UserManagementServiceWSDL/UserManagementService.wsdl</wsdl>
-											<wsdlLocation>http://localhost:8080/TaskManagementService/services/UserManagementService?wsdl</wsdlLocation>
+											<wsdl>${basedir}/src/main/resource/wsdl/UserManagementServiceWSDL/UserManagementService.wsdl</wsdl>
+											<wsdlLocation>http://localhost:8080/tsk-mng-frontend-0.0.1-REVISION/services/UserManagementServicePort?wsdl</wsdlLocation>
 											<extraargs>
 												<extraarg>-xjc-Xcollection-setter-injector</extraarg>
 											</extraargs>

@@ -1,18 +1,18 @@
 package org.tsk.mng.backend.service;
 
+import org.tsk.mng.backend.exceptions.ResultBeException;
 import org.tsk.mng.backend.model.UserBE;
-import org.tsk.mng.backend.result.UserResultBE;
 
 public interface UserManagementBEService {
 
-	UserResultBE addSuperiorToUser(UserBE superior, UserBE worker);
+	UserBE addSuperiorToUser(UserBE superior, UserBE worker) throws ResultBeException;
 	
-	UserResultBE createUser(UserBE user);
+	UserBE createUser(UserBE user) throws ResultBeException;
 	
-	UserResultBE deleteUser(UserBE user);
+	UserBE deleteUser(UserBE user) throws ResultBeException;
 	
-	UserResultBE readUser(String mail);
+	UserBE readUser(String mail) throws ResultBeException;
 	
-	UserResultBE updateUser(UserBE user);
+	UserBE updateUser(UserBE user) throws ResultBeException;
 	
 }

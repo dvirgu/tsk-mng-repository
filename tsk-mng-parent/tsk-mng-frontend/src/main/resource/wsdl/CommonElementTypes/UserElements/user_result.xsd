@@ -4,22 +4,25 @@
 	targetNamespace="http://mng.tsk.org/taskManagement/common_elements/user/userResult"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:ns0="http://mng.tsk.org/taskManagement/common_elements/user/userFE"
-	xmlns:ns1="http://mng.tsk.org/taskManagement/common_elements/opertaionResultStatus"
+	xmlns:ns1="http://mng.tsk.org/taskManagement/common_elements/resultBase"
 	xmlns:tns="http://mng.tsk.org/taskManagement/common_elements/user/userResult">
 
 	<xs:import schemaLocation="userFE.xsd"
 		namespace="http://mng.tsk.org/taskManagement/common_elements/user/userFE" />
-	<xs:import schemaLocation="../opertaion_result_status.xsd"
-		namespace="http://mng.tsk.org/taskManagement/common_elements/opertaionResultStatus"/>
+	<xs:import schemaLocation="../result_base.xsd"
+		namespace="http://mng.tsk.org/taskManagement/common_elements/resultBase" />
 
 	<xs:element name="userResult" type="userResult" />
 
 	<xs:complexType name="userResult">
-		<xs:sequence>
-			<xs:element name="userReturnValues" type="ns0:userFE"
-				minOccurs="0" maxOccurs="unbounded" />
-			<xs:element name="resultStatus" type="ns1:OperationResultStatus" />
-		</xs:sequence>
+		<xs:complexContent>
+			<xs:extension base="ns1:resultBase">
+				<xs:sequence>
+					<xs:element name="userReturnValues" type="ns0:userFE"
+						minOccurs="0" maxOccurs="unbounded" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
 	</xs:complexType>
 
 </xs:schema>

@@ -33,9 +33,9 @@ public class ObjectFactory {
     private final static QName _UpdateUserTypeRequest_QNAME = new QName("http://mng.tsk.org/taskManagement/UserManagementWrapper", "updateUserTypeRequest");
     private final static QName _CreateUserTypeRequest_QNAME = new QName("http://mng.tsk.org/taskManagement/UserManagementWrapper", "createUserTypeRequest");
     private final static QName _DeleteUserTypeRequest_QNAME = new QName("http://mng.tsk.org/taskManagement/UserManagementWrapper", "deleteUserTypeRequest");
-    private final static QName _CreateUserOperationElementRequest_QNAME = new QName("http://mng.tsk.org/taskManagement/UserManagementWrapper", "createUserOperationElementRequest");
     private final static QName _AddSuperiorToUserOperationElementRequest_QNAME = new QName("http://mng.tsk.org/taskManagement/UserManagementWrapper", "addSuperiorToUserOperationElementRequest");
     private final static QName _AddSuperiorToUserOperationElementResponse_QNAME = new QName("http://mng.tsk.org/taskManagement/UserManagementWrapper", "addSuperiorToUserOperationElementResponse");
+    private final static QName _CreateUserOperationElementRequest_QNAME = new QName("http://mng.tsk.org/taskManagement/UserManagementWrapper", "createUserOperationElementRequest");
     private final static QName _DeleteUserOperationElementRequest_QNAME = new QName("http://mng.tsk.org/taskManagement/UserManagementWrapper", "deleteUserOperationElementRequest");
     private final static QName _AddSuperiorToUserTypeRequest_QNAME = new QName("http://mng.tsk.org/taskManagement/UserManagementWrapper", "addSuperiorToUserTypeRequest");
     private final static QName _ReadUserTypeRequest_QNAME = new QName("http://mng.tsk.org/taskManagement/UserManagementWrapper", "readUserTypeRequest");
@@ -57,14 +57,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link AddSuperiorToUserTypeRequest }
-     * 
-     */
-    public AddSuperiorToUserTypeRequest createAddSuperiorToUserTypeRequest() {
-        return new AddSuperiorToUserTypeRequest();
-    }
-
-    /**
      * Create an instance of {@link CreateUserTypeRequest }
      * 
      */
@@ -73,11 +65,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ReadUserTypeRequest }
+     * Create an instance of {@link AddSuperiorToUserTypeRequest }
      * 
      */
-    public ReadUserTypeRequest createReadUserTypeRequest() {
-        return new ReadUserTypeRequest();
+    public AddSuperiorToUserTypeRequest createAddSuperiorToUserTypeRequest() {
+        return new AddSuperiorToUserTypeRequest();
     }
 
     /**
@@ -86,6 +78,14 @@ public class ObjectFactory {
      */
     public UpdateUserTypeRequest createUpdateUserTypeRequest() {
         return new UpdateUserTypeRequest();
+    }
+
+    /**
+     * Create an instance of {@link ReadUserTypeRequest }
+     * 
+     */
+    public ReadUserTypeRequest createReadUserTypeRequest() {
+        return new ReadUserTypeRequest();
     }
 
     /**
@@ -161,15 +161,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link CreateUserTypeRequest }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://mng.tsk.org/taskManagement/UserManagementWrapper", name = "createUserOperationElementRequest")
-    public JAXBElement<CreateUserTypeRequest> createCreateUserOperationElementRequest(CreateUserTypeRequest value) {
-        return new JAXBElement<CreateUserTypeRequest>(_CreateUserOperationElementRequest_QNAME, CreateUserTypeRequest.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link AddSuperiorToUserTypeRequest }{@code >}}
      * 
      */
@@ -185,6 +176,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://mng.tsk.org/taskManagement/UserManagementWrapper", name = "addSuperiorToUserOperationElementResponse")
     public JAXBElement<UserResult> createAddSuperiorToUserOperationElementResponse(UserResult value) {
         return new JAXBElement<UserResult>(_AddSuperiorToUserOperationElementResponse_QNAME, UserResult.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CreateUserTypeRequest }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://mng.tsk.org/taskManagement/UserManagementWrapper", name = "createUserOperationElementRequest")
+    public JAXBElement<CreateUserTypeRequest> createCreateUserOperationElementRequest(CreateUserTypeRequest value) {
+        return new JAXBElement<CreateUserTypeRequest>(_CreateUserOperationElementRequest_QNAME, CreateUserTypeRequest.class, null, value);
     }
 
     /**
