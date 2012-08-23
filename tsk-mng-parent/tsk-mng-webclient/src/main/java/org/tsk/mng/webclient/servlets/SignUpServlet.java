@@ -60,8 +60,9 @@ public class SignUpServlet extends ServletBase {
 		try {
 			UserManagementServicePortType userService = getUserManagementServicePort();
 			CreateUserTypeRequest newUserReq = createCreateUserTypeRequest(request);
-			UserResult result = userService.createUserOperation(null, newUserReq);// soapHear parameter should be null cause is new user, authenticate isn't relevant here.
-
+			
+			// soapHear parameter should be null cause is new user, authenticate isn't relevant here.
+			UserResult result = userService.createUserOperation(null, newUserReq);
 			
 			if (result.getUserReturnValues().size() > 1) {
 				throw new RuntimeException("more than one user doesn't supported yet");//TODO support more than one user in sign

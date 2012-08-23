@@ -62,8 +62,6 @@ public class LoginServlet extends ServletBase {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		//TODO change the logic of the this method
-		
-		String dispachPageUri = Consts.ERROR_LOGIN_PAGE; // Error Page.
 
 		String reqUserName = request.getParameter("userName");
 		String reqPass = request.getParameter("password");
@@ -81,10 +79,14 @@ public class LoginServlet extends ServletBase {
 		UserManagementServicePortType userService = getUserManagementServicePort();
 		UserResult user = userService.readUserOperation(authUserInfo,userReq);
 
+		String dispachPageUri;
 		if (user.getResultStatus() == OperationResultStatus.SUCCESS) { //set the user
 			request.getSession().setAttribute(Consts.CURRENT_USER_ATT, user.getUserReturnValues().get(0)); //FIXME change it getIndex
-			dispachPageUri = Consts.WELCOME_PAGE; }
-
+			dispachPageUri = Consts.WELCOME_PAGE; 
+		} else {
+			request.setAttribute(Consts.USER_RESULT_STATUS_ATT, user);
+			dispachPageUri = Consts.ERROR_LOGIN_PAGE; // Error Page.
+		}
 
 		getServletContext().getRequestDispatcher(dispachPageUri).forward(request, response);
 	}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+	xmlns="http://mng.tsk.org/taskManagement/common_elements/resultBase"
+	targetNamespace="http://mng.tsk.org/taskManagement/common_elements/resultBase"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:ns0="http://mng.tsk.org/taskManagement/common_elements/opertaionResultStatus"
+	xmlns:tns="http://mng.tsk.org/taskManagement/common_elements/resultBase">
+
+	<xs:import schemaLocation="opertaion_result_status.xsd"
+		namespace="http://mng.tsk.org/taskManagement/common_elements/opertaionResultStatus" />
+
+	<xs:element name="resultBase" type="resultBase" />
+
+	<xs:complexType name="resultBase">
+		<xs:sequence>
+			<xs:element name="resultDescription" type="xs:string" />
+			<xs:element name="resultStatus" type="ns0:OperationResultStatus" />
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

@@ -9,6 +9,9 @@
 <h1>Login has failed</h1>
 </head>
 <body>
-
+	<jsp:useBean id="userResultStatusAtt" scope="request"
+		class="org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult"/>
+	The Result is :
+	<jsp:getProperty property="resultDescription" name="userResultStatusAtt"/>
 </body>
 </html>

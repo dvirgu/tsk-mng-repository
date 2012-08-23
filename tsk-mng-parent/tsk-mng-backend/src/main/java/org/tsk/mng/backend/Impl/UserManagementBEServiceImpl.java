@@ -8,6 +8,9 @@ import org.tsk.mng.backend.service.UserManagementBEService;
 import org.tsk.mng.dal.dao.interfaces.UserDao;
 import org.tsk.mng.dal.model.UserDT;
 
+//TODO adding authorization checking in each service method
+//TODO logger
+
 /**
  * The class present
  * the implementation of the server side business logic
@@ -60,6 +63,7 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 	 * @exception ResultBeException
 	 */
 	public UserBE createUser(UserBE user) throws ResultBeException {
+		//TODO adding authorization check
 
 		try {
 			//create UserDT
@@ -137,6 +141,49 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 		return null;
 	}
 
+	
+	/**
+	 * 
+	 * TODO add descriptions
+	 * @throws ResultBeException 
+	 */
+	@Override
+	public UserBE authenticate(UserBE userBeToAuth) throws ResultBeException {
+		//TODO add logger
+		
+		try {
+			
+			if (userBeToAuth == null) {
+				throw new ResultBeException("userBeToAuth is null");
+			}
+			
+			UserDT userToAuth = TransformerUtil.dozerConvert(userBeToAuth, UserDT.class);
+			if (authenticate(userToAuth)) {
+				return userBeToAuth;
+			}
+
+			//the user doesn't exist
+			throw new ResultBeException("your username/password is incorrect or doesn't exist");
+			
+			
+		} catch (Exception e) {
+			//TODO logger
+			throw new ResultBeException(e.getMessage(),e);
+		}
+	}
+
+	
+	private boolean authenticate(UserDT userToAuth) {
+		//TODO change it to "smart" query
+		
+		UserDT userToCompare = userDao.getByPK(userToAuth.getMail());//TODO change it to "smart" query
+		if (userToCompare != null) {
+			return userToAuth.getPassword().equals(userToCompare.getPassword());
+		}
+		
+		//user doesn't exist
+		return false;
+	}
 
 
 }

@@ -30,6 +30,7 @@ public class Consts {
 	 * Services Attributes
 	 */
 	public static final String USER_SERVICE_PORT_ATT = "UserManagementService";
+	public static final String USER_RESULT_STATUS_ATT = "userResultStatusAtt";
 
 	
 	/**
@@ -41,5 +42,7 @@ public class Consts {
 	public static final String NICK_NAME_PARAM = "nickName";
 	public static final String PASSWORD_PARAM = "password";
 	public static final String PERMISSION_PARAM = "permissions";
+
+
 }
 

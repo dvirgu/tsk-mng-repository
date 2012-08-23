@@ -29,12 +29,8 @@
 			<a>permission</a>
 			<b>permission</b>
 		</field>
-		<!-- TODO: mapping superiors in BE to single superior in DT 
-		<field> 
-			<a></a> 
-			<b></b> 
-		</field> 
-		-->
+		<!-- TODO: mapping superiors in BE to single superior in DT <field> <a></a> 
+			<b></b> </field> -->
 		<field>
 			<a>tasks</a>
 			<b>tasks</b>
@@ -44,7 +40,8 @@
 	</mapping>
 
 	<mapping type="bi-directional">
-		<class-a>org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE</class-a>
+		<class-a>org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE
+		</class-a>
 		<class-b>org.tsk.mng.backend.model.UserBE</class-b>
 		<field>
 			<a>mail</a>
@@ -70,12 +67,8 @@
 			<a>permission</a>
 			<b>permission</b>
 		</field>
-		<!-- TODO: mapping superiors in BE to single superior in DT
-		<field>
-			<a></a>
-			<b></b>
-		</field>
-		-->
+		<!-- TODO: mapping superiors in BE to single superior in DT <field> <a></a> 
+			<b></b> </field> -->
 		<field>
 			<a>tasks</a>
 			<b>tasks</b>
@@ -115,9 +108,41 @@
 			<b>dependentTasks</b>
 		</field>
 	</mapping>
-	
+
+
 	<mapping wildcard="true" type="bi-directional">
-		<class-a>org.tsk.mng.taskmanagement.common_elements.task.taskfe.TaskFE</class-a>
+		<class-a>org.tsk.mng.taskmanagement.header.soapheader.UserAuthInfo
+		</class-a>
+		<class-b>org.tsk.mng.backend.model.UserBE</class-b>
+		<field>
+			<a>userName</a>
+			<b>mail</b>
+		</field>
+		<field>
+			<a>password</a>
+			<b>password</b>
+		</field>
+	</mapping>
+
+	<mapping wildcard="true" type="bi-directional">
+		<class-a>org.tsk.mng.taskmanagement.header.soapheader.UserAuthInfo
+		</class-a>
+		<class-b>org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE
+		</class-b>
+
+		<field>
+			<a>userName</a>
+			<b>mail</b>
+		</field>
+		<field>
+			<a>password</a>
+			<b>password</b>
+		</field>
+	</mapping>
+
+	<mapping wildcard="true" type="bi-directional">
+		<class-a>org.tsk.mng.taskmanagement.common_elements.task.taskfe.TaskFE
+		</class-a>
 		<class-b>org.tsk.mng.backend.model.TaskBE</class-b>
 
 		<field>
@@ -149,34 +174,19 @@
 			<b>dependentTasks</b>
 		</field>
 	</mapping>
-	
-	<!-- mapping>
-		<class-a>org.tsk.mng.backend.result.UserResultBE</class-a>
-		<class-b>org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult</class-b>
-		<field>
-			<a>status</a>
-			<b>resultStatus</b>
-		</field>
-		<field>
-			<a>users</a>
-			<b>userReturnValues</b>
-			<b-hint>org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE</b-hint>
-		</field>
-	</mapping-->
-	
-	<!--mapping>
-		<class-a>org.tsk.mng.backend.result.TaskResultBE</class-a>
-		<class-b>org.tsk.mng.taskmanagement.common_elements.task.taskresult.TaskResult</class-b>
-		<field>
-			<a>status</a>
-			<b>resultStatus</b>
-		</field>
-		<field>
-			<a>tasks</a>
-			<b>taskReturnValues</b>
-			<b-hint>org.tsk.mng.taskmanagement.common_elements.task.taskfe.TaskFE</b-hint>
-		</field>
-	</mapping-->
+
+
+	<!-- mapping> <class-a>org.tsk.mng.backend.result.UserResultBE</class-a> 
+		<class-b>org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult</class-b> 
+		<field> <a>status</a> <b>resultStatus</b> </field> <field> <a>users</a> <b>userReturnValues</b> 
+		<b-hint>org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE</b-hint> 
+		</field> </mapping -->
+
+	<!--mapping> <class-a>org.tsk.mng.backend.result.TaskResultBE</class-a> 
+		<class-b>org.tsk.mng.taskmanagement.common_elements.task.taskresult.TaskResult</class-b> 
+		<field> <a>status</a> <b>resultStatus</b> </field> <field> <a>tasks</a> <b>taskReturnValues</b> 
+		<b-hint>org.tsk.mng.taskmanagement.common_elements.task.taskfe.TaskFE</b-hint> 
+		</field> </mapping -->
 
 
 </mappings>
