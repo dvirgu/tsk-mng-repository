@@ -1,6 +1,7 @@
 package org.tsk.mng.backend.Impl;
 
 
+import org.apache.log4j.Logger;
 import org.tsk.mng.backend.exceptions.OperationFailureException;
 import org.tsk.mng.common.infra.TransformerUtil;
 import org.tsk.mng.backend.model.UserBE;
@@ -8,8 +9,7 @@ import org.tsk.mng.backend.service.UserManagementBEService;
 import org.tsk.mng.dal.dao.interfaces.UserDao;
 import org.tsk.mng.dal.model.UserDT;
 
-//TODO adding authorization checking in each service method
-//TODO logger
+//TODO adding authorization checking in each service method - ANAR
 
 /**
  * The class present
@@ -21,6 +21,8 @@ import org.tsk.mng.dal.model.UserDT;
  *
  */
 public class UserManagementBEServiceImpl implements UserManagementBEService {
+
+	private static final Logger logger = Logger.getLogger(UserManagementBEServiceImpl.class);
 
 	private UserDao userDao;
 
@@ -50,20 +52,21 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 		UserBE retValue;
 
 		try {
-			
+
+			logger.info("trying to add " + superior + " as Sueprior of Worker " + worker);
+
 			if (superior == null || worker == null) {
 				throw new OperationFailureException("superior or worker are null");
-				//TODO debug logger ?
 			}
-			
+
+			logger.info("getting PK (mail) from worker and suprioir");
 			String workerPK = worker.getMail();
 			String superiorPK = superior.getMail();
-			boolean areParamValids = workerPK != null && !workerPK.isEmpty() && superiorPK != null && !superiorPK.isEmpty();  
+			boolean areParamValids = workerPK != null && !workerPK.isEmpty() && superiorPK != null && !superiorPK.isEmpty();
 			if (areParamValids == false) {
 				throw new OperationFailureException("no mail in superior/worker");
-				//TODO debug logger ?
 			}
-			
+
 			UserDT workerDT = userDao.getByPK(workerPK);
 			UserDT superiorDT = userDao.getByPK(superiorPK);
 			if (!isUserExistInTheSystem(workerDT)) {
@@ -72,58 +75,50 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 			if (!isUserExistInTheSystem(superiorDT)) {
 				throw new OperationFailureException("superior " + superiorPK + "is not exist in the system");
 			}
-			
+
 			workerDT.setSuperior(superiorDT);
-			
-			if (!userDao.saveAndVerifyUser(workerDT)) {
+
+			if (!userDao.updateUserAndVerify(workerDT)) {
 				throw new OperationFailureException("error occuer when tryied to save user " + workerPK);
-				//TODO error logger
 			}
-		
+			logger.info(superiorPK + " has added as superior of " + workerPK + ", the changes been updated in DB");
+
 			retValue = TransformerUtil.dozerConvert(workerDT, UserBE.class);
-			
+
 		} catch (Exception e) {
+			logger.error(e.getMessage(),e);
 			throw new OperationFailureException(e.getMessage(),e);
-			//TODO logger
 		}
-		
-		
+
 		return retValue;
 	}
 
-	/**
-	 * This method provides create user service.
-	 * The service checks whether the requested user doesn't exist in the system.
-	 * 
-	 * In case the user is existing appropriate @link BEResultException exception throws
-	 * 
-	 * @param user
-	 * @return UserBE
-	 * @author Dvir
-	 * 
-	 * @exception ResultBeException
-	 */
 	public UserBE createUser(UserBE user) throws OperationFailureException {
-		//TODO adding authorization check
 
 		try {
-			//create UserDT
+			if (user == null) {
+				throw new OperationFailureException("user is null");
+			}
+
+			logger.info("try to create user : " + user);
 			UserDT userDT = TransformerUtil.dozerConvert(user, UserDT.class);
 
 			if (isUserExistInTheSystem(userDT)) {
 				throw new OperationFailureException("User already exist in the system");
 			}
 
-			if (!userDao.saveAndVerifyUser(userDT)) {
+			if (!userDao.saveUserAndVerify(userDT)) {
 				throw new OperationFailureException("error occur while creating user");
 			}
 
-			return user;
-
 		} catch (Exception e) { 
-			//TODO logger
-			throw new OperationFailureException("Exception occur : " + e.getMessage(),e);
+			logger.error(e.getMessage(),e);
+			throw new OperationFailureException(e.getMessage(),e);
 		}
+
+		logger.info("user " + user + " save succesfuly");
+
+		return user;
 	}
 
 	/**
@@ -135,85 +130,145 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 	 * @author Dvir
 	 * 
 	 */
-	private boolean isUserExistInTheSystem(UserDT userDT)//TODO should be in the interface
+	private boolean isUserExistInTheSystem(UserDT userDT)//TODO should be in the interface?
 			throws NullPointerException {
-		if (userDT != null) {
-			if (userDT.getMail() != null) {
-				return userDao.getByPK(userDT.getMail()) != null;
-			}
+
+		boolean retValue;
+
+		if (userDT == null) {
+			throw new NullPointerException("userDT is null");
+		}
+
+		if (userDT.getMail() == null) {
 			throw new NullPointerException("PK value (mail) is null");
 		}
-		throw new NullPointerException("userDT is null");
+
+
+		logger.info("trying to fetching " + userDT.getMail() + " from DB");
+		retValue = userDao.getByPK(userDT.getMail()) != null;
+		String messageToLog = retValue == true ? " found in the system" : " doesn't exist";
+		logger.info(userDT.getMail() + messageToLog);
+
+		return retValue;
+
 	}
 
-	public UserBE deleteUser(UserBE user) {
-		// TODO Auto-generated method stub
-		return null;
+	public UserBE deleteUser(UserBE user) throws OperationFailureException {
+
+		UserBE retValue;
+
+		try {
+
+			if (user == null) {
+				throw new OperationFailureException("user is null");
+			}
+
+			logger.info("going to delete " + user + " from the system");
+			UserDT userToDeleteDT = TransformerUtil.dozerConvert(user, UserDT.class);
+			if (!isUserExistInTheSystem(userToDeleteDT)) {
+				throw new OperationFailureException("User does not exist in the system");
+			}
+
+			if (!userDao.deleteUserAndVerify(userToDeleteDT)) {
+				throw new OperationFailureException("delete " + user + " failed due DB failure");
+			}
+
+			logger.info("delete user : " + user + " has succeeded");
+			retValue = user;
+
+		} catch (Exception e) {
+			logger.error(e.getMessage(),e);
+			throw new OperationFailureException(e.getMessage(),e);
+		}
+
+		return retValue;
 	}
 
-
-	/**
-	 * This method provide getUser service.
-	 * in case of error in data fetching
-	 * throw exception with appropriate message/description
-	 * 
-	 * @return UserBE
-	 * @param mail - the ID/PK of the user
-	 * @throws ResultBeException 
-	 */
 	public UserBE readUser(String mail) throws OperationFailureException {
 
+		UserBE retValue;
+
 		try {
-			UserDT userDT = userDao.getByPK(mail);
-			if (userDT != null) {//the user exists
-				return TransformerUtil.dozerConvert(userDT, UserBE.class);
+			if (mail == null) {
+				throw new OperationFailureException("mail is null");
 			}
-			// user doesn't exist
-			throw new OperationFailureException("The User doesn't exist");
+			logger.info("fetching user : " + mail + " from DB");
+			UserDT userDT = userDao.getByPK(mail);
+			// we don't use the private method isUserExistInTheSystem since this method would use over DB transaction.
+			if (userDT == null) {//the does not exists
+				throw new OperationFailureException("The User doesn't exist");
+			}
+			// user exist
+			retValue = TransformerUtil.dozerConvert(userDT, UserBE.class);
+			logger.info("user " + retValue + " has found in the system");
 
 		}catch (Exception e) {
-			//TODO logger
-			throw new OperationFailureException("Exception occur : " + e.getMessage(),e);
+			logger.error(e.getMessage(),e);
+			throw new OperationFailureException(e.getMessage(),e);
 		}
+
+		return retValue;
 	}
 
-	public UserBE updateUser(UserBE user) {
-		// TODO Auto-generated method stub
-		return null;
+	public UserBE updateUser(UserBE user) throws OperationFailureException {
+
+		UserBE retValue;
+		
+		try {
+			if (user == null) {
+				throw new OperationFailureException("user is null");
+			}
+			
+			logger.info("going to update " + user);
+			UserDT userToUpdateDT = TransformerUtil.dozerConvert(user, UserDT.class);
+			if (!userDao.updateUserAndVerify(userToUpdateDT)) {
+				throw new OperationFailureException("Update user " + user + " failed due DB error");
+			}
+			
+			retValue = user;
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage(),e);
+			throw new OperationFailureException(e.getMessage());
+		}
+
+
+		return retValue;
 	}
 
 
-	/**
-	 * 
-	 * TODO add descriptions
-	 * @throws ResultBeException 
-	 */
 	@Override
-	public UserBE authenticate(UserBE userBeToAuth) throws OperationFailureException {
-		//TODO add logger
+	public UserBE authenticate(UserBE userToAuth) throws OperationFailureException {
 
+		UserBE retValue;
+		
 		try {
 
-			if (userBeToAuth == null) {
+			if (userToAuth == null) {
 				throw new OperationFailureException("userBeToAuth is null");
 			}
 
-			UserDT userToAuth = TransformerUtil.dozerConvert(userBeToAuth, UserDT.class);
-			if (authenticate(userToAuth)) {
-				return userBeToAuth;
+			UserDT userToAuthDT = TransformerUtil.dozerConvert(userToAuth, UserDT.class);
+			if (!authenticate(userToAuthDT)) {
+				//the user doesn't exist
+				throw new OperationFailureException("your username/password is incorrect or doesn't exist");
 			}
-
-			//the user doesn't exist
-			throw new OperationFailureException("your username/password is incorrect or doesn't exist");
-
+			
+			logger.info("User " + userToAuth + " is authenticate");
+			retValue = userToAuth;
 
 		} catch (Exception e) {
-			//TODO logger
+			logger.error(e.getMessage(),e);
 			throw new OperationFailureException(e.getMessage(),e);
 		}
+		
+	return retValue;
+	
 	}
 
 
+	//TODO change it to be in LDAP interface
+	//this is LDAP method
 	private boolean authenticate(UserDT userToAuth) {
 		//TODO change it to "smart" query
 
