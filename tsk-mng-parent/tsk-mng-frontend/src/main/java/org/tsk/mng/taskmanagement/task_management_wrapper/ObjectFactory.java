@@ -50,30 +50,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetUserTasksTypeRequest }
-     * 
-     */
-    public GetUserTasksTypeRequest createGetUserTasksTypeRequest() {
-        return new GetUserTasksTypeRequest();
-    }
-
-    /**
-     * Create an instance of {@link AssignUserToTaskTypeRequest }
-     * 
-     */
-    public AssignUserToTaskTypeRequest createAssignUserToTaskTypeRequest() {
-        return new AssignUserToTaskTypeRequest();
-    }
-
-    /**
-     * Create an instance of {@link RemoveTaskFromUserElementRequest }
-     * 
-     */
-    public RemoveTaskFromUserElementRequest createRemoveTaskFromUserElementRequest() {
-        return new RemoveTaskFromUserElementRequest();
-    }
-
-    /**
      * Create an instance of {@link AddDependencyElemetRequest }
      * 
      */
@@ -87,6 +63,30 @@ public class ObjectFactory {
      */
     public UpdateTaskElemetRequest createUpdateTaskElemetRequest() {
         return new UpdateTaskElemetRequest();
+    }
+
+    /**
+     * Create an instance of {@link RemoveTaskFromUserElementRequest }
+     * 
+     */
+    public RemoveTaskFromUserElementRequest createRemoveTaskFromUserElementRequest() {
+        return new RemoveTaskFromUserElementRequest();
+    }
+
+    /**
+     * Create an instance of {@link GetUserTasksTypeRequest }
+     * 
+     */
+    public GetUserTasksTypeRequest createGetUserTasksTypeRequest() {
+        return new GetUserTasksTypeRequest();
+    }
+
+    /**
+     * Create an instance of {@link AssignUserToTaskTypeRequest }
+     * 
+     */
+    public AssignUserToTaskTypeRequest createAssignUserToTaskTypeRequest() {
+        return new AssignUserToTaskTypeRequest();
     }
 
     /**

@@ -37,8 +37,8 @@ import org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult;
     "resultStatus"
 })
 @XmlSeeAlso({
-    TaskResult.class,
-    UserResult.class
+    UserResult.class,
+    TaskResult.class
 })
 public class ResultBase {
 

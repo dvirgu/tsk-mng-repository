@@ -23,9 +23,10 @@ public interface UserDao {
 
 	/**
 	 * 
+	 * save userToSave in DB and verify operation status.
 	 * 
 	 * @param userToSave
-	 * @return
+	 * @return true whether save operation has succeed, otherwise false
 	 */
 	boolean saveAndVerifyUser(UserDT userToSave);
 }

@@ -1,8 +1,8 @@
-package org.tsk.mng.backend.infa;
+package org.tsk.mng.common.infra;
 
 
 import org.dozer.Mapper;
-import org.tsk.mng.backend.config.Consts;
+import org.tsk.mng.common.config.Consts;
 
 public class TransformerUtil {
 

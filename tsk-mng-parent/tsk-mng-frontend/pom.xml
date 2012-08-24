@@ -28,29 +28,17 @@
 			<artifactId>tsk-mng-backend</artifactId>
 			<version>0.0.1-REVISION</version>
 		</dependency>
-
+		<dependency>
+			<groupId>tsk-mng-common</groupId>
+			<artifactId>tsk-mng-common</artifactId>
+			<version>0.0.1-REVISION</version>
+		</dependency>
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-web-api</artifactId>
 			<version>6.0</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-			<version>3.0.5.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>3.0.5.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-			<version>3.0.5.RELEASE</version>
-		</dependency>
-
 
 		<!-- Apache CXF dependencies -->
 		<dependency>
@@ -109,7 +97,7 @@
 									<sourceRoot>${basedir}/src/main/java</sourceRoot>
 									<wsdlOptions>
 										<wsdlOption>
-											<wsdl>${basedir}/src/main/resource/wsdl/TaskManagementServiceWSDL/TaskManagementService.wsdl</wsdl>
+											<wsdl>${basedir}/src/main/webapp/WEB-INF/wsdl/TaskManagementServiceWSDL/TaskManagementService.wsdl</wsdl>
 											<wsdlLocation>http://localhost:8080/tsk-mng-frontend-0.0.1-REVISION/services/TaskManagementServicePort?wsdl</wsdlLocation>
 											<extraargs>
 												<extraarg>-xjc-Xcollection-setter-injector</extraarg>
@@ -128,7 +116,7 @@
 									<sourceRoot>${basedir}/src/main/java</sourceRoot>
 									<wsdlOptions>
 										<wsdlOption>
-											<wsdl>${basedir}/src/main/resource/wsdl/UserManagementServiceWSDL/UserManagementService.wsdl</wsdl>
+											<wsdl>${basedir}/src/main/webapp/WEB-INF/wsdl/UserManagementServiceWSDL/UserManagementService.wsdl</wsdl>
 											<wsdlLocation>http://localhost:8080/tsk-mng-frontend-0.0.1-REVISION/services/UserManagementServicePort?wsdl</wsdlLocation>
 											<extraargs>
 												<extraarg>-xjc-Xcollection-setter-injector</extraarg>

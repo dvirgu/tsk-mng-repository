@@ -30,8 +30,8 @@
 	
 	<xs:complexType name="addSuperiorToUserTypeRequest">
 		<xs:sequence>
-			<xs:element name="task" type="ns1:taskFE"/>
-			<xs:element name="user" type="ns0:userFE"/>
+			<xs:element name="worker"   type="ns0:userFE"/>
+			<xs:element name="superior" type="ns0:userFE"/>
 		</xs:sequence>
 	</xs:complexType>
 

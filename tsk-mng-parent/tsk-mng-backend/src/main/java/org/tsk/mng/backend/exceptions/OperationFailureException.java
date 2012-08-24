@@ -6,7 +6,7 @@ package org.tsk.mng.backend.exceptions;
  * @author Dvir
  *
  */
-public class ResultBeException extends Exception {
+public class OperationFailureException extends Exception {
 
 	
 	/**
@@ -16,11 +16,11 @@ public class ResultBeException extends Exception {
 
 	
 	
-	public ResultBeException(String message) {
+	public OperationFailureException(String message) {
 		super(message);
 	}
 	
-	public ResultBeException(String message,Throwable exeption) {
+	public OperationFailureException(String message,Throwable exeption) {
 		super(message,exeption);
 	}
 	

@@ -5,7 +5,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-import org.tsk.mng.taskmanagement.common_elements.task.taskfe.TaskFE;
 import org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE;
 
 
@@ -19,8 +18,8 @@ import org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="task" type="{http://mng.tsk.org/taskManagement/common_elements/task/taskFE}taskFE"/>
- *         &lt;element name="user" type="{http://mng.tsk.org/taskManagement/common_elements/user/userFE}userFE"/>
+ *         &lt;element name="worker" type="{http://mng.tsk.org/taskManagement/common_elements/user/userFE}userFE"/>
+ *         &lt;element name="superior" type="{http://mng.tsk.org/taskManagement/common_elements/user/userFE}userFE"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -31,62 +30,62 @@ import org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "addSuperiorToUserTypeRequest", propOrder = {
-    "task",
-    "user"
+    "worker",
+    "superior"
 })
 public class AddSuperiorToUserTypeRequest {
 
     @XmlElement(required = true)
-    protected TaskFE task;
+    protected UserFE worker;
     @XmlElement(required = true)
-    protected UserFE user;
+    protected UserFE superior;
 
     /**
-     * Gets the value of the task property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TaskFE }
-     *     
-     */
-    public TaskFE getTask() {
-        return task;
-    }
-
-    /**
-     * Sets the value of the task property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TaskFE }
-     *     
-     */
-    public void setTask(TaskFE value) {
-        this.task = value;
-    }
-
-    /**
-     * Gets the value of the user property.
+     * Gets the value of the worker property.
      * 
      * @return
      *     possible object is
      *     {@link UserFE }
      *     
      */
-    public UserFE getUser() {
-        return user;
+    public UserFE getWorker() {
+        return worker;
     }
 
     /**
-     * Sets the value of the user property.
+     * Sets the value of the worker property.
      * 
      * @param value
      *     allowed object is
      *     {@link UserFE }
      *     
      */
-    public void setUser(UserFE value) {
-        this.user = value;
+    public void setWorker(UserFE value) {
+        this.worker = value;
+    }
+
+    /**
+     * Gets the value of the superior property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link UserFE }
+     *     
+     */
+    public UserFE getSuperior() {
+        return superior;
+    }
+
+    /**
+     * Sets the value of the superior property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link UserFE }
+     *     
+     */
+    public void setSuperior(UserFE value) {
+        this.superior = value;
     }
 
 }

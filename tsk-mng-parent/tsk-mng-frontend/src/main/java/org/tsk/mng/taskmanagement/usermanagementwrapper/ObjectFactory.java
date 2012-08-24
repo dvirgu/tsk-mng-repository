@@ -49,6 +49,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link AddSuperiorToUserTypeRequest }
+     * 
+     */
+    public AddSuperiorToUserTypeRequest createAddSuperiorToUserTypeRequest() {
+        return new AddSuperiorToUserTypeRequest();
+    }
+
+    /**
      * Create an instance of {@link DeleteUserTypeRequest }
      * 
      */
@@ -65,11 +73,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link AddSuperiorToUserTypeRequest }
+     * Create an instance of {@link ReadUserTypeRequest }
      * 
      */
-    public AddSuperiorToUserTypeRequest createAddSuperiorToUserTypeRequest() {
-        return new AddSuperiorToUserTypeRequest();
+    public ReadUserTypeRequest createReadUserTypeRequest() {
+        return new ReadUserTypeRequest();
     }
 
     /**
@@ -78,14 +86,6 @@ public class ObjectFactory {
      */
     public UpdateUserTypeRequest createUpdateUserTypeRequest() {
         return new UpdateUserTypeRequest();
-    }
-
-    /**
-     * Create an instance of {@link ReadUserTypeRequest }
-     * 
-     */
-    public ReadUserTypeRequest createReadUserTypeRequest() {
-        return new ReadUserTypeRequest();
     }
 
     /**
