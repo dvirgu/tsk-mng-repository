@@ -10,5 +10,6 @@
     <module>tsk-mng-dal</module>
     <module>tsk-mng-frontend</module>
     <module>tsk-mng-webclient</module>
+    <module>tsk-mng-common</module>
   </modules>
 </project>

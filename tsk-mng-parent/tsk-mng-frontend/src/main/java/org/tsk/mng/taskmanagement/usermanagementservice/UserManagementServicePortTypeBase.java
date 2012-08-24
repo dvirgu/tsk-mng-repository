@@ -18,8 +18,8 @@ import javax.jws.soap.SOAPBinding.ParameterStyle;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
 import org.tsk.mng.backend.exceptions.ResultBeException;
-import org.tsk.mng.backend.infa.SpringInitializer;
-import org.tsk.mng.backend.infa.TransformerUtil;
+import org.tsk.mng.common.infra.SpringInitializer;
+import org.tsk.mng.common.infra.TransformerUtil;
 import org.tsk.mng.backend.model.UserBE;
 import org.tsk.mng.backend.service.UserManagementBEService;
 import org.tsk.mng.frontend.filters.AuthenticationServiceFilter;

@@ -23,36 +23,27 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>net.sf.dozer</groupId>
-			<artifactId>dozer</artifactId>
-			<version>5.2.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.xmlbeans</groupId>
-			<artifactId>xmlbeans</artifactId>
-			<version>2.4.0</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
 			<version>6.0</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
-			<version>1.4</version>
-		</dependency>
 
 
-		<!-- DAL PRoject -->
+
+		<!-- DAL module -->
 		<dependency>
 			<groupId>tsk-mng-dal</groupId>
 			<artifactId>tsk-mng-dal</artifactId>
 			<version>0.0.1-REVISION</version>
 		</dependency>
-
+		
+		<!-- Common module -->
+		<dependency>
+			<groupId>tsk-mng-common</groupId>
+			<artifactId>tsk-mng-common</artifactId>
+			<version>0.0.1-REVISION</version>
+		</dependency>
 	</dependencies>
 
 	<build>
