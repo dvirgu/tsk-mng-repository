@@ -1,11 +1,14 @@
 package org.tsk.mng.common.infra;
 
 
+<<<<<<< HEAD
+import org.apache.log4j.Logger;
 import org.dozer.Mapper;
 import org.tsk.mng.common.config.Consts;
 
 public class TransformerUtil {
 
+	private static final Logger logger = Logger.getLogger(TransformerUtil.class); 
 	private static Mapper mapper;
 
 	/**
@@ -16,7 +19,8 @@ public class TransformerUtil {
 	 * @return converted object
 	 */
 	public static <T, K> T dozerConvert(K fromObj, Class<T> toObjClass) {
-
+		logger.info("Entry to dozerConvert method");
+>>>>>>> refs/remotes/origin/revision_0.0.3
 		mapper = SpringInitializer.getBeanFactory().getBean(Consts.MAPPER_BEAN ,Mapper.class);
 		T toObj = mapper.map(fromObj, toObjClass);
 

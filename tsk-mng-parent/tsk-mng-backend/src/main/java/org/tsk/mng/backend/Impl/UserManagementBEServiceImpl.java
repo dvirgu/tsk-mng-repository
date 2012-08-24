@@ -1,7 +1,7 @@
 package org.tsk.mng.backend.Impl;
 
 
-import org.tsk.mng.backend.exceptions.OperationFailureException;
+import org.tsk.mng.backend.exceptions.ResultBeException;
 import org.tsk.mng.common.infra.TransformerUtil;
 import org.tsk.mng.backend.model.UserBE;
 import org.tsk.mng.backend.service.UserManagementBEService;

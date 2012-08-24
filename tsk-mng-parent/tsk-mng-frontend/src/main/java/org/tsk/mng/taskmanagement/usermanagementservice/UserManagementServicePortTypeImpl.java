@@ -16,7 +16,6 @@ import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.jws.soap.SOAPBinding.ParameterStyle;
 import javax.xml.bind.annotation.XmlSeeAlso;
-
 import org.tsk.mng.backend.model.UserBE;
 import org.tsk.mng.backend.service.UserManagementBEService;
 import org.tsk.mng.common.infra.SpringInitializer;

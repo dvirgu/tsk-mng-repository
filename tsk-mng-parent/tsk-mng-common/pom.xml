@@ -25,7 +25,16 @@
 			<artifactId>junit</artifactId>
 			<version>4.10</version>
 		</dependency>
+<<<<<<< HEAD
 
+=======
+		<!-- Log4j -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.9</version>
+		</dependency>
+>>>>>>> refs/remotes/origin/revision_0.0.3
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
