@@ -6,57 +6,57 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE;
 import org.tsk.mng.webclient.tools.Consts;
 
 /**
- * Servlet implementation class MainServlet
+ * Servlet implementation class Logout
  */
-@WebServlet(description = "Router of requests", urlPatterns = { Consts.SERVLET_ROUTER })
-public class ServletRouter extends ServletBase {
+@WebServlet(Consts.LOGOUT_SERVLET_URL)
+public class Logout extends ServletBase {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ServletRouter() {
+	public Logout() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doProcess(request,response);
+		doProcess(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doProcess(request,response);
+		doProcess(request, response);
 	}
 
-	@Override
-	public void doProcess(HttpServletRequest request,
-			HttpServletResponse response) {
 
-		UserFE currentUser = (UserFE)request.getSession().getAttribute(Consts.CURRENT_USER_ATT);
+	@Override
+	public void doProcess(HttpServletRequest request, HttpServletResponse response) {
+		//TODO logger
 
 		try {
+			HttpSession httpSession = request.getSession();
 
-			String pageToDispach = Consts.LOGIN_PAGE;
-			if (currentUser != null) {
-				pageToDispach = Consts.WELCOME_PAGE;
+			if (httpSession != null) {
+				httpSession.removeAttribute(Consts.CURRENT_USER_ATT);
 			}
 
-			getServletContext().getRequestDispatcher(pageToDispach).forward(request, response);
-			
+			getServletContext().getRequestDispatcher(Consts.LOGIN_PAGE).forward(request, response);
+
 		} catch (Exception e) {
 			e.printStackTrace();
-			//TODO loggers
+			//TODO logger and change this acting
 		}
+
+
 	}
 }

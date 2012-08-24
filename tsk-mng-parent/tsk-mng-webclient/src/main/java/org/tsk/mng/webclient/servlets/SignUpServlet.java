@@ -48,14 +48,8 @@ public class SignUpServlet extends ServletBase {
 
 	}
 
-	/**
-	 * This method will call from doPost and doGet methods
-	 * 
-	 * @author Dvirgu
-	 * @param request
-	 * @param response
-	 */
-	private void doProcess(HttpServletRequest request,HttpServletResponse response) {
+	@Override
+	public void doProcess(HttpServletRequest request,HttpServletResponse response) {
 
 		try {
 			UserManagementServicePortType userService = getUserManagementServicePort();

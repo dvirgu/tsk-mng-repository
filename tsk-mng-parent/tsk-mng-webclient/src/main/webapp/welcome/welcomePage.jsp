@@ -17,7 +17,9 @@
 	
 	<br><br>
 	click here to logout : <jsp:getProperty property="mail" name="currentUserAttribute"/>
-	 
+	 <form method="post" action="Logout" >
+	 <input type="submit" value="Logout">
+	 </form>
 	
 </body>
 </html>

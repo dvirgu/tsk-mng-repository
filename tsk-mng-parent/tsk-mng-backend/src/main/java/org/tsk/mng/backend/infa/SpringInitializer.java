@@ -23,11 +23,11 @@ public class SpringInitializer {
 				String springLoaderFileNameFixed = springLoaderFileName;
 				if((springLoaderFileNameFixed == null) || (springLoaderFileNameFixed.length() == 0)){
 					springLoaderFileNameFixed = Consts.SPRING_FOLDER_PATH +  "/" + "spring/spring.xml";
-					//springLoaderFileNameFixed =  "../spring/spring.xml"; FIXME
+					//springLoaderFileNameFixed =  "../spring/spring.xml"; FIXME SpringInitilizer
 				}
 				String springLoaderPathFile = springLoaderFileNameFixed;
 				beanFactory = new ClassPathXmlApplicationContext(springLoaderPathFile);
-				//beanFactory = new FileSystemXmlApplicationContext(springLoaderPathFile); FIXME
+				//beanFactory = new FileSystemXmlApplicationContext(springLoaderPathFile); FIXME SpringInitilizer
 			}
 		} catch (Exception e) {
 			System.out.println("Error getting beanFactory. Message: " + e.getMessage());

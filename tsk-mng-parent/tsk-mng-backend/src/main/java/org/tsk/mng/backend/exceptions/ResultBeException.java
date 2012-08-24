@@ -2,7 +2,7 @@ package org.tsk.mng.backend.exceptions;
 
 /**
  * 
- * TODO
+ * TODO complete this Class and add description
  * @author Dvir
  *
  */

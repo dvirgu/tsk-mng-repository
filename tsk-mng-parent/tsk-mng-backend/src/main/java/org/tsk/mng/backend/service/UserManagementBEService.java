@@ -7,7 +7,7 @@ public interface UserManagementBEService {
 
 	
 	/**
-	 * TODO
+	 * TODO add descriptions
 	 * 
 	 * @param superior
 	 * @param worker
@@ -18,7 +18,7 @@ public interface UserManagementBEService {
 	
 	/**
 	 * 
-	 * TODO
+	 * TODO add descriptions
 	 * 
 	 * @param user
 	 * @return
@@ -28,7 +28,7 @@ public interface UserManagementBEService {
 	
 	/**
 	 * 
-	 * TODO
+	 * TODO add descriptions
 	 * 
 	 * @param user
 	 * @return
@@ -39,7 +39,7 @@ public interface UserManagementBEService {
 	
 	/**
 	 * 
-	 * TODO
+	 * TODO add descriptions
 	 * 
 	 * @param mail
 	 * @return
@@ -49,7 +49,7 @@ public interface UserManagementBEService {
 	
 	
 	/**
-	 * TODO
+	 * TODO add descriptions
 	 * 
 	 * @param user
 	 * @return

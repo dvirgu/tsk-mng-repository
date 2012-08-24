@@ -1,9 +1,12 @@
 package org.tsk.mng.webclient.servlets;
 
+import java.io.IOException;
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.tsk.mng.taskmanagement.common_elements.user.userfe.PermissionType;
 import org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE;
@@ -16,7 +19,7 @@ import org.tsk.mng.webclient.tools.Consts;
 /**
  * Servlet implementation class ServletUtils
  */
-public class ServletBase extends HttpServlet {
+public abstract class ServletBase extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -24,6 +27,15 @@ public class ServletBase extends HttpServlet {
 
 	//	private static TaskManagementServicePortType taskService;
 
+	/**
+	 * This method will call from doPost and doGet methods
+	 * 
+	 * @author Dvirgu
+	 * @param request
+	 * @param response
+	 */
+	public abstract void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
+	
 	//TODO should be synchronized
 	public UserManagementServicePortType getUserManagementServicePort() throws ServletException {
 

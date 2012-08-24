@@ -25,6 +25,7 @@ public class Consts {
 	public static final String SERVLET_ROUTER = "/MainServlet";
 	public static final String SIGNUP_SERVLET_URL = WELCOME_PAGES + "/SignUp";
 	public static final String LOGIN_SERVLET_URL = WELCOME_PAGES + "/Login";
+	public static final String LOGOUT_SERVLET_URL = WELCOME_PAGES + "/Logout";
 	
 	/**
 	 * Services Attributes

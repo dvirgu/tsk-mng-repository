@@ -58,7 +58,8 @@ public class LoginServlet extends ServletBase {
 		doProcess(request, response);
 	}
 
-	private void doProcess(HttpServletRequest request,
+	@Override
+	public void doProcess(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
 		//TODO change the logic of the this method
