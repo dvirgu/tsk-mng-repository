@@ -2,8 +2,8 @@ package org.tsk.mng.backend.model;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 import java.util.Set;
 
 import org.tsk.mng.backend.enums.PermissionType;
@@ -19,7 +19,7 @@ public class UserBE {
 	private String nickName;
 	private String password;
 	private PermissionType permission;
-	private List<UserBE> superiors;
+	private UserBE superior;
 	private List<UserBE> workers;
 	private Set<TaskBE> tasks;
 	
@@ -32,12 +32,6 @@ public class UserBE {
 	}
 
 
-	@Override
-	public String toString() {
-		return "Mail: " + mail + " Name: " + lastName + " " + firstName;
-	}
-	
-	
 	public String getMail() {
 		return mail;
 	}
@@ -74,11 +68,11 @@ public class UserBE {
 	public void setPermission(PermissionType permission) {
 		this.permission = permission;
 	}
-	public List<UserBE> getSuperiors() {
-		return superiors;
+	public UserBE getSuperior() {
+		return superior;
 	}
-	public void setSuperiors(List<UserBE> superiors) {
-		this.superiors = superiors;
+	public void setSuperior(UserBE superior) {
+		this.superior = superior;
 	}
 	public List<UserBE> getWorkers() {
 		return workers;
@@ -91,6 +85,21 @@ public class UserBE {
 	}
 	public void setTasks(Set<TaskBE> tasks) {
 		this.tasks = tasks;
+	}
+
+	/* 
+	 * Methods
+	 */
+	public void addWorker(UserBE worker) {
+		if (workers == null) {
+			workers = new ArrayList<UserBE>();
+		}
+		workers.add(worker);
+	}
+	
+	@Override
+	public String toString() {
+		return "Mail: " + mail + " Name: " + lastName + " " + firstName;
 	}
 	
 	

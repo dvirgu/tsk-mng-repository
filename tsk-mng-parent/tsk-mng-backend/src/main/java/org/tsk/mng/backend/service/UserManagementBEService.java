@@ -9,8 +9,9 @@ public interface UserManagementBEService {
 	/**
 	 * Tries to add superior to worker and updates DB.<br>
 	 * The method checks whether the superior exists in the system<br>
-	 * and if it does and worker either updates worker by set his superior.<br>
-	 * 
+	 * and if it does and worker either, updates:<br>
+	 * Adding the worker to Superior worker list.
+	 * in addition set the superior as superior of the worker 
 	 * 
 	 * @param superior
 	 * @param worker
