@@ -1,6 +1,8 @@
 package org.tsk.mng.backend.Impl;
 
 
+import org.tsk.mng.backend.aop.RolePermissionAnnotation;
+import org.tsk.mng.backend.enums.PermissionType;
 import org.tsk.mng.backend.exceptions.OperationFailureException;
 import org.tsk.mng.common.infra.TransformerUtil;
 import org.tsk.mng.backend.model.UserBE;
@@ -103,6 +105,7 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 	 * 
 	 * @exception ResultBeException
 	 */
+	@RolePermissionAnnotation(allowedRoles={PermissionType.ADMIN})
 	public UserBE createUser(UserBE user) throws OperationFailureException {
 		//TODO adding authorization check
 
