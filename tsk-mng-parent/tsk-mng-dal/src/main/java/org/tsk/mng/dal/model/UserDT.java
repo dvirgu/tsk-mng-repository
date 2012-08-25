@@ -17,6 +17,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.tsk.mng.common.config.Consts;
+import org.tsk.mng.common.infra.PropertiesHandler;
+import org.tsk.mng.common.infra.SpringInitializer;
+
 
 @Entity
 @Table(name = "USER_DETAILS")
@@ -28,6 +32,13 @@ public class UserDT {
 		USER
 	}
 	
+	
+	
+	public UserDT() {
+		String beanIdOther = PropertiesHandler.readPropertie(Consts.SPRING_PROPERTIES_FILE_NAME, Consts.SET_IMPL_PROPERTIE);
+		String beanId = (String) SpringInitializer.getBeanFactory().getBean(Consts.SET_IMPL_PROPERTIE);
+		tasks = (Set<TaskDT>) SpringInitializer.getBeanFactory().getBean(beanId);
+	}
 	@Id
 	@Column(name="MAIL")
 	private String mail;
@@ -57,7 +68,7 @@ public class UserDT {
 	private List<UserDT> workers;
 	
 	@OneToMany(mappedBy="owner" ,fetch=FetchType.EAGER)
-	private List<TaskDT> tasks;
+	private Set<TaskDT> tasks;
 	
 	
 	
@@ -112,10 +123,10 @@ public class UserDT {
 		this.superior = superior;
 	}
 	
-	public List<TaskDT> getTasks() {
+	public Set<TaskDT> getTasks() {
 		return tasks;
 	}
-	public void setTasks(List<TaskDT> tasks) {
+	public void setTasks(Set<TaskDT> tasks) {
 		this.tasks = tasks;
 	}
 	

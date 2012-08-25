@@ -14,4 +14,11 @@ public final class Consts {
 	
 	public static final String MAPPER_BEAN = "mapper";
 	
+	public static final String SPRING_PROPERTIES_FILE_NAME = "/recources/spring/spring.properties";
+	
+	/**
+	 * propertie name that decide what would be the impl of set - HashSet/TreeSet/LinkedList
+	 */
+	public static final String SET_IMPL_PROPERTIE = "setImpl";
+	
 }

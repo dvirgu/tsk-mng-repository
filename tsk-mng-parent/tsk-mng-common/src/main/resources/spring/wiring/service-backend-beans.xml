@@ -1,6 +1,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/util
+			http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
 	<bean id="UserManagementBEService" class="org.tsk.mng.backend.Impl.UserManagementBEServiceImpl">
 		<property name="userDao" ref="userDaoBean" />
@@ -9,5 +13,24 @@
 	<bean id="TaskManagementBEService" class="org.tsk.mng.backend.Impl.TaskManagementBEServiceImpl">
 		<property name="taskDao" ref="taskDaoBean" />
 	</bean>
+	
+	<bean id="userWithHashSet" class="org.tsk.mng.backend.model.UserBE" scope="prototype">
+		<property name="tasks">
+			<util:set set-class="java.util.HashSet"/>
+		</property>
+	</bean>
 
+	<bean id="userWithTreeSet" class="org.tsk.mng.backend.model.UserBE" scope="prototype">
+		<property name="tasks">
+			<util:set set-class="java.util.TreeSet"/>
+		</property>
+	</bean>
+	
+	<bean id="setImpl" class="java.lang.String" >
+		<constructor-arg type="java.lang.String" value="hashSet" />
+	</bean>
+	<bean id="hashSet" class="java.util.HashSet" />
+	
+	<bean id="treeSet" class="java.util.TreeSet" />
+	
 </beans>

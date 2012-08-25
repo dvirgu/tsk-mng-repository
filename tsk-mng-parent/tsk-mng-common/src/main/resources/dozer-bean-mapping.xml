@@ -40,8 +40,7 @@
 	</mapping>
 
 	<mapping type="bi-directional">
-		<class-a>org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE
-		</class-a>
+		<class-a>org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE</class-a>
 		<class-b>org.tsk.mng.backend.model.UserBE</class-b>
 		<field>
 			<a>mail</a>
@@ -111,8 +110,7 @@
 
 
 	<mapping wildcard="true" type="bi-directional">
-		<class-a>org.tsk.mng.taskmanagement.header.soapheader.UserAuthInfo
-		</class-a>
+		<class-a>org.tsk.mng.taskmanagement.header.soapheader.UserAuthInfo</class-a>
 		<class-b>org.tsk.mng.backend.model.UserBE</class-b>
 		<field>
 			<a>userName</a>
@@ -125,8 +123,7 @@
 	</mapping>
 
 	<mapping wildcard="true" type="bi-directional">
-		<class-a>org.tsk.mng.taskmanagement.header.soapheader.UserAuthInfo
-		</class-a>
+		<class-a>org.tsk.mng.taskmanagement.header.soapheader.UserAuthInfo</class-a>
 		<class-b>org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE
 		</class-b>
 
@@ -141,8 +138,7 @@
 	</mapping>
 
 	<mapping wildcard="true" type="bi-directional">
-		<class-a>org.tsk.mng.taskmanagement.common_elements.task.taskfe.TaskFE
-		</class-a>
+		<class-a>org.tsk.mng.taskmanagement.common_elements.task.taskfe.TaskFE</class-a>
 		<class-b>org.tsk.mng.backend.model.TaskBE</class-b>
 
 		<field>

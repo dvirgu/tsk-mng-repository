@@ -1,8 +1,15 @@
 package org.tsk.mng.backend.model;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import java.util.Properties;
+import java.util.Set;
 
 import org.tsk.mng.backend.enums.PermissionType;
+import org.tsk.mng.common.config.Consts;
+import org.tsk.mng.common.infra.PropertiesHandler;
+import org.tsk.mng.common.infra.SpringInitializer;
 
 public class UserBE {
 
@@ -14,9 +21,17 @@ public class UserBE {
 	private PermissionType permission;
 	private List<UserBE> superiors;
 	private List<UserBE> workers;
-	private List<TaskBE> tasks;
+	private Set<TaskBE> tasks;
 	
 	
+	
+	public UserBE() {
+		String beanIdProp = PropertiesHandler.readPropertie(Consts.SPRING_PROPERTIES_FILE_NAME, Consts.SET_IMPL_PROPERTIE);
+		String beanId = (String) SpringInitializer.getBeanFactory().getBean(Consts.SET_IMPL_PROPERTIE);
+		tasks = (Set<TaskBE>) SpringInitializer.getBeanFactory().getBean(beanId);
+	}
+
+
 	@Override
 	public String toString() {
 		return "Mail: " + mail + " Name: " + lastName + " " + firstName;
@@ -71,10 +86,10 @@ public class UserBE {
 	public void setWorkers(List<UserBE> workers) {
 		this.workers = workers;
 	}
-	public List<TaskBE> getTasks() {
+	public Set<TaskBE> getTasks() {
 		return tasks;
 	}
-	public void setTasks(List<TaskBE> tasks) {
+	public void setTasks(Set<TaskBE> tasks) {
 		this.tasks = tasks;
 	}
 	

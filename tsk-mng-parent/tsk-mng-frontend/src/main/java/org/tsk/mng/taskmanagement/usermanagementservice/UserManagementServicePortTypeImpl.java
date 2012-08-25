@@ -21,7 +21,6 @@ import org.tsk.mng.backend.model.UserBE;
 import org.tsk.mng.backend.service.UserManagementBEService;
 import org.tsk.mng.common.infra.SpringInitializer;
 import org.tsk.mng.common.infra.TransformerUtil;
-import org.tsk.mng.frontend.aop.RolePermissionAnnotation;
 import org.tsk.mng.taskmanagement.common_elements.opertaionresultstatus.OperationResultStatus;
 import org.tsk.mng.taskmanagement.common_elements.user.userfe.PermissionType;
 import org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE;
@@ -97,6 +96,7 @@ public class UserManagementServicePortTypeImpl implements UserManagementServiceP
 			ex.printStackTrace();
 			throw new RuntimeException(ex);
 		}
+		return null;
 	}
 
 	/* (non-Javadoc)
