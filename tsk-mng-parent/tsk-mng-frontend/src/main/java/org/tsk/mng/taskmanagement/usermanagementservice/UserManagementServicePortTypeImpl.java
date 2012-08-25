@@ -21,7 +21,6 @@ import org.tsk.mng.backend.model.UserBE;
 import org.tsk.mng.backend.service.UserManagementBEService;
 import org.tsk.mng.common.infra.SpringInitializer;
 import org.tsk.mng.common.infra.TransformerUtil;
-import org.tsk.mng.frontend.aop.RolePermissionAnnotation;
 import org.tsk.mng.taskmanagement.common_elements.opertaionresultstatus.OperationResultStatus;
 import org.tsk.mng.taskmanagement.common_elements.user.userfe.PermissionType;
 import org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE;
@@ -77,7 +76,6 @@ public class UserManagementServicePortTypeImpl implements UserManagementServiceP
 	}
 
 
-
 	/*
 	 * Web Service Methods
 	 */
@@ -89,65 +87,95 @@ public class UserManagementServicePortTypeImpl implements UserManagementServiceP
 		logger.info("Executing operation addSuperiorToUserOperation");
 
 		UserResult result;
-		
+
+		//TODO what about soap header
+
 		try {
-			 //TODO
-			
+			//get user service
+			UserManagementBEService service = getUserService();
+
+			//getting users from the operation request wrapper
+			UserFE superior = addSuperiorToUserRequest.getSuperior();
+			UserFE worker = addSuperiorToUserRequest.getWorker();
+			//transform from userfe to userbe
+			UserBE superiorBE = TransformerUtil.dozerConvert(superior, UserBE.class);
+			UserBE workerBE = TransformerUtil.dozerConvert(worker, UserBE.class);
+
+			//invoke service
+			workerBE = service.addSuperiorToUser(superiorBE, workerBE);
+			worker = TransformerUtil.dozerConvert(workerBE, UserFE.class);
+
+			logger.info("adding superior to worker has succeeded");
+			result = createResult("Operation Succeeded" , OperationResultStatus.SUCCESS, worker);
+
 		} catch (Exception ex) {
-			ex.printStackTrace();
-			throw new RuntimeException(ex);
+			logger.error(ex.getMessage(),ex);
+			result = createFailureResult(ex.getMessage());
 		}
+
+		return result;
 	}
 
 	/* (non-Javadoc)
 	 * @see org.tsk.mng.taskmanagement.usermanagementservice.UserManagementServicePortType#createUserOperation(org.tsk.mng.taskmanagement.header.soapheader.UserAuthInfo  soapHeader ,)org.tsk.mng.taskmanagement.usermanagementwrapper.CreateUserTypeRequest  createUserRequest )*
 	 */
 	public org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult createUserOperation(org.tsk.mng.taskmanagement.header.soapheader.UserAuthInfo soapHeader,org.tsk.mng.taskmanagement.usermanagementwrapper.CreateUserTypeRequest createUserRequest) { 
-		/*LOG.info("Executing operation createUserOperation");
-        System.out.println(soapHeader);
-        System.out.println(createUserRequest);*/
+		logger.info("Executing operation createUserOperation");
 
-		try	{
+		UserResult result;
 
-			if(createUserRequest == null) {
-				return createFailureResult("CreateUserRequest is null");
-			}
+		//TODO soapheader - soap header does not relevant since it's create (first action in the flow)
 
+		try {
 			UserManagementBEService service = getUserService();
+			UserFE userToCreate = createUserRequest.getUser();
+			UserBE userToCreateBE = TransformerUtil.dozerConvert(userToCreate, UserBE.class);
 
-			/*
-			 * 
-			 * TODO add comments
-			 */
-			UserFE userFromRequest = createUserRequest.getUser();
-			if(userFromRequest != null) {
-				UserBE userToCreate = (UserBE)TransformerUtil.dozerConvert(userFromRequest, UserBE.class);
-				service.createUser(userToCreate);
-				return createResult("User has created successfuly", OperationResultStatus.SUCCESS, userFromRequest);
-			}
+			logger.info("going to create user " + userToCreateBE + " by serivce");
+			//invoke service
+			userToCreateBE = service.createUser(userToCreateBE);
+			userToCreate = TransformerUtil.dozerConvert(userToCreateBE, UserFE.class);
 
-			return createFailureResult("No User has Requested");
+			String msg = "User " + userToCreateBE + " has created successfully";
+			logger.info(msg);
+			result = createResult(msg, OperationResultStatus.SUCCESS, userToCreate);
 
-		} catch(Exception ex)	{
-			ex.printStackTrace();
-			return createFailureResult(ex.getMessage());
+		} catch (Exception ex) {
+			logger.error(ex.getMessage(),ex);
+			result = createFailureResult(ex.getMessage());
 		}
-	}
+
+		return result;
+	}		
+
 
 	/* (non-Javadoc)
 	 * @see org.tsk.mng.taskmanagement.usermanagementservice.UserManagementServicePortType#deleteUserOperation(org.tsk.mng.taskmanagement.header.soapheader.UserAuthInfo  soapHeader ,)org.tsk.mng.taskmanagement.usermanagementwrapper.DeleteUserTypeRequest  deleteUserRequest )*
 	 */
 	public org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult deleteUserOperation(org.tsk.mng.taskmanagement.header.soapheader.UserAuthInfo soapHeader,org.tsk.mng.taskmanagement.usermanagementwrapper.DeleteUserTypeRequest deleteUserRequest) { 
 		logger.info("Executing operation deleteUserOperation");
-		System.out.println(soapHeader);
-		System.out.println(deleteUserRequest);
+
+		UserResult result;
+
 		try {
-			org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult _return = null;
-			return _return;
+			UserManagementBEService service = getUserService();
+			UserFE userToDelete = deleteUserRequest.getUser();
+			UserBE userToDeleteBE = TransformerUtil.dozerConvert(userToDelete, UserBE.class);
+
+			//invoke service
+			userToDeleteBE = service.deleteUser(userToDeleteBE);
+			userToDelete = TransformerUtil.dozerConvert(userToDeleteBE, UserFE.class);
+
+			String msg = "delete user " + userToDeleteBE + " successfully";
+			logger.info(msg);
+			result = createResult(msg, OperationResultStatus.SUCCESS, userToDelete);
+
 		} catch (Exception ex) {
-			ex.printStackTrace();
-			throw new RuntimeException(ex);
+			logger.error(ex.getMessage());
+			result = createFailureResult(ex.getMessage());
 		}
+
+		return result;
 	}
 
 	/* (non-Javadoc)
@@ -155,56 +183,54 @@ public class UserManagementServicePortTypeImpl implements UserManagementServiceP
 	 */
 	public org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult updateUserOperation(org.tsk.mng.taskmanagement.header.soapheader.UserAuthInfo soapHeader,org.tsk.mng.taskmanagement.usermanagementwrapper.UpdateUserTypeRequest updateUserRequest) { 
 		logger.info("Executing operation updateUserOperation");
-		System.out.println(soapHeader);
-		System.out.println(updateUserRequest);
-		
+
+		UserResult result;
+
 		try {
-			org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult _return = null;
-			return _return;
+			UserManagementBEService service = getUserService();
+			UserFE userToUpdate = updateUserRequest.getUser();
+			UserBE userToUpdateBE = TransformerUtil.dozerConvert(userToUpdate, UserBE.class);
+			//invoke serivce
+			userToUpdateBE = service.updateUser(userToUpdateBE);
+			userToUpdate = TransformerUtil.dozerConvert(userToUpdateBE, UserFE.class);
+
+			String msg = "User " + userToUpdateBE  + " has updated successfully";
+			logger.info(msg);
+			result = createResult(msg, OperationResultStatus.SUCCESS, userToUpdate);
+
 		} catch (Exception ex) {
-			ex.printStackTrace();
-			throw new RuntimeException(ex);
+			logger.error(ex.getMessage());
+			result = createFailureResult(ex.getMessage());
 		}
+
+		return result;
 	}
 
 	/* (non-Javadoc)
 	 * @see org.tsk.mng.taskmanagement.usermanagementservice.UserManagementServicePortType#readUserOperation(org.tsk.mng.taskmanagement.header.soapheader.UserAuthInfo  soapHeader ,)org.tsk.mng.taskmanagement.usermanagementwrapper.ReadUserTypeRequest  readUserRequest )*
 	 */
 	public org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult readUserOperation(org.tsk.mng.taskmanagement.header.soapheader.UserAuthInfo soapHeader,org.tsk.mng.taskmanagement.usermanagementwrapper.ReadUserTypeRequest readUserRequest) { 
-		/*LOG.info("Executing operation readUserOperation");
-        System.out.println(soapHeader);
-        System.out.println(readUserRequest);*/
+		logger.info("Executing operation readUserOperation");
 
-		//TODO UserResult result;
-		
+		UserResult result;
+
 		try	{
-
-			if(readUserRequest == null) {
-				return createFailureResult("ReadRequest is null");
-			}
-
 			UserManagementBEService service = getUserService();
-
-			//TODO add comments
-
 			String userNameToRead = readUserRequest.getUser();
-			if(userNameToRead != null) {
-				UserBE readedUser = service.readUser(userNameToRead);
-				UserFE userToRet = TransformerUtil.dozerConvert(readedUser, UserFE.class);
-				return createResult("User has been found", OperationResultStatus.SUCCESS, userToRet);
-			}
-
-			return createFailureResult("No User has requested");
+			//invoke service
+			UserBE readedUser = service.readUser(userNameToRead);
+			UserFE userToRet = TransformerUtil.dozerConvert(readedUser, UserFE.class);
+			
+			logger.info("User read has succeded, returning User : " + userToRet );
+			result = createResult("User has been found", OperationResultStatus.SUCCESS, userToRet);
 
 		} catch(Exception ex) {
-
-			ex.printStackTrace();
+			logger.error(ex.getMessage());
 			return createFailureResult(ex.getMessage());
 		}			
+		
+		return result;
 	}
-
-	//TODO delete: protected abstract UserResult readUserTemplate(ReadUserTypeRequest readUserRequest);
-
 
 	protected UserManagementBEService getUserService() {
 		return SpringInitializer.getBean(UserManagementBEService.class);

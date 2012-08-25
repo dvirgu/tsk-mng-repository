@@ -69,23 +69,44 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 				throw new OperationFailureException("no mail in superior/worker");
 			}
 
+			//
 			UserDT workerDT = userDao.getByPK(workerPK);
 			UserDT superiorDT = userDao.getByPK(superiorPK);
 			if (!isUserExistInTheSystem(workerDT)) {
-				throw new OperationFailureException("worker " + workerPK + " is not exist in the system");
+				throw new OperationFailureException("worker " + worker + " does not exist in the system");
 			}
 			if (!isUserExistInTheSystem(superiorDT)) {
-				throw new OperationFailureException("superior " + superiorPK + "is not exist in the system");
+				throw new OperationFailureException("superior " + superior + "does not exist in the system");
+			}
+			logger.info("Worker: " + worker + " and Superior: " + superior + " were found");
+			
+			//adding superior to the worker and either adding worker to superior
+			
+			//check whether the Worker has Superior already
+			UserDT currentSuperior = workerDT.getSuperior();
+			if (currentSuperior != null) {
+				String msg = "Suprior: " + currentSuperior.getNickName() + " already setted as Superior of " + worker;
+				logger.info(msg);
+				throw new OperationFailureException(msg);
 			}
 
-			workerDT.setSuperior(superiorDT);
+			//setting the superior as superior of the worker
+			worker.setSuperior(superior);
+			//adding the worker to superior workers list
+			superior.addWorker(worker);
+			
+			workerDT = TransformerUtil.dozerConvert(worker, UserDT.class);
+			superiorDT = TransformerUtil.dozerConvert(superior, UserDT.class);
 
 			if (!userDao.updateUserAndVerify(workerDT)) {
-				throw new OperationFailureException("error occuer when tryied to save user " + workerPK);
+				throw new OperationFailureException("error occuer when tryied to save user " + worker);
 			}
-			logger.info(superiorPK + " has added as superior of " + workerPK + ", the changes been updated in DB");
+			if (!userDao.updateUserAndVerify(superiorDT)) {
+				throw new OperationFailureException("error occuer when tryid to save user " + superiorPK);
+			}
+			logger.info(superiorPK + " has added as superior of " + worker + ", the changes been updated in DB");
 
-			retValue = TransformerUtil.dozerConvert(workerDT, UserBE.class);
+			retValue = worker;
 
 		} catch (Exception e) {
 			logger.error(e.getMessage(),e);
