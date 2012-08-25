@@ -17,9 +17,10 @@ public class UserBE {
 	private List<TaskBE> tasks;
 	
 	
-	
-	
-	
+	@Override
+	public String toString() {
+		return "Mail: " + mail + " Name: " + lastName + " " + firstName;
+	}
 	
 	
 	public String getMail() {

@@ -5,7 +5,7 @@ import org.tsk.mng.dal.model.UserDT;
 public interface UserDao {
 
 	/**
-	 * 
+	 * Saves userToSave on DB
 	 * 
 	 * @param userToSave
 	 */
@@ -28,5 +28,23 @@ public interface UserDao {
 	 * @param userToSave
 	 * @return true whether save operation has succeed, otherwise false
 	 */
-	boolean saveAndVerifyUser(UserDT userToSave);
+	boolean saveUserAndVerify(UserDT userToSave);
+
+	/**
+	 * 
+	 * TODO
+	 * @param userToDelete
+	 * @return
+	 */
+	boolean deleteUserAndVerify(UserDT userToDelete);
+
+
+	/**
+	 * 
+	 * 
+	 * @param userToUpdate
+	 * @return
+	 */
+	boolean updateUserAndVerify(UserDT userToUpdate);
+	
 }

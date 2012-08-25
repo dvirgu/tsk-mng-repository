@@ -8,7 +8,6 @@ package org.tsk.mng.taskmanagement.usermanagementservice;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
@@ -16,11 +15,15 @@ import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.jws.soap.SOAPBinding.ParameterStyle;
 import javax.xml.bind.annotation.XmlSeeAlso;
+
+import org.apache.log4j.Logger;
 import org.tsk.mng.backend.model.UserBE;
 import org.tsk.mng.backend.service.UserManagementBEService;
 import org.tsk.mng.common.infra.SpringInitializer;
 import org.tsk.mng.common.infra.TransformerUtil;
+import org.tsk.mng.frontend.aop.RolePermissionAnnotation;
 import org.tsk.mng.taskmanagement.common_elements.opertaionresultstatus.OperationResultStatus;
+import org.tsk.mng.taskmanagement.common_elements.user.userfe.PermissionType;
 import org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE;
 import org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult;
 import org.tsk.mng.taskmanagement.header.soapheader.UserAuthInfo;
@@ -41,7 +44,7 @@ import org.tsk.mng.taskmanagement.header.soapheader.UserAuthInfo;
 
 public class UserManagementServicePortTypeImpl implements UserManagementServicePortType {
 
-	private static final Logger LOG = Logger.getLogger(UserManagementServicePortTypeImpl.class.getName());
+	private static final Logger logger = Logger.getLogger(UserManagementServicePortTypeImpl.class);
 
 
 	/**
@@ -83,12 +86,13 @@ public class UserManagementServicePortTypeImpl implements UserManagementServiceP
 	 * @see org.tsk.mng.taskmanagement.usermanagementservice.UserManagementServicePortType#addSuperiorToUserOperation(org.tsk.mng.taskmanagement.header.soapheader.UserAuthInfo  soapHeader ,)org.tsk.mng.taskmanagement.usermanagementwrapper.AddSuperiorToUserTypeRequest  addSuperiorToUserRequest )*
 	 */
 	public org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult addSuperiorToUserOperation(org.tsk.mng.taskmanagement.header.soapheader.UserAuthInfo soapHeader,org.tsk.mng.taskmanagement.usermanagementwrapper.AddSuperiorToUserTypeRequest addSuperiorToUserRequest) { 
-		LOG.info("Executing operation addSuperiorToUserOperation");
-		System.out.println(soapHeader);
-		System.out.println(addSuperiorToUserRequest);
+		logger.info("Executing operation addSuperiorToUserOperation");
+
+		UserResult result;
+		
 		try {
-			org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult _return = null;
-			return _return;
+			 //TODO
+			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			throw new RuntimeException(ex);
@@ -134,7 +138,7 @@ public class UserManagementServicePortTypeImpl implements UserManagementServiceP
 	 * @see org.tsk.mng.taskmanagement.usermanagementservice.UserManagementServicePortType#deleteUserOperation(org.tsk.mng.taskmanagement.header.soapheader.UserAuthInfo  soapHeader ,)org.tsk.mng.taskmanagement.usermanagementwrapper.DeleteUserTypeRequest  deleteUserRequest )*
 	 */
 	public org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult deleteUserOperation(org.tsk.mng.taskmanagement.header.soapheader.UserAuthInfo soapHeader,org.tsk.mng.taskmanagement.usermanagementwrapper.DeleteUserTypeRequest deleteUserRequest) { 
-		LOG.info("Executing operation deleteUserOperation");
+		logger.info("Executing operation deleteUserOperation");
 		System.out.println(soapHeader);
 		System.out.println(deleteUserRequest);
 		try {
@@ -150,9 +154,10 @@ public class UserManagementServicePortTypeImpl implements UserManagementServiceP
 	 * @see org.tsk.mng.taskmanagement.usermanagementservice.UserManagementServicePortType#updateUserOperation(org.tsk.mng.taskmanagement.header.soapheader.UserAuthInfo  soapHeader ,)org.tsk.mng.taskmanagement.usermanagementwrapper.UpdateUserTypeRequest  updateUserRequest )*
 	 */
 	public org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult updateUserOperation(org.tsk.mng.taskmanagement.header.soapheader.UserAuthInfo soapHeader,org.tsk.mng.taskmanagement.usermanagementwrapper.UpdateUserTypeRequest updateUserRequest) { 
-		LOG.info("Executing operation updateUserOperation");
+		logger.info("Executing operation updateUserOperation");
 		System.out.println(soapHeader);
 		System.out.println(updateUserRequest);
+		
 		try {
 			org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult _return = null;
 			return _return;
@@ -169,47 +174,36 @@ public class UserManagementServicePortTypeImpl implements UserManagementServiceP
 		/*LOG.info("Executing operation readUserOperation");
         System.out.println(soapHeader);
         System.out.println(readUserRequest);*/
+
+		//TODO UserResult result;
 		
-		try {
-			UserResult authResult = isAuthenticate(soapHeader);
+		try	{
 
-			if (authResult.getResultStatus() == OperationResultStatus.SUCCESS) {
-				//authenticate phase has passed invoke template method
-				try	{
-
-					if(readUserRequest == null) {
-						return createFailureResult("ReadRequest is null");
-					}
-
-					UserManagementBEService service = getUserService();
-
-
-					//TODO add comments
-
-					String userNameToRead = readUserRequest.getUser();
-					if(userNameToRead != null) {
-						UserBE readedUser = service.readUser(userNameToRead);
-						UserFE userToRet = TransformerUtil.dozerConvert(readedUser, UserFE.class);
-						return createResult("User has been found", OperationResultStatus.SUCCESS, userToRet);
-					}
-
-					return createFailureResult("No User has requested");
-
-				} catch(Exception ex) {
-
-					ex.printStackTrace();
-					return createFailureResult(ex.getMessage());
-				}			
-			} else {//authentication error
-				return authResult;
+			if(readUserRequest == null) {
+				return createFailureResult("ReadRequest is null");
 			}
-			
-		} catch (Exception e) {
-			return createFailureResult(e.getMessage());
-		}
+
+			UserManagementBEService service = getUserService();
+
+			//TODO add comments
+
+			String userNameToRead = readUserRequest.getUser();
+			if(userNameToRead != null) {
+				UserBE readedUser = service.readUser(userNameToRead);
+				UserFE userToRet = TransformerUtil.dozerConvert(readedUser, UserFE.class);
+				return createResult("User has been found", OperationResultStatus.SUCCESS, userToRet);
+			}
+
+			return createFailureResult("No User has requested");
+
+		} catch(Exception ex) {
+
+			ex.printStackTrace();
+			return createFailureResult(ex.getMessage());
+		}			
 	}
 
-	//TODO delete protected abstract UserResult readUserTemplate(ReadUserTypeRequest readUserRequest);
+	//TODO delete: protected abstract UserResult readUserTemplate(ReadUserTypeRequest readUserRequest);
 
 
 	protected UserManagementBEService getUserService() {

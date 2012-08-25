@@ -3,6 +3,7 @@ package org.tsk.mng.dal.dao.impl;
 import java.io.Serializable;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate3.HibernateTemplate;
@@ -22,6 +23,10 @@ public class BaseDaoImpl<DataType, PKType extends Serializable> {
 	public SessionFactory getSessionFactory() {
 		//return sessionFactory;
 		return hibernateTemplate.getSessionFactory();
+	}
+	
+	public HibernateTemplate getHibernateTemplate() {
+		return this.hibernateTemplate;
 	}
 
 	public void setSessionFactory(SessionFactory sessionFactory) {
