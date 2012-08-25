@@ -16,8 +16,7 @@ public class TaskBE {
 	private List<TaskBE> dependentTasks;
 	
 	
-	
-	
+
 	
 	public int getTaskId() {
 		return taskId;
@@ -63,7 +62,10 @@ public class TaskBE {
 	}
 	
 	
-	
-	
+	@Override
+	public String toString() {
+		return "TaskID: " + taskId + " Owner: " + owner + "Status: " + status;
+	}
+
 	
 }

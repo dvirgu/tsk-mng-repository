@@ -50,22 +50,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link AddDependencyElemetRequest }
-     * 
-     */
-    public AddDependencyElemetRequest createAddDependencyElemetRequest() {
-        return new AddDependencyElemetRequest();
-    }
-
-    /**
-     * Create an instance of {@link UpdateTaskElemetRequest }
-     * 
-     */
-    public UpdateTaskElemetRequest createUpdateTaskElemetRequest() {
-        return new UpdateTaskElemetRequest();
-    }
-
-    /**
      * Create an instance of {@link RemoveTaskFromUserElementRequest }
      * 
      */
@@ -82,11 +66,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link UpdateTaskElemetRequest }
+     * 
+     */
+    public UpdateTaskElemetRequest createUpdateTaskElemetRequest() {
+        return new UpdateTaskElemetRequest();
+    }
+
+    /**
      * Create an instance of {@link AssignUserToTaskTypeRequest }
      * 
      */
     public AssignUserToTaskTypeRequest createAssignUserToTaskTypeRequest() {
         return new AssignUserToTaskTypeRequest();
+    }
+
+    /**
+     * Create an instance of {@link AddDependencyElemetRequest }
+     * 
+     */
+    public AddDependencyElemetRequest createAddDependencyElemetRequest() {
+        return new AddDependencyElemetRequest();
     }
 
     /**
