@@ -6,5 +6,7 @@ public enum TaskStatusType {
 	InProgress,
 	NotStarted,
 	Waiting,
+	Alerted,
+	Delayed,
 	Failed
 }

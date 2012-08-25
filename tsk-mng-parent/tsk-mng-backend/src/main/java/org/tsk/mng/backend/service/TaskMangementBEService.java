@@ -9,6 +9,7 @@ import org.tsk.mng.backend.model.UserBE;
 public interface TaskMangementBEService {
 
 	/**
+	 * Validate if user exist and if exist then save task in DB, otherwise threw exception
 	 * 
 	 * @param user
 	 * @param task
@@ -18,6 +19,7 @@ public interface TaskMangementBEService {
 	UserBE assignUserToTask(UserBE user, TaskBE task) throws OperationFailureException;
 	
 	/**
+	 * Validates if the user exist and if exist then return all his tasks, otherwise threw exception.
 	 * 
 	 * @param user
 	 * @return 
@@ -36,6 +38,7 @@ public interface TaskMangementBEService {
 	TaskBE removeTaskFromUser(UserBE user, TaskBE task) throws OperationFailureException;
 	
 	/**
+	 * Validates if the task exist and if exists then update the task, otherwise threw exception.
 	 * 
 	 * @param task
 	 * @return Updated task
@@ -44,10 +47,12 @@ public interface TaskMangementBEService {
 	TaskBE updateTask(TaskBE task) throws OperationFailureException;
 	
 	/**
+	 * Validates if the task exist, validate if dependentTask exist, 
+	 * if they are then add the dependentTask to task and save to DB
 	 * 
 	 * @param task
 	 * @param dependentTask
-	 * @return
+	 * @return 
 	 * @throws OperationFailureException
 	 */
 	UserBE addDependencyToTask(TaskBE task, TaskBE dependentTask) throws OperationFailureException;
