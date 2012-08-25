@@ -6,7 +6,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import org.tsk.mng.taskmanagement.common_elements.task.taskfe.TaskFE;
-import org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE;
 
 
 /**
@@ -20,7 +19,7 @@ import org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="task" type="{http://mng.tsk.org/taskManagement/common_elements/task/taskFE}taskFE"/>
- *         &lt;element name="user" type="{http://mng.tsk.org/taskManagement/common_elements/user/userFE}userFE"/>
+ *         &lt;element name="dependedTask" type="{http://mng.tsk.org/taskManagement/common_elements/task/taskFE}taskFE"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -32,14 +31,14 @@ import org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "addDependencyElemetRequest", propOrder = {
     "task",
-    "user"
+    "dependedTask"
 })
 public class AddDependencyElemetRequest {
 
     @XmlElement(required = true)
     protected TaskFE task;
     @XmlElement(required = true)
-    protected UserFE user;
+    protected TaskFE dependedTask;
 
     /**
      * Gets the value of the task property.
@@ -66,27 +65,27 @@ public class AddDependencyElemetRequest {
     }
 
     /**
-     * Gets the value of the user property.
+     * Gets the value of the dependedTask property.
      * 
      * @return
      *     possible object is
-     *     {@link UserFE }
+     *     {@link TaskFE }
      *     
      */
-    public UserFE getUser() {
-        return user;
+    public TaskFE getDependedTask() {
+        return dependedTask;
     }
 
     /**
-     * Sets the value of the user property.
+     * Sets the value of the dependedTask property.
      * 
      * @param value
      *     allowed object is
-     *     {@link UserFE }
+     *     {@link TaskFE }
      *     
      */
-    public void setUser(UserFE value) {
-        this.user = value;
+    public void setDependedTask(TaskFE value) {
+        this.dependedTask = value;
     }
 
 }

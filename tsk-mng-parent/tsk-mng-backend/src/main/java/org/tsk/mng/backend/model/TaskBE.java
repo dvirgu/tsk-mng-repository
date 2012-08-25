@@ -129,6 +129,11 @@ public class TaskBE implements Comparable<TaskBE> {
 		
 		return null;
 	}
+	
+	@Override
+	public String toString() {
+		return "TaskID: " + taskId + " Owner: " + owner + "Status: " + status;
+	}
 
 
 

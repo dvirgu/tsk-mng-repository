@@ -70,7 +70,7 @@
 	<xs:complexType name="addDependencyElemetRequest">
 		<xs:sequence>
 			<xs:element name="task" type="ns1:taskFE"/>
-			<xs:element name="user" type="ns0:userFE"/>
+			<xs:element name="dependedTask" type="ns1:taskFE"/>
 		</xs:sequence>
 	</xs:complexType>
 	
