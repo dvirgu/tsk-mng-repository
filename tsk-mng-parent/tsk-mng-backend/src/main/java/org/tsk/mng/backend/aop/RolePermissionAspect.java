@@ -40,15 +40,20 @@ public class RolePermissionAspect {
 		if(roleAnnotation != null){
 
 			PermissionType[] allowedRoles = roleAnnotation.allowedRoles();
-			UserBE user = ((UserBE)(pjp.getArgs()[0]));
-			//UserBE user = TransformerUtil.dozerConvert(SpringInitializer.getBean(UserManagementBEService.class).readUser(soapHeader), UserBE.class); 
-			PermissionType userRole = user.getPermission();
-			
-			for(PermissionType allowedRole : allowedRoles){
-				if(allowedRole == userRole){
-					isAllowed = true;
+			if(pjp.getArgs()[0] instanceof UserBE){
+				UserBE user = ((UserBE)(pjp.getArgs()[0]));
+				//UserBE user = TransformerUtil.dozerConvert(SpringInitializer.getBean(UserManagementBEService.class).readUser(soapHeader), UserBE.class); 
+				PermissionType userRole = user.getPermission();
+				
+				for(PermissionType allowedRole : allowedRoles){
+					if(allowedRole == userRole){
+						isAllowed = true;
+					}
 				}
+			} else {
+				throw new OperationFailureException("The first argument is not instance of UserBE");
 			}
+			
 		}
 		
 		return isAllowed;

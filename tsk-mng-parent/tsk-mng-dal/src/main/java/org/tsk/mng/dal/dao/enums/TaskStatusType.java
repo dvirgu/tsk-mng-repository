@@ -2,9 +2,9 @@ package org.tsk.mng.dal.dao.enums;
 
 public enum TaskStatusType {
 
-	Done,
-	InProgress,
-	NotStarted,
-	Waiting,
-	Failed
+	DONE,
+	IN_PROGRESS,
+	NOT_STARTED,
+	WAITING,
+	FAILED
 }

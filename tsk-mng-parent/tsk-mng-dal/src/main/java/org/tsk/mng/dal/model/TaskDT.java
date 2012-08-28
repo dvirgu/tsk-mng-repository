@@ -16,6 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 @Entity
@@ -24,11 +25,11 @@ public class TaskDT {
 
 	public enum TaskStatusType {
 
-		Done,
-		InProgress,
-		NotStarted,
-		Waiting,
-		Failed
+		DONE,
+		IN_PROGRESS,
+		NOT_STARTED,
+		WAITING,
+		FAILED
 	}
 	
 	@Id
@@ -57,6 +58,7 @@ public class TaskDT {
 	private List<TaskDT> meDependOnTasks;
 	
 	@ManyToMany(mappedBy="meDependOnTasks" ,fetch=FetchType.EAGER)
+	@Transient
 	private List<TaskDT> dependOnMeTasks;
 	
 	

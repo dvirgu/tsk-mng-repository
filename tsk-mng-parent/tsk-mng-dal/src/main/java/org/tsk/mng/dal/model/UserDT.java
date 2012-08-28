@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlTransient;
 
 import org.tsk.mng.common.config.Consts;
 import org.tsk.mng.common.infra.PropertiesHandler;
@@ -65,9 +66,11 @@ public class UserDT {
 	private UserDT superior;
 	
 	@OneToMany(mappedBy="superior" ,fetch=FetchType.EAGER)
+	@XmlTransient
 	private List<UserDT> workers;
 	
 	@OneToMany(mappedBy="owner" ,fetch=FetchType.EAGER)
+	@XmlTransient
 	private Set<TaskDT> tasks;
 	
 	

@@ -130,7 +130,7 @@ public class TaskBE implements Comparable<TaskBE> {
 	}
 	
 	public void alertTask(){
-		status = TaskStatusType.Alerted;
+		status = TaskStatusType.ALERTED;
 	}
 	
 	public StatusStrategy checkStatus(){

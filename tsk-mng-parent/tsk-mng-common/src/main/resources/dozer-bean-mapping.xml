@@ -32,6 +32,10 @@
 		<!-- TODO: mapping superiors in BE to single superior in DT <field> <a></a> 
 			<b></b> </field> -->
 		<field>
+			<a>superior</a>
+			<b>superior</b>
+		</field>
+		<field>
 			<a>tasks</a>
 			<b>tasks</b>
 			<b-hint>org.tsk.mng.dal.model.TaskDT</b-hint>
