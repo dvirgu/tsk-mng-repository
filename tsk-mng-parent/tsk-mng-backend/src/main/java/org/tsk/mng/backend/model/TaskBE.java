@@ -22,11 +22,27 @@ public class TaskBE implements Comparable<TaskBE> {
 	
 
 	public TaskBE() {
-		String beanId = (String) SpringInitializer.getBeanFactory().getBean(Consts.SET_IMPL_PROPERTIE);
+		String beanId = SpringInitializer.getBeanFactory().getBean(Consts.SET_IMPL_PROPERTIE ,String.class);
 		meDependOnTasks = (Set) SpringInitializer.getBeanFactory().getBean(beanId);
 		dependOnMeTasks = (Set) SpringInitializer.getBeanFactory().getBean(beanId);
 	}
 
+	public Set<TaskBE> getDependOnMeTasks() {
+		return dependOnMeTasks;
+	}
+
+	public void setDependOnMeTasks(Set<TaskBE> dependOnMeTasks) {
+		this.dependOnMeTasks = dependOnMeTasks;
+	}
+	
+	public Set<TaskBE> getMeDependOnTasks() {
+		return meDependOnTasks;
+	}
+
+	public void setMeDependOnTasks(Set<TaskBE> meDependOnTasks) {
+		this.meDependOnTasks = meDependOnTasks;
+	}
+	
 	public int getTaskId() {
 		return taskId;
 	}
@@ -75,13 +91,7 @@ public class TaskBE implements Comparable<TaskBE> {
 		this.status = status;
 	}
 
-	public Set<TaskBE> getMeDependOnTasks() {
-		return meDependOnTasks;
-	}
-
-	public void setMeDependOnTasks(Set<TaskBE> meDependOnTasks) {
-		this.meDependOnTasks = meDependOnTasks;
-	}
+	
 
 	@Override
 	public int compareTo(TaskBE otherTask) {

@@ -54,18 +54,29 @@ public class TaskDT {
 	
 	@ManyToMany(cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
 	@JoinTable(name="DEPENDENT_TASKS", joinColumns=@JoinColumn(name="TASK_ID"), inverseJoinColumns=@JoinColumn(name="DEPENDENT_TASK_ID"))
-	private List<TaskDT> dependentTasks;
+	private List<TaskDT> meDependOnTasks;
 	
-	@ManyToMany(mappedBy="dependentTasks" ,fetch=FetchType.EAGER)
-	private List<TaskDT> dependOnMyTasks;
+	@ManyToMany(mappedBy="meDependOnTasks" ,fetch=FetchType.EAGER)
+	private List<TaskDT> dependOnMeTasks;
 	
 	
-	
+	public List<TaskDT> getDependOnMeTasks() {
+		return dependOnMeTasks;
+	}
+	public void setDependOnMeTasks(List<TaskDT> dependOnMeTasks) {
+		this.dependOnMeTasks = dependOnMeTasks;
+	}
+	public List<TaskDT> getMeDependOnTasks() {
+		return meDependOnTasks;
+	}
+	public void setMeDependOnTasks(List<TaskDT> dependentTasks) {
+		this.meDependOnTasks = dependentTasks;
+	}
 	public List<TaskDT> getDependOnMyTasks() {
-		return dependOnMyTasks;
+		return dependOnMeTasks;
 	}
 	public void setDependOnMyTasks(List<TaskDT> dependOnMyTasks) {
-		this.dependOnMyTasks = dependOnMyTasks;
+		this.dependOnMeTasks = dependOnMyTasks;
 	}
 	public int getTaskId() {
 		return taskId;
@@ -104,12 +115,7 @@ public class TaskDT {
 	public void setStatus(TaskStatusType status) {
 		this.status = status;
 	}
-	public List<TaskDT> getDependentTasks() {
-		return dependentTasks;
-	}
-	public void setDependentTasks(List<TaskDT> dependentTasks) {
-		this.dependentTasks = dependentTasks;
-	}
+	
 	
 	
 	

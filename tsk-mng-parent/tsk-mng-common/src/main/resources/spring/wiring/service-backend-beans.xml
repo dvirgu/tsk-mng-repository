@@ -14,18 +14,6 @@
 		<property name="taskDao" ref="taskDaoBean" />
 	</bean>
 	
-	<bean id="userWithHashSet" class="org.tsk.mng.backend.model.UserBE" scope="prototype">
-		<property name="tasks">
-			<util:set set-class="java.util.HashSet"/>
-		</property>
-	</bean>
-
-	<bean id="userWithTreeSet" class="org.tsk.mng.backend.model.UserBE" scope="prototype">
-		<property name="tasks">
-			<util:set set-class="java.util.TreeSet"/>
-		</property>
-	</bean>
-	
 	<bean id="setImpl" class="java.lang.String" >
 		<constructor-arg type="java.lang.String" value="hashSet" />
 	</bean>

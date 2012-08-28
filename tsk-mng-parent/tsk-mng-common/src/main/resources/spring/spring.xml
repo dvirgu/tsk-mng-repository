@@ -19,5 +19,6 @@
 	<import resource="wiring/dao-hibernate-beans.xml"/>
 	<import resource="wiring/dao-dal-beans.xml"/>
 	<import resource="wiring/common-infra-beans.xml"/>
+	<import resource="wiring/spring-aop-beans.xml"/>
 
 </beans>

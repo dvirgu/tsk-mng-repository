@@ -12,8 +12,9 @@
 						http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	
 	<aop:aspectj-autoproxy/>
-	
+	<!-- -->
 	<bean id="rolePermissionAspect" class="org.tsk.mng.backend.aop.RolePermissionAspect" />
-	<bean id="loggAspect" class="org.tsk.mng.common.aop.LoggingAspect"/>
+	 
+	<bean id="logAspect" class="org.tsk.mng.common.aop.LoggingAspect"/>
 	
 </beans>

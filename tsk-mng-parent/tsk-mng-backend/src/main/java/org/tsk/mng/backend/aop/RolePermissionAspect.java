@@ -16,21 +16,21 @@ public class RolePermissionAspect {
 
 	private static final Logger logger = Logger.getLogger(RolePermissionAspect.class);
 	
-	@Around("@annotation(org.tsk.mng.backend.aop.RolePermissionAnnotation)")
-	public Object around(ProceedingJoinPoint pjp ,RolePermissionAnnotation roleAnnotation) throws Throwable{
+	@Around(value = "@annotation(org.tsk.mng.backend.aop.RolePermissionAnnotation) && @annotation(roleAnnotation)", argNames="roleAnnotation")
+	public Object around(final ProceedingJoinPoint pjp ,RolePermissionAnnotation roleAnnotation) throws Throwable{
 		
+		Object retVal = null;
 		boolean isMethodAllowed = isMethodAllowed(pjp ,roleAnnotation); 
 		if(isMethodAllowed){
-			Object retVal = pjp.proceed();
+			retVal = pjp.proceed();
 			
-			return retVal;
 		} else {
-			String errorMessage = "User not allowed";
-			logger.error(errorMessage);
-			throw new Exception(errorMessage); // TODO: change to BaseException
+			String warnMessage = "User not allowed";
+			logger.warn(warnMessage);
+			throw new OperationFailureException(warnMessage);
 		}
 		
-		
+		return retVal;
 	}
 	
 	private boolean isMethodAllowed(ProceedingJoinPoint pjp ,RolePermissionAnnotation roleAnnotation) throws OperationFailureException{
@@ -40,8 +40,8 @@ public class RolePermissionAspect {
 		if(roleAnnotation != null){
 
 			PermissionType[] allowedRoles = roleAnnotation.allowedRoles();
-			String soapHeader = ((String)(pjp.getArgs()[0]));
-			UserBE user = TransformerUtil.dozerConvert(SpringInitializer.getBean(UserManagementBEService.class).readUser(soapHeader), UserBE.class); 
+			UserBE user = ((UserBE)(pjp.getArgs()[0]));
+			//UserBE user = TransformerUtil.dozerConvert(SpringInitializer.getBean(UserManagementBEService.class).readUser(soapHeader), UserBE.class); 
 			PermissionType userRole = user.getPermission();
 			
 			for(PermissionType allowedRole : allowedRoles){
