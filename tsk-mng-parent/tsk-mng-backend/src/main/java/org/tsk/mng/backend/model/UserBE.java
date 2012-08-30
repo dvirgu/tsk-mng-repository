@@ -19,18 +19,18 @@ public class UserBE {
 	private String nickName;
 	private String password;
 	private PermissionType permission;
-	private UserBE superior;
+	private String superior;
 	private List<UserBE> workers;
 	private Set<TaskBE> tasks;
 	
 	
 	
 	public UserBE() {
-		String beanIdProp = PropertiesHandler.readPropertie(Consts.SPRING_PROPERTIES_FILE_NAME, Consts.SET_IMPL_PROPERTIE);
-		String beanId = (String) SpringInitializer.getBeanFactory().getBean(Consts.SET_IMPL_PROPERTIE);
+		String beanIdProp = PropertiesHandler.readPropertie(Consts.SPRING_PROPERTIES_FILE_NAME, Consts.SET_IMPL_PROPERTY);
+		String beanId = (String) SpringInitializer.getBeanFactory().getBean(Consts.SET_IMPL_PROPERTY);
 		tasks = (Set<TaskBE>) SpringInitializer.getBeanFactory().getBean(beanId);
 	}
-
+	
 
 	public String getMail() {
 		return mail;
@@ -68,10 +68,10 @@ public class UserBE {
 	public void setPermission(PermissionType permission) {
 		this.permission = permission;
 	}
-	public UserBE getSuperior() {
+	public String getSuperior() {
 		return superior;
 	}
-	public void setSuperior(UserBE superior) {
+	public void setSuperior(String superior) {
 		this.superior = superior;
 	}
 	public List<UserBE> getWorkers() {

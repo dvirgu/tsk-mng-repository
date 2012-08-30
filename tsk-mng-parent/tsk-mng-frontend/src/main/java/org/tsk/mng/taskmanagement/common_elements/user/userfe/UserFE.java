@@ -25,7 +25,7 @@ import org.tsk.mng.taskmanagement.common_elements.task.taskfe.TaskFE;
  *         &lt;element name="lastName" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="nickName" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="tasks" type="{http://mng.tsk.org/taskManagement/common_elements/task/taskFE}taskFE" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="superiors" type="{http://mng.tsk.org/taskManagement/common_elements/user/userFE}userFE"/>
+ *         &lt;element name="superior" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="workers" type="{http://mng.tsk.org/taskManagement/common_elements/user/userFE}userFE" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="permission" type="{http://mng.tsk.org/taskManagement/common_elements/user/userFE}PermissionType"/>
@@ -44,7 +44,7 @@ import org.tsk.mng.taskmanagement.common_elements.task.taskfe.TaskFE;
     "lastName",
     "nickName",
     "tasks",
-    "superiors",
+    "superior",
     "workers",
     "password",
     "permission"
@@ -61,7 +61,7 @@ public class UserFE {
     protected String nickName;
     protected List<TaskFE> tasks;
     @XmlElement(required = true)
-    protected UserFE superiors;
+    protected String superior;
     protected List<UserFE> workers;
     @XmlElement(required = true)
     protected String password;
@@ -194,27 +194,27 @@ public class UserFE {
     }
 
     /**
-     * Gets the value of the superiors property.
+     * Gets the value of the superior property.
      * 
      * @return
      *     possible object is
-     *     {@link UserFE }
+     *     {@link String }
      *     
      */
-    public UserFE getSuperiors() {
-        return superiors;
+    public String getSuperior() {
+        return superior;
     }
 
     /**
-     * Sets the value of the superiors property.
+     * Sets the value of the superior property.
      * 
      * @param value
      *     allowed object is
-     *     {@link UserFE }
+     *     {@link String }
      *     
      */
-    public void setSuperiors(UserFE value) {
-        this.superiors = value;
+    public void setSuperior(String value) {
+        this.superior = value;
     }
 
     /**

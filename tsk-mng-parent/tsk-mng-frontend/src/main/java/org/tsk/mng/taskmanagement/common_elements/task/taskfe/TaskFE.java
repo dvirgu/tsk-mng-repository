@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
-import org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE;
 
 
 /**
@@ -27,7 +26,7 @@ import org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE;
  *         &lt;element name="descriptions" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="deadLine" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
  *         &lt;element name="alert" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
- *         &lt;element name="owner" type="{http://mng.tsk.org/taskManagement/common_elements/user/userFE}userFE"/>
+ *         &lt;element name="owner" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="dependentTasks" type="{http://mng.tsk.org/taskManagement/common_elements/task/taskFE}taskFE" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -61,7 +60,7 @@ public class TaskFE {
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar alert;
     @XmlElement(required = true)
-    protected UserFE owner;
+    protected String owner;
     protected List<TaskFE> dependentTasks;
 
     /**
@@ -181,10 +180,10 @@ public class TaskFE {
      * 
      * @return
      *     possible object is
-     *     {@link UserFE }
+     *     {@link String }
      *     
      */
-    public UserFE getOwner() {
+    public String getOwner() {
         return owner;
     }
 
@@ -193,10 +192,10 @@ public class TaskFE {
      * 
      * @param value
      *     allowed object is
-     *     {@link UserFE }
+     *     {@link String }
      *     
      */
-    public void setOwner(UserFE value) {
+    public void setOwner(String value) {
         this.owner = value;
     }
 

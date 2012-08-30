@@ -15,7 +15,7 @@
 			<xs:element name="lastName" type="xs:string" />
 			<xs:element name="nickName" type="xs:string" />
 			<xs:element name="tasks" type="ns0:taskFE" minOccurs="0" maxOccurs="unbounded" />
-			<xs:element name="superiors" type="userFE"/>
+			<xs:element name="superior" type="xs:string"/>
 			<xs:element name="workers" type="userFE" minOccurs="0" maxOccurs="unbounded" />
 			<xs:element name="password" type="xs:string" />
 			<xs:element name="permission" type="tns:PermissionType" />

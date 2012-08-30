@@ -36,8 +36,8 @@ public class UserDT {
 	
 	
 	public UserDT() {
-		String beanIdOther = PropertiesHandler.readPropertie(Consts.SPRING_PROPERTIES_FILE_NAME, Consts.SET_IMPL_PROPERTIE);
-		String beanId = (String) SpringInitializer.getBeanFactory().getBean(Consts.SET_IMPL_PROPERTIE);
+		String beanIdOther = PropertiesHandler.readPropertie(Consts.SPRING_PROPERTIES_FILE_NAME, Consts.SET_IMPL_PROPERTY);
+		String beanId = (String) SpringInitializer.getBeanFactory().getBean(Consts.SET_IMPL_PROPERTY);
 		tasks = (Set<TaskDT>) SpringInitializer.getBeanFactory().getBean(beanId);
 	}
 	@Id
@@ -66,11 +66,9 @@ public class UserDT {
 	private UserDT superior;
 	
 	@OneToMany(mappedBy="superior" ,fetch=FetchType.EAGER)
-	@XmlTransient
 	private List<UserDT> workers;
 	
 	@OneToMany(mappedBy="owner" ,fetch=FetchType.EAGER)
-	@XmlTransient
 	private Set<TaskDT> tasks;
 	
 	

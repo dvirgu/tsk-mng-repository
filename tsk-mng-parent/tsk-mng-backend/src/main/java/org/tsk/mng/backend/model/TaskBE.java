@@ -14,7 +14,7 @@ public class TaskBE implements Comparable<TaskBE> {
 	private String descriptions;
 	private Date alert;
 	private Date deadline;
-	private UserBE owner;
+	private String owner;
 	private TaskStatusType status;
 	private Set<TaskBE> meDependOnTasks;
 	private Set<TaskBE> dependOnMeTasks;
@@ -22,7 +22,7 @@ public class TaskBE implements Comparable<TaskBE> {
 	
 
 	public TaskBE() {
-		String beanId = SpringInitializer.getBeanFactory().getBean(Consts.SET_IMPL_PROPERTIE ,String.class);
+		String beanId = SpringInitializer.getBeanFactory().getBean(Consts.SET_IMPL_PROPERTY ,String.class);
 		meDependOnTasks = (Set) SpringInitializer.getBeanFactory().getBean(beanId);
 		dependOnMeTasks = (Set) SpringInitializer.getBeanFactory().getBean(beanId);
 	}
@@ -75,11 +75,11 @@ public class TaskBE implements Comparable<TaskBE> {
 		this.deadline = deadline;
 	}
 
-	public UserBE getOwner() {
+	public String getOwner() {
 		return owner;
 	}
 
-	public void setOwner(UserBE owner) {
+	public void setOwner(String owner) {
 		this.owner = owner;
 	}
 

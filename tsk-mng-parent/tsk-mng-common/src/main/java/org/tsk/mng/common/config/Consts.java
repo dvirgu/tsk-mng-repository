@@ -19,6 +19,10 @@ public final class Consts {
 	/**
 	 * propertie name that decide what would be the impl of set - HashSet/TreeSet/LinkedList
 	 */
-	public static final String SET_IMPL_PROPERTIE = "setImpl";
+	public static final String SET_IMPL_PROPERTY = "setImpl";
+	
+	public static final String USER_DAO_BEAN_ID = "userDaoBean";
+	
+	public static final String TASK_DAO_BEAN_ID = "taskDaoBean";
 	
 }
