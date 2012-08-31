@@ -2,6 +2,7 @@ package org.tsk.mng.dal.model;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,10 +15,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-import javax.xml.bind.annotation.adapters.XmlAdapter;
+
+import org.tsk.mng.common.config.Consts;
+import org.tsk.mng.common.infra.SpringInitializer;
+import org.tsk.mng.dal.dao.interfaces.TaskDao;
+import org.tsk.mng.dal.dao.interfaces.UserDao;
 
 
 @Entity
@@ -46,9 +49,10 @@ public class TaskDT {
 	@Column(name="DEADLINE")
 	private Date deadline;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="OWNER_MAIL")
-	private UserDT owner;
+//	@ManyToOne(fetch=FetchType.EAGER)
+//	@JoinColumn(name="OWNER_MAIL")
+	@Column(name="OWNER_MAIL")
+	private String owner;
 	
 	@Column(name="STATUS")
 	@Enumerated(EnumType.ORDINAL)
@@ -58,28 +62,43 @@ public class TaskDT {
 	@JoinTable(name="DEPENDENT_TASKS", joinColumns=@JoinColumn(name="TASK_ID"), inverseJoinColumns=@JoinColumn(name="DEPENDENT_TASK_ID"))
 	private List<TaskDT> meDependOnTasks;
 	
-	@ManyToMany(mappedBy="meDependOnTasks" ,fetch=FetchType.EAGER)
-	private List<TaskDT> dependOnMeTasks;
+	//@ManyToMany(mappedBy="meDependOnTasks" ,fetch=FetchType.EAGER)
+	//private List<Integer> dependOnMeTasks;
 	
+	public void addTask(TaskDT task){
+		meDependOnTasks.add(task);
+	}
+//	public void setOwnerValueDT(String ownerMail){
+//		UserDao dao = SpringInitializer.getBeanFactory().getBean(Consts.USER_DAO_BEAN_ID, UserDao.class);
+//		UserDT ownerEntity = dao.getByPK(ownerMail);
+//		this.owner = ownerEntity;
+//	}
+//	public void setDependentTasksValueDT(Set<Integer> taskIdSet){
+//		TaskDao dao = SpringInitializer.getBeanFactory().getBean(Consts.TASK_DAO_BEAN_ID, TaskDao.class);
+//		for(Integer taskId : taskIdSet){
+//			TaskDT taskDT = dao.getByPK(taskId);
+//			dependOnMeTasks.add(taskDT);
+//		}
+//	}
 	
-	public List<TaskDT> getDependOnMeTasks() {
-		return dependOnMeTasks;
-	}
-	public void setDependOnMeTasks(List<TaskDT> dependOnMeTasks) {
-		this.dependOnMeTasks = dependOnMeTasks;
-	}
+//	public List<TaskDT> getDependOnMeTasks() {
+//		return dependOnMeTasks;
+//	}
+//	public void setDependOnMeTasks(List<TaskDT> dependOnMeTasks) {
+//		this.dependOnMeTasks = dependOnMeTasks;
+//	}
 	public List<TaskDT> getMeDependOnTasks() {
 		return meDependOnTasks;
 	}
 	public void setMeDependOnTasks(List<TaskDT> dependentTasks) {
 		this.meDependOnTasks = dependentTasks;
 	}
-	public List<TaskDT> getDependOnMyTasks() {
-		return dependOnMeTasks;
-	}
-	public void setDependOnMyTasks(List<TaskDT> dependOnMyTasks) {
-		this.dependOnMeTasks = dependOnMyTasks;
-	}
+//	public List<TaskDT> getDependOnMyTasks() {
+//		return dependOnMeTasks;
+//	}
+//	public void setDependOnMyTasks(List<TaskDT> dependOnMyTasks) {
+//		this.dependOnMeTasks = dependOnMyTasks;
+//	}
 	public int getTaskId() {
 		return taskId;
 	}
@@ -105,10 +124,10 @@ public class TaskDT {
 		this.deadline = deadline;
 	}
 	
-	public UserDT getOwner() {
+	public String getOwner() {
 		return owner;
 	}
-	public void setOwner(UserDT owner) {
+	public void setOwner(String owner) {
 		this.owner = owner;
 	}
 	public TaskStatusType getStatus() {

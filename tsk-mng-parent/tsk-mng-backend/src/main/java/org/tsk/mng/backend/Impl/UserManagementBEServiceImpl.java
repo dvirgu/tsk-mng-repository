@@ -83,7 +83,7 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 			//adding superior to the worker and either adding worker to superior
 			
 			//check whether the Worker has Superior already
-			UserDT currentSuperior = workerDT.getSuperior();
+			UserDT currentSuperior = userDao.getByPK(workerDT.getSuperior());
 			if (currentSuperior != null) {
 				String msg = "Suprior: " + currentSuperior.getNickName() + " already setted as Superior of " + worker;
 				logger.info(msg);
@@ -91,19 +91,16 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 			}
 
 			//setting the superior as superior of the worker
-			worker.setSuperior(superior);
+			worker.setSuperior(superior.getMail());
 			//adding the worker to superior workers list
 			superior.addWorker(worker);
 			
 			workerDT = TransformerUtil.dozerConvert(worker, UserDT.class);
 			superiorDT = TransformerUtil.dozerConvert(superior, UserDT.class);
-
-			if (!userDao.updateUserAndVerify(workerDT)) {
-				throw new OperationFailureException("error occuer when tryied to save user " + worker);
-			}
-			if (!userDao.updateUserAndVerify(superiorDT)) {
-				throw new OperationFailureException("error occuer when tryid to save user " + superiorPK);
-			}
+			
+			userDao.update(workerDT);
+			userDao.update(superiorDT);
+			
 			logger.info(superiorPK + " has added as superior of " + worker + ", the changes been updated in DB");
 
 			retValue = worker;
@@ -131,9 +128,7 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 				throw new OperationFailureException("User already exist in the system");
 			}
 
-			if (!userDao.saveUserAndVerify(userDT)) {
-				throw new OperationFailureException("error occur while creating user");
-			}
+			userDao.update(userDT);
 
 		} catch (Exception e) { 
 			logger.error(e.getMessage(),e);
@@ -193,7 +188,7 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 				throw new OperationFailureException("User does not exist in the system");
 			}
 
-			if (!userDao.deleteUserAndVerify(userToDeleteDT)) {
+			if (!userDao.delete(userToDeleteDT ,userToDeleteDT.getMail())) {
 				throw new OperationFailureException("delete " + user + " failed due DB failure");
 			}
 
@@ -245,9 +240,7 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 			
 			logger.info("going to update " + user);
 			UserDT userToUpdateDT = TransformerUtil.dozerConvert(user, UserDT.class);
-			if (!userDao.updateUserAndVerify(userToUpdateDT)) {
-				throw new OperationFailureException("Update user " + user + " failed due DB error");
-			}
+			userDao.update(userToUpdateDT);
 			
 			retValue = user;
 			

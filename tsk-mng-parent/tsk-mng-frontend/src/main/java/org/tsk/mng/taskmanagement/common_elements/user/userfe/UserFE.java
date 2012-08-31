@@ -6,6 +6,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
 import org.tsk.mng.taskmanagement.common_elements.task.taskfe.TaskFE;
 
@@ -68,6 +69,10 @@ public class UserFE {
     @XmlElement(required = true)
     protected PermissionType permission;
 
+    //TODO remove it - used by dozer
+    public void addTask(TaskFE task){
+    	tasks.add(task);
+    }
     /**
      * Gets the value of the mail property.
      * 

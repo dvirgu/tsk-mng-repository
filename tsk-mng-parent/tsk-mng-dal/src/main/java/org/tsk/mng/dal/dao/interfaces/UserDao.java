@@ -5,14 +5,13 @@ import org.tsk.mng.dal.model.UserDT;
 public interface UserDao {
 
 	/**
-	 * Saves userToSave on DB
+	 * save userToSave in DB and verify operation status.
 	 * 
-	 * @param userToSave
+	 * @param true whether save operation has succeed, otherwise false
 	 */
-	void save(UserDT userToSave);
+	boolean save(UserDT userToSave, String mail);
 
 
-	
 	/**
 	 * 
 	 * @param mail
@@ -23,20 +22,11 @@ public interface UserDao {
 
 	/**
 	 * 
-	 * save userToSave in DB and verify operation status.
-	 * 
-	 * @param userToSave
-	 * @return true whether save operation has succeed, otherwise false
-	 */
-	boolean saveUserAndVerify(UserDT userToSave);
-
-	/**
-	 * 
 	 * TODO
 	 * @param userToDelete
 	 * @return
 	 */
-	boolean deleteUserAndVerify(UserDT userToDelete);
+	boolean delete(UserDT userToDelete ,String mail);
 
 
 	/**
@@ -45,6 +35,6 @@ public interface UserDao {
 	 * @param userToUpdate
 	 * @return
 	 */
-	boolean updateUserAndVerify(UserDT userToUpdate);
+	void update(UserDT userToUpdate);
 	
 }

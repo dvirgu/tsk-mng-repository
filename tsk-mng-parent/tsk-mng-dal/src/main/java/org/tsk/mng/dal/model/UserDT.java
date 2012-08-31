@@ -18,9 +18,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlTransient;
 
+
 import org.tsk.mng.common.config.Consts;
 import org.tsk.mng.common.infra.PropertiesHandler;
 import org.tsk.mng.common.infra.SpringInitializer;
+import org.tsk.mng.dal.dao.interfaces.UserDao;
 
 
 @Entity
@@ -60,25 +62,35 @@ public class UserDT {
 	@Enumerated(EnumType.ORDINAL)
 	private PermissionType permission;
 	
+//	
+//	@ManyToOne(cascade={CascadeType.ALL} ,fetch=FetchType.EAGER)
+//	@JoinColumn(name="SUPERIOR_ID")
+	@Column(name="SUPERIOR_ID")
+	private String superior;
 	
-	@ManyToOne(cascade={CascadeType.ALL} ,fetch=FetchType.EAGER)
-	@JoinColumn(name="SUPERIOR_ID")
-	private UserDT superior;
+//	@OneToMany(mappedBy="superior" ,fetch=FetchType.EAGER)
+//	private List<UserDT> workers;
 	
-	@OneToMany(mappedBy="superior" ,fetch=FetchType.EAGER)
-	private List<UserDT> workers;
-	
-	@OneToMany(mappedBy="owner" ,fetch=FetchType.EAGER)
+	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
+	@JoinTable(name="OWNER_TASK", joinColumns=@JoinColumn(name="OWNER_ID"), inverseJoinColumns=@JoinColumn(name="TASK_ID"))
 	private Set<TaskDT> tasks;
 	
+	public void addTask(TaskDT task){
+    	tasks.add(task);
+    }
+//	public void setSuperiorValueDT(String superiorMail){
+//		UserDao dao = SpringInitializer.getBeanFactory().getBean(Consts.USER_DAO_BEAN_ID, UserDao.class);
+//		UserDT superiorEntity = dao.getByPK(superiorMail);
+//		this.superior = superiorEntity;
+//	}
 	
 	
-	public List<UserDT> getWorkers() {
-		return workers;
-	}
-	public void setWorkers(List<UserDT> workers) {
-		this.workers = workers;
-	}
+//	public List<UserDT> getWorkers() {
+//		return workers;
+//	}
+//	public void setWorkers(List<UserDT> workers) {
+//		this.workers = workers;
+//	}
 	public String getMail() {
 		return mail;
 	}
@@ -117,10 +129,10 @@ public class UserDT {
 		this.permission = permission;
 	}
 	
-	public UserDT getSuperior() {
+	public String getSuperior() {
 		return superior;
 	}
-	public void setSuperior(UserDT superior) {
+	public void setSuperior(String superior) {
 		this.superior = superior;
 	}
 	

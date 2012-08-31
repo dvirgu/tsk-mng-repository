@@ -2,7 +2,7 @@
 <mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://dozer.sourceforge.net http://dozer.sourceforge.net/schema/beanmapping.xsd">
 
-	<mapping map-id="mapUserBEtoDT" type="bi-directional">
+	<mapping wildcard="false" type="bi-directional">
 		<class-a>org.tsk.mng.backend.model.UserBE</class-a>
 		<class-b>org.tsk.mng.dal.model.UserDT</class-b>
 		<field>
@@ -29,20 +29,22 @@
 			<a>permission</a>
 			<b>permission</b>
 		</field>
+		<!-- 
 		<field>
 			<a>superior</a>
 			<b>superior</b>
 		</field>
-		<field map-id="mapTaskBEtoDT">
-			<a>tasks</a>
-			<b>tasks</b>
-			<a-hint>org.tsk.mng.backend.model.UserBE</a-hint>
+		  -->
+		<field >
+			<a set-method="addTask" type="iterate">tasks</a>
+			<b set-method="addTask" type="iterate">tasks</b>
+			<a-hint>org.tsk.mng.backend.model.TaskBE</a-hint>
 			<b-hint>org.tsk.mng.dal.model.TaskDT</b-hint>
 		</field>
 
 	</mapping>
 
-	<mapping map-id="mapUserFEtoBE" type="bi-directional">
+	<mapping wildcard="false" type="bi-directional">
 		<class-a>org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE</class-a>
 		<class-b>org.tsk.mng.backend.model.UserBE</class-b>
 		<field>
@@ -73,14 +75,14 @@
 			<a>superior</a>
 			<b>superior</b>
 		</field>
-		<field map-id="mapTaskFEtoBE">
-			<a>tasks</a>
-			<b>tasks</b>
-			<a-hint>org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE</a-hint>
+		<field>
+			<a set-method="addTask" type="iterate">tasks</a>
+			<b set-method="addTask" type="iterate">tasks</b>
+			<a-hint>org.tsk.mng.taskmanagement.common_elements.task.taskfe.TaskFE</a-hint>
 			<b-hint>org.tsk.mng.backend.model.TaskBE</b-hint>
 		</field>
 	</mapping>
-	<mapping map-id="mapTaskBEtoDT" map-null="true" wildcard="true" type="bi-directional">
+	<mapping wildcard="false" type="bi-directional">
 		<class-a>org.tsk.mng.backend.model.TaskBE</class-a>
 		<class-b>org.tsk.mng.dal.model.TaskDT</class-b>
 
@@ -100,30 +102,32 @@
 			<a>deadline</a>
 			<b>deadline</b>
 		</field>
+		<!-- 
 		<field>
-			<a>owner</a>
-			<b>owner</b>
+			<a >owner</a>
+			<b >owner</b>
 		</field>
+		 -->
 		<field>
 			<a>status</a>
 			<b>status</b>
 		</field>
 		<field>
-			<a>meDependOnTasks</a>
-			<b>meDependOnTasks</b>
+			<a set-method="addTask" type="iterate">meDependOnTasks</a>
+			<b set-method="addTask" type="iterate">meDependOnTasks</b>
 			<a-hint>org.tsk.mng.backend.model.TaskBE</a-hint>
 			<b-hint>org.tsk.mng.dal.model.TaskDT</b-hint>
 		</field>
+		<!-- 
 		<field>
 			<a>dependOnMeTasks</a>
 			<b>dependOnMeTasks</b>
-			<a-hint>org.tsk.mng.backend.model.TaskBE</a-hint>
-			<b-hint>org.tsk.mng.dal.model.TaskDT</b-hint>
 		</field>
+		 -->
 	</mapping>
 
 
-	<mapping wildcard="true" type="bi-directional">
+	<mapping wildcard="false" type="bi-directional">
 		<class-a>org.tsk.mng.taskmanagement.header.soapheader.UserAuthInfo</class-a>
 		<class-b>org.tsk.mng.backend.model.UserBE</class-b>
 		<field>
@@ -136,7 +140,7 @@
 		</field>
 	</mapping>
 
-	<mapping wildcard="true" type="bi-directional">
+	<mapping wildcard="false" type="bi-directional">
 		<class-a>org.tsk.mng.taskmanagement.header.soapheader.UserAuthInfo</class-a>
 		<class-b>org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE
 		</class-b>
@@ -151,7 +155,7 @@
 		</field>
 	</mapping>
 
-	<mapping map-id="mapTaskFEtoBE" map-null="true" wildcard="true" type="bi-directional">
+	<mapping type="bi-directional">
 		<class-a>org.tsk.mng.taskmanagement.common_elements.task.taskfe.TaskFE</class-a>
 		<class-b>org.tsk.mng.backend.model.TaskBE</class-b>
 
@@ -183,7 +187,7 @@
 			<a>dependentTasks</a>
 			<b>meDependOnTasks</b>
 			<a-hint>org.tsk.mng.taskmanagement.common_elements.task.taskfe.TaskFE</a-hint>
-			<b-hint>org.tsk.mng.backend.model.TaskBE</b-hint>
+			<b-hint>org.tsk.mng.taskmanagement.common_elements.task.taskfe.TaskFE</b-hint>
 		</field>
 	</mapping>
 

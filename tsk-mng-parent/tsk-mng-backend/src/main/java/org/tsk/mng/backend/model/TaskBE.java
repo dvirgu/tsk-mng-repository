@@ -1,12 +1,21 @@
 package org.tsk.mng.backend.model;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.tsk.mng.backend.enums.TaskStatusType;
 import org.tsk.mng.backend.model.strategy.StatusStrategy;
 import org.tsk.mng.common.config.Consts;
 import org.tsk.mng.common.infra.SpringInitializer;
+import org.tsk.mng.common.infra.TransformerUtil;
+import org.tsk.mng.dal.dao.impl.TaskDaoImpl;
+import org.tsk.mng.dal.dao.impl.UserDaoImpl;
+import org.tsk.mng.dal.dao.interfaces.TaskDao;
+import org.tsk.mng.dal.dao.interfaces.UserDao;
+import org.tsk.mng.dal.model.TaskDT;
+import org.tsk.mng.dal.model.UserDT;
 
 public class TaskBE implements Comparable<TaskBE> {
 
@@ -17,7 +26,7 @@ public class TaskBE implements Comparable<TaskBE> {
 	private String owner;
 	private TaskStatusType status;
 	private Set<TaskBE> meDependOnTasks;
-	private Set<TaskBE> dependOnMeTasks;
+	private Set<Integer> dependOnMeTasks;
 	
 	
 
@@ -26,12 +35,25 @@ public class TaskBE implements Comparable<TaskBE> {
 		meDependOnTasks = (Set) SpringInitializer.getBeanFactory().getBean(beanId);
 		dependOnMeTasks = (Set) SpringInitializer.getBeanFactory().getBean(beanId);
 	}
+	
+	public void addTask(TaskBE task){
+		meDependOnTasks.add(task);
+	}
+	public void setOwnerValueBE(UserDT ownerObj){
+		this.owner = ownerObj.getMail();
+	}
+	
+	public void setDependOnMeTasksValueBE(List<TaskDT> taskDTSet) {
+		for(TaskDT taskDT : taskDTSet){
+			dependOnMeTasks.add(taskDT.getTaskId());
+		}
+	}
 
-	public Set<TaskBE> getDependOnMeTasks() {
+	public Set<Integer> getDependOnMeTasks() {
 		return dependOnMeTasks;
 	}
 
-	public void setDependOnMeTasks(Set<TaskBE> dependOnMeTasks) {
+	public void setDependOnMeTasks(Set<Integer> dependOnMeTasks) {
 		this.dependOnMeTasks = dependOnMeTasks;
 	}
 	
@@ -118,7 +140,8 @@ public class TaskBE implements Comparable<TaskBE> {
 	}
 	
 	public void notify(StatusStrategy status){
-		status.handle(dependOnMeTasks, this);
+		
+		status.handle(getDepenedentTaskFromDB(), this);
 	}
 	
 	public void removeTask(TaskBE taskToRemove){
@@ -138,6 +161,18 @@ public class TaskBE implements Comparable<TaskBE> {
 		
 		
 		return null;
+	}
+	
+	public Set<TaskBE> getDepenedentTaskFromDB(){
+		TaskDao dao = SpringInitializer.getBeanFactory().getBean(Consts.TASK_DAO_BEAN_ID, TaskDao.class);
+		Set<TaskBE> taskBeSet = new HashSet<TaskBE>();
+		for(Integer taskId : dependOnMeTasks){
+			TaskDT taskDT = dao.getByPK(taskId);
+			TaskBE taskBE = TransformerUtil.dozerConvert(taskDT, TaskBE.class);
+			taskBeSet.add(taskBE);
+		}
+	
+		return taskBeSet;
 	}
 	
 	@Override

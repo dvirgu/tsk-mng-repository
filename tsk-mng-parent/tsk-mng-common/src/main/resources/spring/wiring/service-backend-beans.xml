@@ -17,8 +17,8 @@
 	<bean id="setImpl" class="java.lang.String" >
 		<constructor-arg type="java.lang.String" value="hashSet" />
 	</bean>
-	<bean id="hashSet" class="java.util.HashSet" />
+	<bean id="hashSet" class="java.util.HashSet" scope="prototype"/>
 	
-	<bean id="treeSet" class="java.util.TreeSet" />
+	<bean id="treeSet" class="java.util.TreeSet" scope="prototype"/>
 	
 </beans>

@@ -3,7 +3,6 @@ package org.tsk.mng.dal.dao.impl;
 import java.io.Serializable;
 import java.util.List;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate3.HibernateTemplate;
@@ -49,44 +48,41 @@ public class BaseDaoImpl<DataType, PKType extends Serializable> {
         return hibernateTemplate.getSessionFactory().getCurrentSession();
     }
 
-	public void save(DataType dt) {
-//		Session session = getSession();
-//		session.beginTransaction();
-//		session.save(dt);
-//		session.getTransaction().commit();
-//		session.close();
-		hibernateTemplate.saveOrUpdate(dt);
+	public boolean save(DataType dt, PKType pk) {
+		if (dt != null) {
+			hibernateTemplate.saveOrUpdate(dt);
+			DataType verifyUser = getByPK(pk);
+
+			return verifyUser != null;
+		}
+
+		throw new NullPointerException(getPersistentClass().getSimpleName() + " is null");
 	}
 
 	public DataType getByPK(PKType pk) {
-//		Session session = getSession();
-//		DataType dt = (DataType) session.get(getPersistentClass(), pk);
-//		session.close();
 		DataType dt = hibernateTemplate.get(getPersistentClass(), pk);
 		return dt;
 	}
 
 	public void update(DataType dt) {
-//		Session session = getSession();
-//		session.beginTransaction();
-//		session.update(dt);
-//		session.getTransaction().commit();
-//		session.close();
 		hibernateTemplate.saveOrUpdate(dt);
 	}
 
-	public void delete(DataType dt) {
-//		Session session = getSession();
-//		session.beginTransaction();
-//		session.delete(dt);
-//		session.getTransaction().commit();
-//		session.close();
-		hibernateTemplate.delete(dt);
+	public boolean delete(DataType dt ,PKType pk) {
+		if (dt == null) {
+			throw new NullPointerException(getPersistentClass().getSimpleName() + " is null");
+		}
+
+		hibernateTemplate.delete(dt); // invoke Base delete
+		DataType verifyDelete = getByPK(pk);
+
+		return verifyDelete == null; // equal to null , means user does not
+		// exist any more
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<DataType> getList(){
-		List<DataType> retList =(List<DataType>)hibernateTemplate.find("from " + getPersistentClass().getName()); 
+		List<DataType> retList =(List<DataType>)hibernateTemplate.find("from " + getPersistentClass().getSimpleName()); 
 
 		return retList;
 	}

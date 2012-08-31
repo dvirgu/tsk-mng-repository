@@ -10,6 +10,8 @@ import org.tsk.mng.backend.enums.PermissionType;
 import org.tsk.mng.common.config.Consts;
 import org.tsk.mng.common.infra.PropertiesHandler;
 import org.tsk.mng.common.infra.SpringInitializer;
+import org.tsk.mng.dal.model.TaskDT;
+import org.tsk.mng.dal.model.UserDT;
 
 public class UserBE {
 
@@ -31,7 +33,12 @@ public class UserBE {
 		tasks = (Set<TaskBE>) SpringInitializer.getBeanFactory().getBean(beanId);
 	}
 	
-
+	public void addTask(TaskBE task){
+    	tasks.add(task);
+    }
+	public void setSuperiorValueBE(UserDT userDT){
+		this.superior = userDT.getMail();
+	}
 	public String getMail() {
 		return mail;
 	}
