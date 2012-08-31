@@ -1,6 +1,5 @@
 package org.tsk.mng.dal.model;
 
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -12,17 +11,12 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlTransient;
-
 
 import org.tsk.mng.common.config.Consts;
 import org.tsk.mng.common.infra.PropertiesHandler;
 import org.tsk.mng.common.infra.SpringInitializer;
-import org.tsk.mng.dal.dao.interfaces.UserDao;
 
 
 @Entity

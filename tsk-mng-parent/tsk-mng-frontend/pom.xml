@@ -29,6 +29,11 @@
 			<version>0.0.1-REVISION</version>
 		</dependency>
 		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xerces</artifactId>
+			<version>1.2.3</version>
+		</dependency>
+		<dependency>
 			<groupId>tsk-mng-common</groupId>
 			<artifactId>tsk-mng-common</artifactId>
 			<version>0.0.1-REVISION</version>
