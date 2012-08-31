@@ -49,7 +49,7 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 
 	/* ServiceImpl Methods */
 
-	public UserBE addSuperiorToUser(UserBE superior, UserBE worker) throws OperationFailureException {
+	public UserBE addSuperiorToUser(String authUser ,UserBE superior, UserBE worker) throws OperationFailureException {
 
 		UserBE retValue;
 
@@ -113,8 +113,7 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 		return retValue;
 	}
 
-	@RolePermissionAnnotation(allowedRoles={PermissionType.ADMIN})
-	public UserBE createUser(UserBE user) throws OperationFailureException {
+	public UserBE createUser(String authUser ,UserBE user) throws OperationFailureException {
 
 		try {
 			if (user == null) {
@@ -172,7 +171,7 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 
 	}
 
-	public UserBE deleteUser(UserBE user) throws OperationFailureException {
+	public UserBE deleteUser(String authUser ,UserBE user) throws OperationFailureException {
 
 		UserBE retValue;
 
@@ -229,7 +228,7 @@ public class UserManagementBEServiceImpl implements UserManagementBEService {
 		return retValue;
 	}
 
-	public UserBE updateUser(UserBE user) throws OperationFailureException {
+	public UserBE updateUser(String authUser ,UserBE user) throws OperationFailureException {
 
 		UserBE retValue;
 		

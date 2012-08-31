@@ -1,5 +1,7 @@
 package org.tsk.mng.backend.service;
 
+import org.tsk.mng.backend.aop.RolePermissionAnnotation;
+import org.tsk.mng.backend.enums.PermissionType;
 import org.tsk.mng.backend.exceptions.OperationFailureException;
 import org.tsk.mng.backend.model.UserBE;
 
@@ -19,7 +21,8 @@ public interface UserManagementBEService {
 	 * @throws OperationFailureException in case of one of the parameters is null or doesn't exist.<br>
 	 * in spit of those throws exception in case of DB failure.
 	 */
-	UserBE addSuperiorToUser(UserBE superior, UserBE worker) throws OperationFailureException;
+	@RolePermissionAnnotation(allowedRoles={PermissionType.ADMIN})
+	UserBE addSuperiorToUser(String authUser ,UserBE superior, UserBE worker) throws OperationFailureException;
 
 	/**
 	 * Provides create user service.<br>
@@ -30,7 +33,8 @@ public interface UserManagementBEService {
 	 * 
 	 * @exception OperationFailureException - In case the user exists
 	 */
-	UserBE createUser(UserBE user) throws OperationFailureException;
+	@RolePermissionAnnotation(allowedRoles={PermissionType.ADMIN})
+	UserBE createUser(String authUser ,UserBE user) throws OperationFailureException;
 
 	/**
 	 * Tries to delete requested user.<br>
@@ -41,7 +45,8 @@ public interface UserManagementBEService {
 	 * @return
 	 * @throws OperationFailureException - in case of the user doesn't exist or another error occur.
 	 */
-	UserBE deleteUser(UserBE user) throws OperationFailureException;
+	@RolePermissionAnnotation(allowedRoles={PermissionType.ADMIN ,PermissionType.USER})
+	UserBE deleteUser(String authUser ,UserBE user) throws OperationFailureException;
 
 
 	/** Provides getUser service.<br>
@@ -53,6 +58,7 @@ public interface UserManagementBEService {
 	 * @return {@link UserBE} with the requested user to get. 
 	 * @throws OperationFailureException - in case the user does not exist or error occurs in data fetching
 	 */
+	@RolePermissionAnnotation(allowedRoles={PermissionType.ADMIN ,PermissionType.USER})
 	UserBE readUser(String mail) throws OperationFailureException;
 
 
@@ -70,7 +76,8 @@ public interface UserManagementBEService {
 	 * @return {@link UserBE} the updated user
 	 * @throws OperationFailureException - in case the user does not exist or another error occured
 	 */
-	UserBE updateUser(UserBE user) throws OperationFailureException;
+	@RolePermissionAnnotation(allowedRoles={PermissionType.ADMIN})
+	UserBE updateUser(String authUser ,UserBE user) throws OperationFailureException;
 
 	/**
 	 * Verify user authentication.<br>

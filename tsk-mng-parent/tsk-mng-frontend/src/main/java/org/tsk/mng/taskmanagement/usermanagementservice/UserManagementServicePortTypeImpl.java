@@ -100,7 +100,7 @@ public class UserManagementServicePortTypeImpl implements UserManagementServiceP
 			UserBE workerBE = TransformerUtil.dozerConvert(worker, UserBE.class);
 
 			//invoke service
-			workerBE = service.addSuperiorToUser(superiorBE, workerBE);
+			workerBE = service.addSuperiorToUser(soapHeader.getUserName(), superiorBE, workerBE);
 			worker = TransformerUtil.dozerConvert(workerBE, UserFE.class);
 
 			logger.info("adding superior to worker has succeeded");
@@ -131,7 +131,7 @@ public class UserManagementServicePortTypeImpl implements UserManagementServiceP
 
 			logger.info("going to create user " + userToCreateBE + " by serivce");
 			//invoke service
-			userToCreateBE = service.createUser(userToCreateBE);
+			userToCreateBE = service.createUser(soapHeader.getUserName(), userToCreateBE);
 			userToCreate = TransformerUtil.dozerConvert(userToCreateBE, UserFE.class);
 
 			String msg = "User " + userToCreateBE + " has created successfully";
@@ -161,7 +161,7 @@ public class UserManagementServicePortTypeImpl implements UserManagementServiceP
 			UserBE userToDeleteBE = TransformerUtil.dozerConvert(userToDelete, UserBE.class);
 
 			//invoke service
-			userToDeleteBE = service.deleteUser(userToDeleteBE);
+			userToDeleteBE = service.deleteUser(soapHeader.getUserName(), userToDeleteBE);
 			userToDelete = TransformerUtil.dozerConvert(userToDeleteBE, UserFE.class);
 
 			String msg = "delete user " + userToDeleteBE + " successfully";
@@ -189,7 +189,7 @@ public class UserManagementServicePortTypeImpl implements UserManagementServiceP
 			UserFE userToUpdate = updateUserRequest.getUser();
 			UserBE userToUpdateBE = TransformerUtil.dozerConvert(userToUpdate, UserBE.class);
 			//invoke serivce
-			userToUpdateBE = service.updateUser(userToUpdateBE);
+			userToUpdateBE = service.updateUser(soapHeader.getUserName(), userToUpdateBE);
 			userToUpdate = TransformerUtil.dozerConvert(userToUpdateBE, UserFE.class);
 
 			String msg = "User " + userToUpdateBE  + " has updated successfully";

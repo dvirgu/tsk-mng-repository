@@ -29,12 +29,10 @@
 			<a>permission</a>
 			<b>permission</b>
 		</field>
-		<!-- 
 		<field>
 			<a>superior</a>
 			<b>superior</b>
 		</field>
-		  -->
 		<field >
 			<a set-method="addTask" type="iterate">tasks</a>
 			<b set-method="addTask" type="iterate">tasks</b>
@@ -102,12 +100,10 @@
 			<a>deadline</a>
 			<b>deadline</b>
 		</field>
-		<!-- 
 		<field>
 			<a >owner</a>
 			<b >owner</b>
 		</field>
-		 -->
 		<field>
 			<a>status</a>
 			<b>status</b>

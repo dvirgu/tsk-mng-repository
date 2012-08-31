@@ -8,8 +8,11 @@ import org.tsk.mng.backend.enums.PermissionType;
 import org.tsk.mng.backend.exceptions.OperationFailureException;
 import org.tsk.mng.backend.model.UserBE;
 import org.tsk.mng.backend.service.UserManagementBEService;
+import org.tsk.mng.common.config.Consts;
 import org.tsk.mng.common.infra.SpringInitializer;
 import org.tsk.mng.common.infra.TransformerUtil;
+import org.tsk.mng.dal.dao.interfaces.UserDao;
+import org.tsk.mng.dal.model.UserDT;
 
 @Aspect
 public class RolePermissionAspect {
@@ -41,9 +44,11 @@ public class RolePermissionAspect {
 
 			PermissionType[] allowedRoles = roleAnnotation.allowedRoles();
 			if(pjp.getArgs()[0] instanceof UserBE){
-				UserBE user = ((UserBE)(pjp.getArgs()[0]));
-				//UserBE user = TransformerUtil.dozerConvert(SpringInitializer.getBean(UserManagementBEService.class).readUser(soapHeader), UserBE.class); 
-				PermissionType userRole = user.getPermission();
+				String authUser = ((String)(pjp.getArgs()[0]));
+				UserDao dao = SpringInitializer.getBeanFactory().getBean(Consts.USER_DAO_BEAN_ID, UserDao.class);
+				UserDT userDT = dao.getByPK(authUser);
+				UserBE userBE = TransformerUtil.dozerConvert(userDT, UserBE.class);
+				PermissionType userRole = userBE.getPermission();
 				
 				for(PermissionType allowedRole : allowedRoles){
 					if(allowedRole == userRole){
