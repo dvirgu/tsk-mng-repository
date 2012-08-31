@@ -26,8 +26,8 @@ import javax.xml.ws.Service;
                   targetNamespace = "http://mng.tsk.org/taskManagement/TaskManagementService/") 
 public class TaskManagementService extends Service {
 
-    public final static URL WSDL_LOCATION;
     public final static QName SERVICE = new QName("http://mng.tsk.org/taskManagement/TaskManagementService/", "TaskManagementService");
+    public final static URL WSDL_LOCATION;
     public final static QName TaskManagementServicePort = new QName("http://mng.tsk.org/taskManagement/TaskManagementService/", "TaskManagementServicePort");
     static {
         URL url = null;

@@ -2,6 +2,14 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
   <display-name>Task Management System - Web Client</display-name>
   <welcome-file-list>
-    <welcome-file>welcome/loginService/login.jsp</welcome-file>
+    <welcome-file>loginService/loginPage.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <servlet-name>welcomePage</servlet-name>
+    <jsp-file>/loginService/welcome/welcomePage.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>welcomePage</servlet-name>
+    <url-pattern>/loginService/welcome/welcomePage</url-pattern>
+  </servlet-mapping>
 </web-app>
