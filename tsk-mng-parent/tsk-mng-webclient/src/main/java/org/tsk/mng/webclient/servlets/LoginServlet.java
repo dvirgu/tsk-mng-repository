@@ -56,37 +56,6 @@ public class LoginServlet extends ServletBase {
 		UserManagementServicePortType userService = getUserManagementServicePort();
 		UserResult user = userService.readUserOperation(authUserInfo,userReq);
 
-		//TODO delete it
-		/*UserFE dummyUser = new UserFE();
-		dummyUser.setFirstName("dvir");
-		dummyUser.setLastName("guetta");
-		dummyUser.setMail("dvirgu@gmail.com");
-		dummyUser.setNickName("dvirgu");
-		dummyUser.setPassword("456");
-		dummyUser.setPermission(PermissionType.ADMIN);
-		dummyUser.setSuperior("anara@afeka.ac.il");
-		List<TaskFE> tasks = new ArrayList<TaskFE>();
-		TaskFE task = new TaskFE();
-		task.setOwner("dvirgu@gmail.com");
-		task.setTaskId(1);
-		task.setDescriptions("dummy task");
-		task.setStatus(TaskStatusType.IN_PROGRESS);
-		task.setAlert(ObjectsFactoryWrapper.xmlCalanderValueOf("31.08.2012"));
-		task.setDeadLine(ObjectsFactoryWrapper.xmlCalanderValueOf("31.08.2012"));
-		tasks.add(task);
-		dummyUser.setTasks(tasks);
-		List<UserFE> workers = new ArrayList<UserFE>();
-		UserFE worker = new UserFE();
-		worker.setFirstName("naor");
-		worker.setLastName("guetta");
-		worker.setMail("naorgu@gmail.com");
-		worker.setNickName("naorgu");
-		dummyUser.setWorkers(workers);
-		List<UserFE> userReturnValues = new ArrayList<UserFE>();
-		userReturnValues.add(dummyUser);
-		user.setUserReturnValues(userReturnValues);
-		user.setResultStatus(OperationResultStatus.SUCCESS);*/
-		
 		
 		String dispachPageUri;
 		if (user.getResultStatus() == OperationResultStatus.SUCCESS) { //set the user

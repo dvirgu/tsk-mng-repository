@@ -57,13 +57,9 @@ public final class Consts {
 	public static final String DEADLINE_PARAM = "deadline";
 	public static final String ALERT_PARAM = "alert";
 	public static final String TASK_OWNER_PARAM = "taskOwner";
-
-	
 	public static final String OPPERATION_TYPE_PARAM = "opperationType";
-	
+	public static final String FILE_UPLOAD_PARAMETER = "fileUpload";
 
-
-	
 
 
 }

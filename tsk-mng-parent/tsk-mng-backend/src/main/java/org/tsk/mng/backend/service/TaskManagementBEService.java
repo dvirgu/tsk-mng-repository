@@ -6,7 +6,7 @@ import org.tsk.mng.backend.exceptions.OperationFailureException;
 import org.tsk.mng.backend.model.TaskBE;
 import org.tsk.mng.backend.model.UserBE;
 
-public interface TaskMangementBEService {
+public interface TaskManagementBEService {
 
 	/**
 	 * Validate if user exist and if exist then save task in DB, otherwise threw exception

@@ -7,7 +7,7 @@ import javax.swing.Spring;
 import org.tsk.mng.backend.exceptions.OperationFailureException;
 import org.tsk.mng.backend.model.TaskBE;
 import org.tsk.mng.backend.model.UserBE;
-import org.tsk.mng.backend.service.TaskMangementBEService;
+import org.tsk.mng.backend.service.TaskManagementBEService;
 import org.tsk.mng.common.infra.SpringInitializer;
 import org.tsk.mng.common.infra.TransformerUtil;
 import org.tsk.mng.dal.dao.interfaces.TaskDao;
@@ -15,7 +15,7 @@ import org.tsk.mng.dal.dao.interfaces.UserDao;
 import org.tsk.mng.dal.model.TaskDT;
 import org.tsk.mng.dal.model.UserDT;
 
-public class TaskManagementBEServiceImpl implements TaskMangementBEService {
+public class TaskManagementBEServiceImpl implements TaskManagementBEService {
 
 	TaskDao taskDao;
 	UserDao userDao;

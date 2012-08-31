@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 import org.apache.log4j.Logger;
 import org.tsk.mng.backend.model.TaskBE;
 import org.tsk.mng.backend.model.UserBE;
-import org.tsk.mng.backend.service.TaskMangementBEService;
+import org.tsk.mng.backend.service.TaskManagementBEService;
 import org.tsk.mng.common.infra.SpringInitializer;
 import org.tsk.mng.common.infra.TransformerUtil;
 import org.tsk.mng.taskmanagement.common_elements.opertaionresultstatus.OperationResultStatus;
@@ -57,7 +57,7 @@ public class TaskManagementServicePortTypeImpl implements TaskManagementServiceP
 
 		try {
 
-			TaskMangementBEService service = getTaskService();
+			TaskManagementBEService service = getTaskService();
 			UserFE userToGetTasksFrom = getUserTasksRequest.getUser();
 			UserBE userToGetTasksFromBE = TransformerUtil.dozerConvert(userToGetTasksFrom, UserBE.class);
 
@@ -90,7 +90,7 @@ public class TaskManagementServicePortTypeImpl implements TaskManagementServiceP
 		TaskResult result;
 		
 		try {
-			TaskMangementBEService service = getTaskService();
+			TaskManagementBEService service = getTaskService();
 			TaskFE taskToUpdate = updateTaskRequest.getTask();
 			TaskBE taskToUpdateBE = TransformerUtil.dozerConvert(taskToUpdate, TaskBE.class);
 			
@@ -121,7 +121,7 @@ public class TaskManagementServicePortTypeImpl implements TaskManagementServiceP
 		UserResult result;
 		
 		try {
-			TaskMangementBEService service = getTaskService();
+			TaskManagementBEService service = getTaskService();
 			
 			UserFE usertoAssignTo = assignUserToTaskRequest.getUser();
 			TaskFE taskToAssignToUser = assignUserToTaskRequest.getTask();
@@ -154,7 +154,7 @@ public class TaskManagementServicePortTypeImpl implements TaskManagementServiceP
 		UserResult result;
 		
 		try {
-			TaskMangementBEService service = getTaskService();
+			TaskManagementBEService service = getTaskService();
 			TaskFE dependedTask = addDependencyRequest.getDependedTask();
 			TaskFE task = addDependencyRequest.getTask();
 			TaskBE dependedTaskBE = TransformerUtil.dozerConvert(dependedTask, TaskBE.class);
@@ -188,7 +188,7 @@ public class TaskManagementServicePortTypeImpl implements TaskManagementServiceP
 		TaskResult result;
 		
 		try {
-			TaskMangementBEService service = getTaskService();
+			TaskManagementBEService service = getTaskService();
 			TaskFE taskToRemove = removeTaskFromUserRequest.getTask();
 			UserFE userToRemoveTaskFrom = removeTaskFromUserRequest.getUser();
 			TaskBE taskToRemoveBE = TransformerUtil.dozerConvert(taskToRemove, TaskBE.class);
@@ -211,7 +211,7 @@ public class TaskManagementServicePortTypeImpl implements TaskManagementServiceP
 		return result;
 	}
 
-	protected TaskMangementBEService getTaskService() {
-		return SpringInitializer.getBean(TaskMangementBEService.class);
+	protected TaskManagementBEService getTaskService() {
+		return SpringInitializer.getBean(TaskManagementBEService.class);
 	}
 }
