@@ -37,4 +37,12 @@ public interface UserDao {
 	 */
 	void update(UserDT userToUpdate);
 	
+	/**
+	 * Check authentication
+	 * @param user User's mail
+	 * @param password User's password
+	 * @return True if user exist in DB, False otherwise
+	 */
+	boolean authenticate(String user, String password);
+	
 }
