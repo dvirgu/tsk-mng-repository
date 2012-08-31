@@ -1,10 +1,8 @@
 package org.tsk.mng.webclient.servlets;
 
-import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,6 +12,7 @@ import org.tsk.mng.taskmanagement.common_elements.user.userresult.UserResult;
 import org.tsk.mng.taskmanagement.usermanagementservice.UserManagementServicePortType;
 import org.tsk.mng.taskmanagement.usermanagementwrapper.CreateUserTypeRequest;
 import org.tsk.mng.webclient.tools.Consts;
+import org.tsk.mng.webclient.tools.ObjectsFactoryWrapper;
 
 /**
  * Servlet implementation class SignUpServlet
@@ -25,35 +24,12 @@ public class SignUpServlet extends ServletBase {
 	private static final long serialVersionUID = 1L;
 
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public SignUpServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doProcess(request,response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doProcess(request,response);
-
-	}
-
 	@Override
 	public void doProcess(HttpServletRequest request,HttpServletResponse response) {
 
 		try {
 			UserManagementServicePortType userService = getUserManagementServicePort();
-			CreateUserTypeRequest newUserReq = createCreateUserTypeRequest(request);
+			CreateUserTypeRequest newUserReq = ObjectsFactoryWrapper.createCreateUserTypeRequest(request);
 			
 			// soapHear parameter should be null cause is new user, authenticate isn't relevant here.
 			UserResult result = userService.createUserOperation(null, newUserReq);
@@ -62,7 +38,7 @@ public class SignUpServlet extends ServletBase {
 				throw new RuntimeException("more than one user doesn't supported yet");//TODO support more than one user in sign
 			}
 			
-			String pageDispatch = Consts.ERROR_LOGIN_PAGE;;
+			String pageDispatch = Consts.LOGIN_PAGE;
 			
 			if (result.getResultStatus() == OperationResultStatus.SUCCESS) {
 				UserFE userSignupResult = result.getUserReturnValues().get(0);//should be one user if result is successful

@@ -1,20 +1,25 @@
 package org.tsk.mng.webclient.servlets;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.tsk.mng.taskmanagement.common_elements.user.userfe.PermissionType;
 import org.tsk.mng.taskmanagement.common_elements.user.userfe.UserFE;
+import org.tsk.mng.taskmanagement.header.soapheader.UserAuthInfo;
+import org.tsk.mng.taskmanagement.taskmanagementservice.TaskManagementService;
+import org.tsk.mng.taskmanagement.taskmanagementservice.TaskManagementServicePortType;
 import org.tsk.mng.taskmanagement.usermanagementservice.UserManagementService;
 import org.tsk.mng.taskmanagement.usermanagementservice.UserManagementServicePortType;
 import org.tsk.mng.taskmanagement.usermanagementwrapper.CreateUserTypeRequest;
 import org.tsk.mng.webclient.tools.Consts;
-
+import org.tsk.mng.webclient.tools.ObjectsFactoryWrapper;
 
 /**
  * Servlet implementation class ServletUtils
@@ -23,9 +28,27 @@ public abstract class ServletBase extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	//TODO add logger
+	private Logger logger = Logger.getLogger(ServletBase.class.getName());
 
-	//	private static TaskManagementServicePortType taskService;
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse res)
+			throws ServletException, IOException {
+
+		doProcess(req, res);
+
+		// super.doPost(req, res); TODO should be ?
+	}
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse res)
+			throws ServletException, IOException {
+
+		doProcess(req, res);
+
+		// super.doGet(req, res);TODO should be?
+	}
+
 
 	/**
 	 * This method will call from doPost and doGet methods
@@ -34,71 +57,107 @@ public abstract class ServletBase extends HttpServlet {
 	 * @param request
 	 * @param response
 	 */
-	public abstract void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
-	
-	//TODO should be synchronized
-	public UserManagementServicePortType getUserManagementServicePort() throws ServletException {
+	public abstract void doProcess(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException;
+
+	// TODO should be synchronized
+	public UserManagementServicePortType getUserManagementServicePort()
+			throws ServletException {
 
 		ServletContext sc = getServletContext();
 
-		if (sc != null) {
-			UserManagementServicePortType userServiceToRet = (UserManagementServicePortType) sc.getAttribute(Consts.USER_SERVICE_PORT_ATT);
-			if (userServiceToRet != null) {
-				return userServiceToRet;
-			} else {
-				return initClientWebService();
-			}
+		if (sc == null) {
+			throw new ServletException("ServletContext is not available");
 		}
 
-		throw new ServletException("ServletContext is not available");
+		UserManagementServicePortType userServiceToRet = (UserManagementServicePortType)sc.getAttribute(Consts.USER_SERVICE_PORT_ATT);
+
+		if (userServiceToRet != null) {
+			return userServiceToRet;
+		}
+
+		userServiceToRet = initUserWebService();
+
+		if (userServiceToRet != null) {
+			sc.setAttribute(Consts.USER_SERVICE_PORT_ATT, userServiceToRet);
+			return userServiceToRet;
+		}
+
+		throw new NullPointerException("Can't return TaskService");
+		
 	}
 
-	private UserManagementServicePortType initClientWebService() {
+	public TaskManagementServicePortType getTaskManagementServicePort()
+			throws ServletException {
+
+		ServletContext sc = getServletContext();
+
+		if (sc == null) {
+			throw new ServletException("ServletContext is not available");
+		}
+
+		TaskManagementServicePortType taskServiceToRet = (TaskManagementServicePortType)sc.getAttribute(Consts.TASK_SERVICE_PORT_ATT);
+
+		if (taskServiceToRet != null) {
+			return taskServiceToRet;
+		}
+
+		taskServiceToRet = initTaskWebService();
+
+		if (taskServiceToRet != null) {
+			sc.setAttribute(Consts.TASK_SERVICE_PORT_ATT, taskServiceToRet);
+			return taskServiceToRet;
+		}
+
+		throw new NullPointerException("Can't return TaskService");
+	}
+
+
+	private TaskManagementServicePortType initTaskWebService() {
+
+		TaskManagementServicePortType taskService = null;
+
+		try {
+			taskService = new TaskManagementService(
+					TaskManagementService.WSDL_LOCATION,
+					TaskManagementService.SERVICE)
+			.getTaskManagementServicePort();
+		} catch (Exception e) {
+			logger.warning(e.getMessage());
+		}
+
+		return taskService;
+	}
+
+	private UserManagementServicePortType initUserWebService() {
 
 		UserManagementServicePortType userService = null;
 		try {
 			userService = new UserManagementService(
 					UserManagementService.WSDL_LOCATION,
-					UserManagementService.SERVICE).getUserManagementServicePort();
+					UserManagementService.SERVICE)
+			.getUserManagementServicePort();
 		} catch (Exception e) {
-			e.printStackTrace(); //TODO logger
+			logger.warning(e.getMessage());
 		}
 
 		return userService;
 	}
 
-	//TODO move this method to util class
-	public UserFE createUserFEfromReqest(HttpServletRequest request)
-			throws NullPointerException{
-
-		if (request != null) {
-			UserFE newUser = new UserFE();
-			newUser.setMail(request.getParameter(Consts.MAIL_PARAM));
-			newUser.setLastName(request.getParameter(Consts.LAST_NAME_PARAM));
-			newUser.setFirstName(request.getParameter(Consts.FIRST_NAME_PARAM));
-			newUser.setNickName(request.getParameter(Consts.NICK_NAME_PARAM));
-			newUser.setPassword(request.getParameter(Consts.PASSWORD_PARAM));
-			newUser.setPermission(PermissionType.valueOf(request.getParameter(Consts.PERMISSION_PARAM).toUpperCase()));
-
-			return newUser;
-		}
-
-		throw new NullPointerException("HttpServletRequest is null");
+	protected UserFE getCurrentUser(HttpSession currentSession) {
+		return (UserFE) currentSession.getAttribute(Consts.CURRENT_USER_ATT);
 	}
-
-	/**
-	 * 
-	 * create CreateUserTypeRequest object with UserFE object within.
-	 * 
-	 * @param request
-	 * @return
-	 */
-	public CreateUserTypeRequest createCreateUserTypeRequest(
-			HttpServletRequest request) throws NullPointerException {
-
-			CreateUserTypeRequest retValue = new CreateUserTypeRequest();
-			retValue.setUser(createUserFEfromReqest(request));
-
-			return retValue;
+	
+	protected UserAuthInfo getCurrentUser(HttpServletRequest req) {
+		
+		UserAuthInfo reUser = null;
+		
+		UserFE currentUser = getCurrentUser(req.getSession());
+		
+		if (currentUser != null) {
+			reUser = ObjectsFactoryWrapper.createUserAuthInfo(currentUser.getMail(), currentUser.getPassword());
 		}
+		
+		return reUser;
 	}
+}
